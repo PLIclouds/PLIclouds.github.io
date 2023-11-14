@@ -19,30 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="现在的博客只是一个毛坯，我们给它上个漆，把家具都摆上，然后再体验一下。 另外hexo的官方文档放在这里。 主题修改hexo官方网站上就有很多模板，Github上也有很多，下载一个然后按着教程随便玩就行了。我喜欢NexT，这个主题精简美观，很符合我的审美。NexT官方文档在这里。后面都是关于这个主题的介绍。 用npm把主题导入进来是最容易的。 12$ cd hexo-site$ npm instal">
+    <meta name="description" content="能不能找到实习就看这一篇了 总体来说看这个，细节不到位但是文章架构没问题。 更详细的解答还得看李沐大神的论文逐段分析 Positional Encoding就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇文章讲挺明白，but先观察这个函数形式： $$PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&amp;">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="建站记录2：基本功能部署">
-<meta property="og:url" content="http://example.com/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:title" content="NLP笔记2-2：Transformer">
+<meta property="og:url" content="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/index.html">
 <meta property="og:site_name" content="Parallel Space">
-<meta property="og:description" content="现在的博客只是一个毛坯，我们给它上个漆，把家具都摆上，然后再体验一下。 另外hexo的官方文档放在这里。 主题修改hexo官方网站上就有很多模板，Github上也有很多，下载一个然后按着教程随便玩就行了。我喜欢NexT，这个主题精简美观，很符合我的审美。NexT官方文档在这里。后面都是关于这个主题的介绍。 用npm把主题导入进来是最容易的。 12$ cd hexo-site$ npm instal">
+<meta property="og:description" content="能不能找到实习就看这一篇了 总体来说看这个，细节不到位但是文章架构没问题。 更详细的解答还得看李沐大神的论文逐段分析 Positional Encoding就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇文章讲挺明白，but先观察这个函数形式： $$PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-11-13T08:31:14.000Z">
-<meta property="article:modified_time" content="2023-11-14T15:09:36.457Z">
+<meta property="article:published_time" content="2023-11-14T14:56:00.000Z">
+<meta property="article:modified_time" content="2023-11-14T14:58:16.520Z">
 <meta property="article:author" content="黄浩诚">
-<meta property="article:tag" content="建站记录">
-<meta property="article:tag" content="NexT">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="位置编码">
+<meta property="article:tag" content="自注意力机制">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/">
+<link rel="canonical" href="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/","path":"2023/11/13/建站记录2：基本功能部署/","title":"建站记录2：基本功能部署"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/","path":"2023/11/14/NLP笔记2-2：Transformer/","title":"NLP笔记2-2：Transformer"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>建站记录2：基本功能部署 | Parallel Space</title>
+<title>NLP笔记2-2：Transformer | Parallel Space</title>
   
 
 
@@ -115,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9"><span class="nav-number">1.</span> <span class="nav-text">主题修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">博客自定义基础设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">发博客</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">1.</span> <span class="nav-text">Positional Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Self-Attention%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">Self-Attention自注意力机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Normalize"><span class="nav-number">3.</span> <span class="nav-text">Add&amp;Normalize</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -169,7 +168,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -182,12 +181,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="建站记录2：基本功能部署 | Parallel Space">
+      <meta itemprop="name" content="NLP笔记2-2：Transformer | Parallel Space">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          建站记录2：基本功能部署
+          NLP笔记2-2：Transformer
         </h1>
 
         <div class="post-meta-container">
@@ -197,15 +196,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-11-13 16:31:14" itemprop="dateCreated datePublished" datetime="2023-11-13T16:31:14+08:00">2023-11-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-14 23:09:36" itemprop="dateModified" datetime="2023-11-14T23:09:36+08:00">2023-11-14</time>
+      <time title="创建时间：2023-11-14 22:56:00 / 修改时间：22:58:16" itemprop="dateCreated datePublished" datetime="2023-11-14T22:56:00+08:00">2023-11-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -213,7 +206,15 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">建站记录</span></a>
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/Transformer/" itemprop="url" rel="index"><span itemprop="name">Transformer</span></a>
         </span>
     </span>
 
@@ -226,27 +227,19 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>现在的博客只是一个毛坯，我们给它上个漆，把家具都摆上，然后再体验一下。</p>
-<p>另外hexo的官方文档放在<a target="_blank" rel="noopener" href="https://hexo.io/docs/">这里</a>。</p>
-<h3 id="主题修改"><a href="#主题修改" class="headerlink" title="主题修改"></a>主题修改</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo官方网站</a>上就有很多模板，Github上也有很多，下载一个然后按着教程随便玩就行了。我喜欢NexT，这个主题精简美观，很符合我的审美。NexT官方文档在<a target="_blank" rel="noopener" href="https://theme-next.js.org/">这里</a>。后面都是关于这个主题的介绍。</p>
-<p>用npm把主题导入进来是最容易的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo-site</span><br><span class="line">$ npm install hexo-theme-next@latest</span><br></pre></td></tr></table></figure>
-
-<p>这个时候如果尝试 <code>hexo server</code>，就会发现主题已经改过来了。</p>
-<h3 id="博客自定义基础设置"><a href="#博客自定义基础设置" class="headerlink" title="博客自定义基础设置"></a>博客自定义基础设置</h3><p>这个主要是在博客的根目录和主题文件夹的_config.yaml文件里修改配置，官方文档一看就会，也没什么阻力。</p>
-<p>博客根目录没看到相关修改的参考文档，NexT的就在官方文档里。</p>
-<p>我改了标题，副标题，目录，目录页，图标，大部分都没什么讲究。</p>
-<h3 id="发博客"><a href="#发博客" class="headerlink" title="发博客"></a>发博客</h3><p>到目前为止我好像没有看到可以改 <code>hexo new</code>命令创建post的模板，设置得自己改，大概格式就是这样，反正我觉得比较好用：</p>
-<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: Title</span><br><span class="line">date: yyyy-mm-dd hh:mm:ss</span><br><span class="line"><span class="keyword">tags:</span> [Tag, Another Tag]</span><br><span class="line">categories: [Cat, Subcat]</span><br></pre></td></tr></table></figure>
-
-<p>写完后保存就行了，hexo三连进行上传。</p>
-<p>发博客里经常要用数学公式，这个要在NexT主题里修改_config.yml文件：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># 这里改成true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br></pre></td></tr></table></figure>
-
-<p>然后在文章开头加上一行：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>不知道为什么，就在一篇文章里加了这一行，所有文章都能用了。</p>
+    <div class="post-body" itemprop="articleBody"><p>能不能找到实习就看这一篇了</p>
+<p>总体来说看<a target="_blank" rel="noopener" href="https://blog.csdn.net/Tink1995/article/details/105080033?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918474216800188596218%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169918474216800188596218&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105080033-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Transformer&spm=1018.2226.3001.4187">这个</a>，细节不到位但是文章架构没问题。</p>
+<p>更详细的解答还得看李沐大神的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pu411o7BE/?spm_id_from=333.999.0.0&vd_source=2496b4033bb7934a9c794f73f3b41282">论文逐段分析</a></p>
+<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p>就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106644634">文章</a>讲挺明白，but先观察这个函数形式：</p>
+<p>$$<br>PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&#x2F;d_{model}}})<br>$$</p>
+<p>$$<br>PE_{(pos, 2i+1)} &#x3D; cos(\frac{pos}{10000^{2i&#x2F;d_{model}}})<br>$$</p>
+<p>这里的pos一旦大一点，例如$pos&#x3D;100，2i&#x2F;d_{model} &#x3D; 0.5$和$ pos&#x3D;728，2i&#x2F;d_{model} &#x3D; 0.5$，这两个值就特别接近，很容易让机器误解。其实还有很多这样的情况。具体的优化可以看2.2.1。</p>
+<h4 id="Self-Attention自注意力机制"><a href="#Self-Attention自注意力机制" class="headerlink" title="Self-Attention自注意力机制"></a>Self-Attention自注意力机制</h4><p>原始的Attention模型使用了循环卷积中的隐藏状态作为注意力参数的计算方法。Transformer这里用的是另一种叫做Self-Attention的方法。其核心解决的问题就一个：</p>
+<p>如何在已知每个词的词向量后，计算每个词之间的关联程度？算内积。然后把这个内积归一化后乘到词向量上，好像有点意思但又没太看懂这个加权。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38890412/article/details/120601834?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918813716800192223678%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169918813716800192223678&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-120601834-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=self-attention&spm=1018.2226.3001.4187">这篇文章</a>讲的很清楚。</p>
+<p>multi就是整了八组权重，整了八个输出最后拼起来加了个线性变换。而masked呢，就是为了在对输出进行回传的时候，保证字符编码的一致性。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaohongfei_358/article/details/122861751?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169919352616800184141681%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169919352616800184141681&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-122861751-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Masked%20Multi-Head%20Attention&spm=1018.2226.3001.4187">这篇文章</a>究极详细地讲了这几个部分的内容以及实操。</p>
+<h4 id="Add-Normalize"><a href="#Add-Normalize" class="headerlink" title="Add&amp;Normalize"></a>Add&amp;Normalize</h4><p>残差块都是熟悉的老朋友了，就是避免深度过大产生梯度等等问题的。这里用到的LayerNorm倒是值得一看。</p>
 
     </div>
 
@@ -264,7 +257,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/" title="建站记录2：基本功能部署">http://example.com/2023/11/13/建站记录2：基本功能部署/</a>
+      <a href="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/" title="NLP笔记2-2：Transformer">http://example.com/2023/11/14/NLP笔记2-2：Transformer/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -273,23 +266,19 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" rel="tag"># 建站记录</a>
-              <a href="/tags/NexT/" rel="tag"># NexT</a>
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81/" rel="tag"># 位置编码</a>
+              <a href="/tags/%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" rel="tag"># 自注意力机制</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%951%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%A1%B5/" rel="prev" title="建站记录1：创建主页">
-                  <i class="fa fa-angle-left"></i> 建站记录1：创建主页
+                <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/" rel="prev" title="NLP笔记2-1：Attention!">
+                  <i class="fa fa-angle-left"></i> NLP笔记2-1：Attention!
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/" rel="next" title="NLP笔记1-1：从CNN开始">
-                  NLP笔记1-1：从CNN开始 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
