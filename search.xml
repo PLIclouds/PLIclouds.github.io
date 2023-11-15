@@ -218,6 +218,7 @@
 <ol>
 <li>创建仓库，用<a href="https://github.com/apps/utterances">这个链接</a>安装utterance到仓库里。</li>
 <li>改主题的_config.yml</li>
+<li>修改url，这一步不能省略。</li>
 </ol>
 <h3 id="文章显示次序"><a href="#文章显示次序" class="headerlink" title="文章显示次序"></a>文章显示次序</h3><p>使用的是hexo-generator-index-custom，官方文档在<a href="https://github.com/im0o/hexo-generator-index-custom/blob/master/README_zh.md">这里</a>，照着用就是</p>
 <p>感觉其他功能也不实用了，先优化到这，短期内应该不会再做优化了。</p>

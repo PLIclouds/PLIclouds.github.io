@@ -17,12 +17,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="绷不住了早点来看这个，没时间研究正事可就糟了。 Encoder-Decoder字面意思，编码-解码器。编码解码可以用（Bi）RNN&#x2F;LSTM&#x2F;GRU任意组合。 编码器的原理更加简单，只需要把文本输入RNN系列网络，最后的隐藏层输出就包含了输入的所有信息。（但文本长了损失信息） 解码器则有很多问题，必须引入注意力机制才能解决。 Attention Model事实上，人们在输出文本">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="NLP笔记2-1：Attention!">
-<meta property="og:url" content="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/index.html">
+<meta property="og:url" content="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/index.html">
 <meta property="og:site_name" content="Parallel Space">
 <meta property="og:description" content="绷不住了早点来看这个，没时间研究正事可就糟了。 Encoder-Decoder字面意思，编码-解码器。编码解码可以用（Bi）RNN&#x2F;LSTM&#x2F;GRU任意组合。 编码器的原理更加简单，只需要把文本输入RNN系列网络，最后的隐藏层输出就包含了输入的所有信息。（但文本长了损失信息） 解码器则有很多问题，必须引入注意力机制才能解决。 Attention Model事实上，人们在输出文本">
 <meta property="og:locale" content="zh_CN">
@@ -33,11 +33,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/">
+<link rel="canonical" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/","path":"2023/11/14/NLP笔记2-1：Attention/","title":"NLP笔记2-1：Attention!"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/","path":"2023/11/14/NLP笔记2-1：Attention/","title":"NLP笔记2-1：Attention!"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>NLP笔记2-1：Attention! | Parallel Space</title>
@@ -202,7 +202,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -265,7 +265,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>671</span>
+      <span>433</span>
     </span>
 </div>
 
@@ -304,7 +304,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/" title="NLP笔记2-1：Attention!">http://example.com/2023/11/14/NLP笔记2-1：Attention/</a>
+      <a href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/" title="NLP笔记2-1：Attention!">https://pliclouds.github.io/2023/11/14/NLP笔记2-1：Attention/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -359,7 +359,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">3k</span>
   </span>
 </div>
 <div class="busuanzi-count">
