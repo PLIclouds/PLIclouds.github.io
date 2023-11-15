@@ -19,23 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Parallel Space">
-<meta property="og:url" content="http://example.com/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/index.html">
+    <meta name="description" content="今天做完了事不知道干什么，来优化一下博客吧。 搜索栏一个搜索栏，从博客中搜索任何内容。 只需要三步：  启动bash，安装插件：  1npm install hexo-generator-searchdb   打开博客根目录下的_config.yml，末尾加上如下代码：  123456# hexo-generator-searchdbsearch:  path: search.xml  field">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="建站记录3：添砖加瓦">
+<meta property="og:url" content="http://example.com/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/index.html">
 <meta property="og:site_name" content="Parallel Space">
+<meta property="og:description" content="今天做完了事不知道干什么，来优化一下博客吧。 搜索栏一个搜索栏，从博客中搜索任何内容。 只需要三步：  启动bash，安装插件：  1npm install hexo-generator-searchdb   打开博客根目录下的_config.yml，末尾加上如下代码：  123456# hexo-generator-searchdbsearch:  path: search.xml  field">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-15T12:57:14.000Z">
+<meta property="article:modified_time" content="2023-11-15T14:40:59.836Z">
 <meta property="article:author" content="黄浩诚">
+<meta property="article:tag" content="建站记录">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="http://example.com/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/建站记录/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/","path":"2023/11/15/建站记录3：添砖加瓦/","title":"建站记录3：添砖加瓦"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: 建站记录 | Parallel Space</title>
+<title>建站记录3：添砖加瓦 | Parallel Space</title>
   
 
 
@@ -122,7 +127,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -135,6 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A0%8F"><span class="nav-number">1.</span> <span class="nav-text">搜索栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%95%B0%EF%BC%88%E6%97%B6%E9%97%B4%EF%BC%89%E7%BB%9F%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">字数（时间）统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%BB%9F%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">添加统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">评论系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E6%98%BE%E7%A4%BA%E6%AC%A1%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">文章显示次序</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -185,91 +191,158 @@
 
     </div>
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">建站记录
-          <small>分类</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="建站记录3：添砖加瓦 | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          建站记录3：添砖加瓦
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-11-15 20:57:14 / 修改时间：22:40:59" itemprop="dateCreated datePublished" datetime="2023-11-15T20:57:14+08:00">2023-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">建站记录</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>469</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>今天做完了事不知道干什么，来优化一下博客吧。</p>
+<h3 id="搜索栏"><a href="#搜索栏" class="headerlink" title="搜索栏"></a>搜索栏</h3><p>一个搜索栏，从博客中搜索任何内容。</p>
+<p>只需要三步：</p>
+<ol>
+<li>启动bash，安装插件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>打开博客根目录下的_config.yml，末尾加上如下代码：</li>
+</ol>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># hexo-generator-searchdb</span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>打开主题下的_config.yml，local_search中enable选项改成true就行了。</li>
+</ol>
+<h3 id="字数（时间）统计"><a href="#字数（时间）统计" class="headerlink" title="字数（时间）统计"></a>字数（时间）统计</h3><p>用的是hexo-word-counter这个插件，可以实现字数和时间统计。但个人感觉这个时间统计不太适用于这种技术博客，就暂时没用。</p>
+<p>步骤和上面也类似，三步搞定。</p>
+<h3 id="添加统计"><a href="#添加统计" class="headerlink" title="添加统计"></a>添加统计</h3><p>这个更简单，主题下的_config.yml搜索busuanzi，下面的enable开启了就行。</p>
+<h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p>网上看了一圈，还是utterance简单就用这个了，反正大家都有Github账号对吧。这里参考了<a target="_blank" rel="noopener" href="https://www.pengtech.net/hexo/hexo_blog_comments">这篇博客</a>，简单实用，大致就两步：</p>
+<ol>
+<li>创建仓库，用<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">这个链接</a>安装utterance到仓库里。</li>
+<li>改主题的_config.yml</li>
+</ol>
+<h3 id="文章显示次序"><a href="#文章显示次序" class="headerlink" title="文章显示次序"></a>文章显示次序</h3><p>使用的是hexo-generator-index-custom，官方文档在<a target="_blank" rel="noopener" href="https://github.com/im0o/hexo-generator-index-custom/blob/master/README_zh.md">这里</a>，照着用就是</p>
+<p>感觉其他功能也不实用了，先优化到这，短期内应该不会再做优化了。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-11-15T20:57:14+08:00"
-              content="2023-11-15">
-          11-15
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/" itemprop="url">
-          <span itemprop="name">建站记录3：添砖加瓦</span>
-        </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>黄浩诚
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/" title="建站记录3：添砖加瓦">http://example.com/2023/11/15/建站记录3：添砖加瓦/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" rel="tag"># 建站记录</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/" rel="prev" title="NLP笔记2-2：Transformer">
+                  <i class="fa fa-angle-left"></i> NLP笔记2-2：Transformer
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-11-13T16:31:14+08:00"
-              content="2023-11-13">
-          11-13
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/" itemprop="url">
-          <span itemprop="name">建站记录2：基本功能部署</span>
-        </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-11-13T14:22:01+08:00"
-              content="2023-11-13">
-          11-13
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%951%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%A1%B5/" itemprop="url">
-          <span itemprop="name">建站记录1：创建主页</span>
-        </a>
-      </div>
 
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
-
+    <div class="comments utterances-container"></div>
 </div>
   </main>
 

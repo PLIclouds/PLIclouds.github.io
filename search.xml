@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>NLP笔记1-1：从CNN开始</title>
+    <url>/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<p>CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。</p>
+<p>神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入$x$和输出$y$的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。</p>
+<p>不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。</p>
+<h4 id="CNN特征提取-分类预测"><a href="#CNN特征提取-分类预测" class="headerlink" title="CNN特征提取&amp;分类预测"></a>CNN特征提取&amp;分类预测</h4><p>三步走：卷积，激活，池化。</p>
+<p>卷积很像在算互相关函数，也就是在提取特征。输入和卷积核作卷积就是计算相似程度的感觉。具体的卷积核是通过训练得到的。</p>
+<p>激活函数可以加入一些非线性在网络中（毕竟拟合如果只是线性的那可太没意思了），而ReLU又是很简单的非线性，于是就用这个了。</p>
+<p>池化就是减少冗杂信息量加快计算速度。最大池化保留了最好的匹配结果。</p>
+<p>三步之后，看似只是输出匹配结果，但其实对应特征已经被提取出来了。这些特征未必在人眼看来是显性的，但这就是特征。</p>
+<p>加深网络层数，CNN的特征提取部分就结束了。</p>
+<p>特征提取后，还要将提取的特征转化为分类结果，这个时候加全连接层，就像加权投票一样，算出结果。</p>
+<h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><p>如何进行优化？这是一种有监督学习。必须给神经网络喂标注好的数据。</p>
+<p>如果给一个随机的初值，它会产生一个误差值。根据这个误差值，可以计算每一步的梯度。再根据学习率，对网络参数进行调整，直至最后收敛。</p>
+<p>大体内容都在这了，详细可以看<a href="https://e2eml.school/how_convolutional_neural_networks_work.html">这篇文章</a>，真正的大神</p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>NLP</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>CNN</tag>
+        <tag>反向传播</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NLP笔记1-2：RNN和LSTM</title>
+    <url>/2023/11/14/NLP%E7%AC%94%E8%AE%B01-2%EF%BC%9ARNN%E5%92%8CLSTM/</url>
+    <content><![CDATA[<p>正式进入NLP学习！</p>
+<h4 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h4><p>RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！）</p>
+<p>相比CNN的经典卷积核，循环卷积核有一个变化。</p>
+<p>循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。</p>
+<p>这样处理，可以说考虑了前文的所有内容。</p>
+<p>看<a href="https://zhuanlan.zhihu.com/p/30844905">这篇文章</a>，写的特别清楚。</p>
+<p>但是问题在于，存在梯度的问题。如果要顾及很长文章的情况，循环卷积核旁边的权重就会被乘很多次。在反向传播时，由于梯度过小，学习会直接停止；或者由于梯度过大，会直接梯度爆炸。</p>
+<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>在RNN网络结构基础上，把单纯的循环卷积核改成了三个门，遗忘门，输入门，输出门。核心信息储存在随时间变化的cell state里。</p>
+<p>遗忘门用于确定是否需要遗忘之前的某些元素。</p>
+<p>输入门用于确定加入cell state的信息。注意输入门和遗忘门两个sigmoid层作用不一样，前者确定是否需要遗忘cell中的信息，后者确定是否需要向cell中加入信息。</p>
+<p>输出门用于确定输出。这个sigmoid层用来确定是否向下传递，tanh层用来加非线性。</p>
+<p>非常精彩的改动，爱来自中国。</p>
+<p>参考<a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTM Network</a>，这篇文章绝绝子哈哈</p>
+<h5 id="LSTM变种"><a href="#LSTM变种" class="headerlink" title="LSTM变种"></a>LSTM变种</h5><p>peephole：在sigmoid函数那里连接了cell，好像考虑全面了一些。</p>
+<p>coupled forget and input gate：只向cell中input刚刚忘记的。</p>
+<p>Gate Recurrent Unit（GRU）：cell都被整合了？没看懂，但据说很好用，先就这样吧。</p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>NLP</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>RNN</tag>
+        <tag>LSTM</tag>
+        <tag>GRU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NLP笔记1-3：条件随机场</title>
+    <url>/2023/11/14/NLP%E7%AC%94%E8%AE%B01-3%EF%BC%9A%E6%9D%A1%E4%BB%B6%E9%9A%8F%E6%9C%BA%E5%9C%BA/</url>
+    <content><![CDATA[<p>文义分割基础</p>
+<h4 id="一堆概念"><a href="#一堆概念" class="headerlink" title="一堆概念"></a>一堆概念</h4><h5 id="马尔可夫随机场"><a href="#马尔可夫随机场" class="headerlink" title="马尔可夫随机场"></a>马尔可夫随机场</h5><p>马尔可夫随机场：具有马尔可夫性质（下一个状态仅由当前状态预测得到）的随机场（随机变量组成的场）？no。</p>
+<p>这里的马尔可夫只关注空间上的条件依赖关系。而所谓随机场也是指由随机变量（节点）和条件依赖关系（边）构成的无向图。</p>
+<p>实在没看懂这个随机场和概率无向图的区别。真难啊这鬼东西，先润了，回头看看能不能看懂。</p>
+<h5 id="团"><a href="#团" class="headerlink" title="团"></a>团</h5><p>团：图中的全连接子图</p>
+<p>最大团：无法从图中加入任意其他元素的团（和团中顶点个数无关）</p>
+<p>能量函数：给定的团会存在一个能量函数，代表该团中所有变量取值的合理性。能量越高越不合理。该函数一般靠问题具体规则而定。在马尔可夫随机场中，这个函数一般与概率无向图的概率分布有关，具体形式形如$P(X_1, X_2, … , X_n) ∝e^{-E(X_1, X_2, … , X_n)}$，具体证明没看</p>
+<h5 id="CRF"><a href="#CRF" class="headerlink" title="CRF"></a>CRF</h5><p>真麻了，啥也看不懂，先这样吧。</p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>NLP</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>马尔可夫随机场</tag>
+        <tag>团</tag>
+        <tag>CRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NLP笔记2-1：Attention!</title>
+    <url>/2023/11/14/NLP%E7%AC%94%E8%AE%B02-1%EF%BC%9AAttention/</url>
+    <content><![CDATA[<p>绷不住了早点来看这个，没时间研究正事可就糟了。</p>
+<h4 id="Encoder-Decoder"><a href="#Encoder-Decoder" class="headerlink" title="Encoder-Decoder"></a>Encoder-Decoder</h4><p>字面意思，编码-解码器。编码解码可以用（Bi）RNN&#x2F;LSTM&#x2F;GRU任意组合。</p>
+<p>编码器的原理更加简单，只需要把文本输入RNN系列网络，最后的隐藏层输出就包含了输入的所有信息。（但文本长了损失信息）</p>
+<p>解码器则有很多问题，必须引入注意力机制才能解决。</p>
+<h4 id="Attention-Model"><a href="#Attention-Model" class="headerlink" title="Attention Model"></a>Attention Model</h4><p>事实上，人们在输出文本时对于不同内容的关注情况是不同的。引入注意力机制，将信息切割为多个向量即可解决这个问题。</p>
+<p>如何引入？在计算隐藏状态$s_i$时，不仅考虑前一个状态$s_{i-1}$，上一个输出$y_{i-1}$，还引入编码器时的隐藏状态$h_{j}$（注意这里用的是BiRNN，所以这里$h_j$实际上是第j个字符周围的信息）。对的，每一个$h$。引入了这些隐藏状态，还得解决权重才能称得上注意力机制。因此核心式子就两个</p>
+<p>$$<br>s_i &#x3D; f(s_{i-1}, y_{i-1},c_i)<br>$$</p>
+<p>$$<br>c_i &#x3D; \sum_j^{T_x}\alpha_{ij}h_j<br>$$</p>
+<p>那么权重怎么求呢？这里的$\alpha_{ij}$实际上是一个对$e_{ij}$作softmax的结果。这个值代表了第i个位置的输出，和第j个位置的输入的匹配程度。计算方法为</p>
+<p>$$<br>e_{ij} &#x3D; a(s_{i-1},h_j)<br>$$</p>
+<p>原文就用了个前馈神经网络（多层感知机），一开始还觉得太草率，后来想想好像设计得刚刚好。既不会太难也不会失去效果。</p>
+<p><a href="https://arxiv.org/abs/1409.0473">arxiv原文（讲挺好）</a>搭配<a href="https://blog.csdn.net/u014595019/article/details/52826423?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169910460816800188566882%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169910460816800188566882&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-6-52826423-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Attention%E6%A8%A1%E5%9E%8B&spm=1018.2226.3001.4187">博客</a>食用更佳</p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>NLP</category>
+        <category>Transformer</category>
+      </categories>
+      <tags>
+        <tag>注意力机制，Encoder-Decoder</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NLP笔记2-2：Transformer</title>
+    <url>/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/</url>
+    <content><![CDATA[<p>能不能找到实习就看这一篇了</p>
+<p>总体来说看<a href="https://blog.csdn.net/Tink1995/article/details/105080033?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918474216800188596218%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169918474216800188596218&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105080033-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Transformer&spm=1018.2226.3001.4187">这个</a>，细节不到位但是文章架构没问题。</p>
+<p>更详细的解答还得看李沐大神的<a href="https://www.bilibili.com/video/BV1pu411o7BE/?spm_id_from=333.999.0.0&vd_source=2496b4033bb7934a9c794f73f3b41282">论文逐段分析</a></p>
+<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p>就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇<a href="https://zhuanlan.zhihu.com/p/106644634">文章</a>讲挺明白，but先观察这个函数形式：</p>
+<p>$$<br>PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&#x2F;d_{model}}})<br>$$</p>
+<p>$$<br>PE_{(pos, 2i+1)} &#x3D; cos(\frac{pos}{10000^{2i&#x2F;d_{model}}})<br>$$</p>
+<p>这里的pos一旦大一点，例如$pos&#x3D;100，2i&#x2F;d_{model} &#x3D; 0.5$和$ pos&#x3D;728，2i&#x2F;d_{model} &#x3D; 0.5$，这两个值就特别接近，很容易让机器误解。其实还有很多这样的情况。具体的优化可以看2.2.1。</p>
+<h4 id="Self-Attention自注意力机制"><a href="#Self-Attention自注意力机制" class="headerlink" title="Self-Attention自注意力机制"></a>Self-Attention自注意力机制</h4><p>原始的Attention模型使用了循环卷积中的隐藏状态作为注意力参数的计算方法。Transformer这里用的是另一种叫做Self-Attention的方法。其核心解决的问题就一个：</p>
+<p>如何在已知每个词的词向量后，计算每个词之间的关联程度？算内积。然后把这个内积归一化后乘到词向量上，好像有点意思但又没太看懂这个加权。</p>
+<p><a href="https://blog.csdn.net/qq_38890412/article/details/120601834?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918813716800192223678%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169918813716800192223678&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-120601834-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=self-attention&spm=1018.2226.3001.4187">这篇文章</a>讲的很清楚。</p>
+<p>multi就是整了八组权重，整了八个输出最后拼起来加了个线性变换。而masked呢，就是为了在对输出进行回传的时候，保证字符编码的一致性。</p>
+<p><a href="https://blog.csdn.net/zhaohongfei_358/article/details/122861751?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169919352616800184141681%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169919352616800184141681&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-122861751-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Masked%20Multi-Head%20Attention&spm=1018.2226.3001.4187">这篇文章</a>究极详细地讲了这几个部分的内容以及实操。</p>
+<h4 id="Add-Normalize"><a href="#Add-Normalize" class="headerlink" title="Add&amp;Normalize"></a>Add&amp;Normalize</h4><p>残差块都是熟悉的老朋友了，就是避免深度过大产生梯度等等问题的。这里用到的LayerNorm倒是值得一看。</p>
+]]></content>
+      <categories>
+        <category>AI</category>
+        <category>NLP</category>
+        <category>Transformer</category>
+      </categories>
+      <tags>
+        <tag>位置编码</tag>
+        <tag>自注意力机制</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站记录1：创建主页</title>
+    <url>/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%951%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%A1%B5/</url>
+    <content><![CDATA[<p>记录一下建站过程。主要参考网上的hexo博客教程。</p>
+<h3 id="安装Nodejs和hexo"><a href="#安装Nodejs和hexo" class="headerlink" title="安装Nodejs和hexo"></a>安装Nodejs和hexo</h3><p>好像很简单，一直next，直到最后确认npm版本都没什么问题。然后就是这行代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>安装的时候一直显示packages have changed，但是看版本就是不行。后来不知道哪里查到资料说是修改权限的问题，在安装前把nodejs里所有文件权限全部开放后，hexo就能用了。</p>
+<h3 id="github创建个人仓库并创建连接"><a href="#github创建个人仓库并创建连接" class="headerlink" title="github创建个人仓库并创建连接"></a>github创建个人仓库并创建连接</h3><p>创建的.github.io库其实就是<a href="https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages">Github Pages</a>，就是在Github上的托管站点。</p>
+<p>创建仓库后要建立ssh连接。ssh，简单来讲，就是一个私人密钥一个公共秘钥，私人秘钥不能给别人看的，公共秘钥可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。反正我之前也用Github，所以我早都弄好了。</p>
+<p>建立连接更简单，改_config.yaml里的deploy就行。网上branch都写的master，其实是main，Github早都改了。</p>
+<h3 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h3><p>安装deploy-git，然后hexo三连部署就行了。</p>
+<p>至此，建站完毕。Github需要一段时间缓存你的网站，所以当你部署后，等个十来分钟半个小时才会显示，不是网络问题。</p>
+<h3 id="个人域名"><a href="#个人域名" class="headerlink" title="个人域名"></a>个人域名</h3><p>懒得弄，没啥必要感觉</p>
+]]></content>
+      <categories>
+        <category>建站记录</category>
+      </categories>
+      <tags>
+        <tag>建站记录</tag>
+        <tag>Nodejs</tag>
+        <tag>ssh</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站记录2：基本功能部署</title>
+    <url>/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>现在的博客只是一个毛坯，我们给它上个漆，把家具都摆上，然后再体验一下。</p>
+<p>另外hexo的官方文档放在<a href="https://hexo.io/docs/">这里</a>。</p>
+<h3 id="主题修改"><a href="#主题修改" class="headerlink" title="主题修改"></a>主题修改</h3><p><a href="https://hexo.io/themes/">hexo官方网站</a>上就有很多模板，Github上也有很多，下载一个然后按着教程随便玩就行了。我喜欢NexT，这个主题精简美观，很符合我的审美。NexT官方文档在<a href="https://theme-next.js.org/">这里</a>。后面都是关于这个主题的介绍。</p>
+<p>用npm把主题导入进来是最容易的。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo-site</span><br><span class="line">$ npm install hexo-theme-next@latest</span><br></pre></td></tr></table></figure>
+
+<p>这个时候如果尝试 <code>hexo server</code>，就会发现主题已经改过来了。</p>
+<h3 id="博客自定义基础设置"><a href="#博客自定义基础设置" class="headerlink" title="博客自定义基础设置"></a>博客自定义基础设置</h3><p>这个主要是在博客的根目录和主题文件夹的_config.yaml文件里修改配置，官方文档一看就会，也没什么阻力。</p>
+<p>博客根目录没看到相关修改的参考文档，NexT的就在官方文档里。</p>
+<p>我改了标题，副标题，目录，目录页，图标，大部分都没什么讲究。</p>
+<h3 id="发博客"><a href="#发博客" class="headerlink" title="发博客"></a>发博客</h3><p>到目前为止我好像没有看到可以改 <code>hexo new</code>命令创建post的模板，设置得自己改，大概格式就是这样，反正我觉得比较好用：</p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">title: Title</span><br><span class="line">date: yyyy-mm-dd hh:mm:ss</span><br><span class="line"><span class="keyword">tags:</span> [Tag, Another Tag]</span><br><span class="line">categories: [Cat, Subcat]</span><br></pre></td></tr></table></figure>
+
+<p>写完后保存就行了，hexo三连进行上传。</p>
+<p>发博客里经常要用数学公式，这个要在NexT主题里修改_config.yml文件：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># 这里改成true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在文章开头加上一行：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mathjax:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>不知道为什么，就在一篇文章里加了这一行，所有文章都能用了。</p>
+]]></content>
+      <categories>
+        <category>建站记录</category>
+      </categories>
+      <tags>
+        <tag>建站记录</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站记录3：添砖加瓦</title>
+    <url>/2023/11/15/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%953%EF%BC%9A%E6%B7%BB%E7%A0%96%E5%8A%A0%E7%93%A6/</url>
+    <content><![CDATA[<p>今天做完了事不知道干什么，来优化一下博客吧。</p>
+<h3 id="搜索栏"><a href="#搜索栏" class="headerlink" title="搜索栏"></a>搜索栏</h3><p>一个搜索栏，从博客中搜索任何内容。</p>
+<p>只需要三步：</p>
+<ol>
+<li>启动bash，安装插件：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>打开博客根目录下的_config.yml，末尾加上如下代码：</li>
+</ol>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># hexo-generator-searchdb</span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>打开主题下的_config.yml，local_search中enable选项改成true就行了。</li>
+</ol>
+<h3 id="字数（时间）统计"><a href="#字数（时间）统计" class="headerlink" title="字数（时间）统计"></a>字数（时间）统计</h3><p>用的是hexo-word-counter这个插件，可以实现字数和时间统计。但个人感觉这个时间统计不太适用于这种技术博客，就暂时没用。</p>
+<p>步骤和上面也类似，三步搞定。</p>
+<h3 id="添加统计"><a href="#添加统计" class="headerlink" title="添加统计"></a>添加统计</h3><p>这个更简单，主题下的_config.yml搜索busuanzi，下面的enable开启了就行。</p>
+<h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p>网上看了一圈，还是utterance简单就用这个了，反正大家都有Github账号对吧。这里参考了<a href="https://www.pengtech.net/hexo/hexo_blog_comments">这篇博客</a>，简单实用，大致就两步：</p>
+<ol>
+<li>创建仓库，用<a href="https://github.com/apps/utterances">这个链接</a>安装utterance到仓库里。</li>
+<li>改主题的_config.yml</li>
+</ol>
+<h3 id="文章显示次序"><a href="#文章显示次序" class="headerlink" title="文章显示次序"></a>文章显示次序</h3><p>使用的是hexo-generator-index-custom，官方文档在<a href="https://github.com/im0o/hexo-generator-index-custom/blob/master/README_zh.md">这里</a>，照着用就是</p>
+<p>感觉其他功能也不实用了，先优化到这，短期内应该不会再做优化了。</p>
+]]></content>
+      <categories>
+        <category>建站记录</category>
+      </categories>
+      <tags>
+        <tag>建站记录</tag>
+      </tags>
+  </entry>
+</search>
