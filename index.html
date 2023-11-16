@@ -147,18 +147,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,435 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/16/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A81-2%EF%BC%9ASTL%E5%86%85%E5%AE%B9%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/16/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A81-2%EF%BC%9ASTL%E5%86%85%E5%AE%B9%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">算法入门1-2：STL内容整理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-16 16:17:24 / 修改时间：17:12:25" itemprop="dateCreated datePublished" datetime="2023-11-16T16:17:24+08:00">2023-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">编程语言与基础算法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>817</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从接触STL到现在，这些函数我真的查了无数遍了，5年前高中时候整理的这些依旧十分好用，我就在上面略作修改直接搬运过来吧。</p>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><p>（以下函数均为str为示例字符串，用法为str. + 下面的函数）</p>
+<ol>
+<li><p>find(string a)</p>
+<p>类似kmp的功能，返回a在str中首字母出现的位置</p>
+</li>
+<li><p>append(string s2,int st,int en)</p>
+<p>在str后方加入s2从st到en的部分</p>
+</li>
+<li><p>operator + （用法为str&#x3D; str + s1）</p>
+<p>将两个字符串简单拼接</p>
+</li>
+<li><p>length()</p>
+<p>返回字符串的长度</p>
+</li>
+<li><p>replace(string s1,string s2) &#x2F; (string s1,int begin,int len)</p>
+<p>将原字符串中的s1全部替换为s2</p>
+</li>
+<li><p>substr(int st,int len)</p>
+<p>截取指定位置区间内的字串</p>
+</li>
+<li><p>getline(cin,str)</p>
+<p>读取整行，不读取回车和行末空格</p>
+</li>
+</ol>
+<h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><p>（以下函数均以q为示例队列，用法为q. + 下面的函数）</p>
+<ol>
+<li><p>push()</p>
+<p>将一个元素加入队列。若加入类型为结构体，用法为push((自定义结构体){参数})</p>
+</li>
+<li><p>pop()</p>
+<p>将队首弹出队列</p>
+</li>
+<li><p>front()</p>
+<p>返回队首元素</p>
+</li>
+<li><p>empty()</p>
+<p>判断队列是否为空，是返回0，不是返回1</p>
+</li>
+</ol>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p>（以下函数均以q为示例队列，用法为q. + 下面的函数）</p>
+<ol>
+<li><p>push_back()&#x2F;push_front()</p>
+<p>将一个元素加入队列。若加入类型为结构体，用法为push((自定义结构体){参数})</p>
+</li>
+<li><p>pop_back()&#x2F;pop_front()</p>
+<p>将一个元素弹出队列</p>
+</li>
+<li><p>front()&#x2F;back()</p>
+<p>返回队首&#x2F;队尾元素</p>
+</li>
+<li><p>empty()</p>
+<p>判断队列是否为空，是返回0，不是返回1</p>
+</li>
+</ol>
+<h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><p>(以下函数均以s为示例栈，用法为s. + 下面的函数)</p>
+<ol>
+<li><p>push()</p>
+<p>将一个元素加入栈。若加入元素的类型为结构体，用法为push((自定义结构体){参数})</p>
+</li>
+<li><p>pop()</p>
+<p>将队首弹出栈</p>
+</li>
+<li><p>top()</p>
+<p>返回栈顶元素</p>
+</li>
+<li><p>empty()</p>
+<p>判断栈是否为空，是返回0，不是返回1</p>
+</li>
+</ol>
+<h3 id="map-unordered-map"><a href="#map-unordered-map" class="headerlink" title="map(unordered_map)"></a>map(unordered_map)</h3><p>(以下函数均以m为示例映射)</p>
+<ol>
+<li><p>operator [ ] （m[ ])</p>
+<p>返回key对应的value</p>
+</li>
+<li><p>count() （用法为m.count(key)）</p>
+<p>判断key出现过的次数</p>
+</li>
+</ol>
+<p>* 对于要将结构体加入映射，必须重载operator &lt;</p>
+<p>具体重载如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">MYSTRUCT</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> u, v;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> MYSTRUCT a)</span><br><span class="line">        <span class="keyword">return</span> u &lt; a.u ? u : a.u;<span class="comment">//其实如果只需要用count的话，这句话是什么无关紧要</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="set-unordered-set"><a href="#set-unordered-set" class="headerlink" title="set(unordered_set)"></a>set(unordered_set)</h3><p>和map很像</p>
+<p>(以下函数均以s为示例集合，用法为s. + 下面的函数)</p>
+<ol>
+<li><p>count()</p>
+<p>判断key出现过的次数</p>
+</li>
+<li><p>insert()</p>
+<p>向集合中插入元素</p>
+</li>
+<li><p>merge()</p>
+<p>合并两个集合，时间复杂度为$O(nlogm)$（有序）或者$O(nm)$（无序）</p>
+</li>
+</ol>
+<h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h3><p>(以下函数均以q为示例优先队列(堆)，用法为q. + 下面的函数)</p>
+<ol>
+<li><p>push()</p>
+<p>将一个元素加入优先队列(堆)。若加入元素的类型为结构体，用法为push((自定义结构体){参数})</p>
+</li>
+<li><p>pop()</p>
+<p>将队首弹出优先队列(堆)</p>
+</li>
+<li><p>top()</p>
+<p>返回优先队列(堆)顶部元素</p>
+</li>
+<li><p>empty()</p>
+<p>判断优先队列(堆)是否为空，是返回0，不是返回1</p>
+</li>
+</ol>
+<p>* 优先队列(堆)默认为大根堆，若要将其改为小根堆，在定义时需加入参数</p>
+<p>具体代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br></pre></td></tr></table></figure>
+
+<p>* 万分感谢<strong>神犇Trust</strong>纠正错误！</p>
+<p>若要用结构体，则还需要重载＞</p>
+<p>假设我们要用的结构体为Worm（这绝对不是蚯蚓的正解中节选的）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Worm</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> cut,len;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span> &gt; (<span class="type">const</span> Worm a,<span class="type">const</span> Worm b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> a.len-q*a.cut&lt;b.len-q*b.cut;</span><br><span class="line">&#125;</span><br><span class="line">priority_queue &lt; Worm ,vector&lt;Worm&gt;, greater&lt;Worm&gt; &gt; q0; </span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/16/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A81-1%EF%BC%9AC-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/16/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A81-1%EF%BC%9AC-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">算法入门1-1：C++语言基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-16 14:48:41 / 修改时间：17:12:16" itemprop="dateCreated datePublished" datetime="2023-11-16T14:48:41+08:00">2023-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">编程语言与基础算法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>568</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一步步来？不存在的。入门就是要快而且简单</p>
+<h3 id="头文件和命名空间"><a href="#头文件和命名空间" class="headerlink" title="头文件和命名空间"></a>头文件和命名空间</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br></pre></td></tr></table></figure>
+
+<p>别问，竞赛如果支持 C++11 就写上这个，错不了而且省时间。实际工程反正没啥用。</p>
+<p>bits&#x2F;stdc++.h 是个万能头文件，基本常用的都支持。命名空间就是为了重名设置的，常用的命名空间就这一个。</p>
+<h3 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就一函数，每次程序运行，这个就是入口了。</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>行内注释 <code>//</code> 和段注释 <code>/*...*/</code></p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量就是变量，c++中，有几种基本类型：</p>
+<ol>
+<li>int：32位整型（默认），范围大约在$-2.1\times10^9\sim2.1\times10^9$（2的32次方）。</li>
+<li>long long：64位整型，范围大约在$-9\times10^{18}\sim9\times10^{18}$（2的64次方）</li>
+<li>float：单精度浮点型，一般认为其有效数字为6~9位。</li>
+<li>double：双精度浮点型，一般认为其有效数字为15~16位。</li>
+<li>bool：布尔型，只有对（1）错（0）两种值。</li>
+</ol>
+<h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><p>主要用两套，<code>printf()/scanf()</code> 和 <code>cin/cout</code></p>
+<h4 id="printf-scanf"><a href="#printf-scanf" class="headerlink" title="printf()/scanf()"></a><code>printf()/scanf()</code></h4><p>这一套容易做精确的格式控制而且执行速度快，但是要写格式控制符。格式控制符就是用来控制输入输出格式的。常见的格式控制符有：</p>
+<p><code>%d</code>：读取&#x2F;输出 int 类型的整数</p>
+<p><code>%d</code>：读取&#x2F;输出 int 类型的整数</p>
+<p><code>%s</code>：读取&#x2F;输出 char[] 字符串类型</p>
+<p><code>%c</code>：读取&#x2F;输出 char 类型</p>
+<p><code>%f/%lf</code>：读取&#x2F;输出 float&#x2F;double 浮点型</p>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);   <span class="comment">// 读入 x 和 y，注意取地址符</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n%d&quot;</span>, y, x);  <span class="comment">// 输出 y，换行，再输出 x</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="cin-cout"><a href="#cin-cout" class="headerlink" title="cin/cout"></a><code>cin/cout</code></h4><p>这一套写起来比较方便而且和格式无关，但是执行速度略慢。</p>
+<p>示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cin &gt;&gt; x &gt;&gt; y;	<span class="comment">//读入 x 和 y</span></span><br><span class="line">cout &lt;&lt; y &lt;&lt; endl &lt;&lt; x;	<span class="comment">//输出 y，换行，再输出 x</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="循环控制"><a href="#循环控制" class="headerlink" title="循环控制"></a>循环控制</h4><p>循环主要有for循环，while循环和do while循环，三者可以互相替代。常用的是前二者。for循环更加全面，while循环更加简洁。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>for循环第一个分号前的语句是在整个循环体开始之前执行的，第二个是循环继续的条件。第三个是执行一次循环后</p>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>使得程序正确退出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整体框架（模板）"><a href="#整体框架（模板）" class="headerlink" title="整体框架（模板）"></a>整体框架（模板）</h3><p>但凡算法题，主体都是这样的，题都不用看，先打上这个总没错：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，程序已经可以做一些简单的输入输出了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/16/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A80%EF%BC%9A%E8%BF%99%E4%B9%88%E5%A4%9A%E5%90%8C%E8%B4%A8%E8%B5%84%E6%96%99%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E5%BC%80%E8%BF%99%E6%A0%B7%E7%9A%84%E4%B8%93%E9%A2%98%E5%90%97%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/16/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A80%EF%BC%9A%E8%BF%99%E4%B9%88%E5%A4%9A%E5%90%8C%E8%B4%A8%E8%B5%84%E6%96%99%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E5%BC%80%E8%BF%99%E6%A0%B7%E7%9A%84%E4%B8%93%E9%A2%98%E5%90%97%EF%BC%9F/" class="post-title-link" itemprop="url">算法入门0：这么多同质资料还有必要开这样的专题吗？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-16 14:33:01 / 修改时间：16:16:40" itemprop="dateCreated datePublished" datetime="2023-11-16T14:33:01+08:00">2023-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>338</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>听说找实习算法要求不会很高，我就凭着一点几乎没有的老底，直接去面试了。但直到我在面试官面前什么也不会的时候，我才意识到自己有多幼稚多天真。</p>
+<h3 id="算法资料还不够多吗？"><a href="#算法资料还不够多吗？" class="headerlink" title="算法资料还不够多吗？"></a>算法资料还不够多吗？</h3><p>够多。真要说，<a target="_blank" rel="noopener" href="https://oi-wiki.org/">OIWiki</a>够很多OIer喝一壶了。但说白了，那就是个wiki。哪怕整个互联网都给你，那都不过是个知识库，而且是一个松散的，不属于自己的知识库。</p>
+<h3 id="不同之处？"><a href="#不同之处？" class="headerlink" title="不同之处？"></a>不同之处？</h3><p>属于我自己的，可持续更新的可扩展的，有逻辑有章法有联系的一个动态知识库。</p>
+<p>我希望在看完我的这些博客时，可以对纷繁复杂的算法世界有一个最直接最简单的看法，即便遇到不会的也可以查到相关的资料。也就是说，缺失很多细节是很正常的，纠结于细枝末节毫无意义。我希望尽可能保持学习的主线，而不是整理wiki时的体系和逻辑。所以看到不懂的就去查OIWiki，而不是觉得连贯性不好。事实上，这条学习路线才是最快进入算法世界的方法。</p>
+<p>博客主要参考<a target="_blank" rel="noopener" href="https://oi-wiki.org/">OIWiki</a>，确实是一份比较全面的知识库。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -944,108 +1373,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%951%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%A1%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%951%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%BB%E9%A1%B5/" class="post-title-link" itemprop="url">建站记录1：创建主页</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-13 14:22:01" itemprop="dateCreated datePublished" datetime="2023-11-13T14:22:01+08:00">2023-11-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-15 21:46:05" itemprop="dateModified" datetime="2023-11-15T21:46:05+08:00">2023-11-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">建站记录</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>390</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>记录一下建站过程。主要参考网上的hexo博客教程。</p>
-<h3 id="安装Nodejs和hexo"><a href="#安装Nodejs和hexo" class="headerlink" title="安装Nodejs和hexo"></a>安装Nodejs和hexo</h3><p>好像很简单，一直next，直到最后确认npm版本都没什么问题。然后就是这行代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>安装的时候一直显示packages have changed，但是看版本就是不行。后来不知道哪里查到资料说是修改权限的问题，在安装前把nodejs里所有文件权限全部开放后，hexo就能用了。</p>
-<h3 id="github创建个人仓库并创建连接"><a href="#github创建个人仓库并创建连接" class="headerlink" title="github创建个人仓库并创建连接"></a>github创建个人仓库并创建连接</h3><p>创建的.github.io库其实就是<a target="_blank" rel="noopener" href="https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages">Github Pages</a>，就是在Github上的托管站点。</p>
-<p>创建仓库后要建立ssh连接。ssh，简单来讲，就是一个私人密钥一个公共秘钥，私人秘钥不能给别人看的，公共秘钥可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。反正我之前也用Github，所以我早都弄好了。</p>
-<p>建立连接更简单，改_config.yaml里的deploy就行。网上branch都写的master，其实是main，Github早都改了。</p>
-<h3 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h3><p>安装deploy-git，然后hexo三连部署就行了。</p>
-<p>至此，建站完毕。Github需要一段时间缓存你的网站，所以当你部署后，等个十来分钟半个小时才会显示，不是网络问题。</p>
-<h3 id="个人域名"><a href="#个人域名" class="headerlink" title="个人域名"></a>个人域名</h3><p>懒得弄，没啥必要感觉</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
@@ -1066,7 +1396,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">3k</span>
+    <span title="站点总字数">5k</span>
   </span>
 </div>
 <div class="busuanzi-count">
