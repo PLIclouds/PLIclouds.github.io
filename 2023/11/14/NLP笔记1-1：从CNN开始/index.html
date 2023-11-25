@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。 神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入$x$和输出$y$的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。 不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。 CNN特征提取&amp;分类预测三步走：">
+    <meta name="description" content="CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。 神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入\(x\)和输出\(y\)的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。 不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。 CNN特征提取&amp;分">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="NLP笔记1-1：从CNN开始">
 <meta property="og:url" content="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/index.html">
 <meta property="og:site_name" content="Parallel Space">
-<meta property="og:description" content="CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。 神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入$x$和输出$y$的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。 不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。 CNN特征提取&amp;分类预测三步走：">
+<meta property="og:description" content="CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。 神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入\(x\)和输出\(y\)的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。 不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。 CNN特征提取&amp;分">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-14T14:42:19.000Z">
 <meta property="article:modified_time" content="2023-11-15T14:40:07.573Z">
@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#CNN%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96-%E5%88%86%E7%B1%BB%E9%A2%84%E6%B5%8B"><span class="nav-number">1.</span> <span class="nav-text">CNN特征提取&amp;分类预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.</span> <span class="nav-text">反向传播</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#cnn%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%88%86%E7%B1%BB%E9%A2%84%E6%B5%8B"><span class="nav-number">1.</span> <span class="nav-text">CNN特征提取&amp;分类预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.</span> <span class="nav-text">反向传播</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -154,18 +154,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -283,18 +283,23 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。</p>
-<p>神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入$x$和输出$y$的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。</p>
+<p>神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入<span
+class="math inline">\(x\)</span>和输出<span
+class="math inline">\(y\)</span>的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。</p>
 <p>不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。</p>
-<h4 id="CNN特征提取-分类预测"><a href="#CNN特征提取-分类预测" class="headerlink" title="CNN特征提取&amp;分类预测"></a>CNN特征提取&amp;分类预测</h4><p>三步走：卷积，激活，池化。</p>
+<h4 id="cnn特征提取分类预测">CNN特征提取&amp;分类预测</h4>
+<p>三步走：卷积，激活，池化。</p>
 <p>卷积很像在算互相关函数，也就是在提取特征。输入和卷积核作卷积就是计算相似程度的感觉。具体的卷积核是通过训练得到的。</p>
 <p>激活函数可以加入一些非线性在网络中（毕竟拟合如果只是线性的那可太没意思了），而ReLU又是很简单的非线性，于是就用这个了。</p>
 <p>池化就是减少冗杂信息量加快计算速度。最大池化保留了最好的匹配结果。</p>
 <p>三步之后，看似只是输出匹配结果，但其实对应特征已经被提取出来了。这些特征未必在人眼看来是显性的，但这就是特征。</p>
 <p>加深网络层数，CNN的特征提取部分就结束了。</p>
 <p>特征提取后，还要将提取的特征转化为分类结果，这个时候加全连接层，就像加权投票一样，算出结果。</p>
-<h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><p>如何进行优化？这是一种有监督学习。必须给神经网络喂标注好的数据。</p>
+<h4 id="反向传播">反向传播</h4>
+<p>如何进行优化？这是一种有监督学习。必须给神经网络喂标注好的数据。</p>
 <p>如果给一个随机的初值，它会产生一个误差值。根据这个误差值，可以计算每一步的梯度。再根据学习率，对网络参数进行调整，直至最后收敛。</p>
-<p>大体内容都在这了，详细可以看<a target="_blank" rel="noopener" href="https://e2eml.school/how_convolutional_neural_networks_work.html">这篇文章</a>，真正的大神</p>
+<p>大体内容都在这了，详细可以看<a
+target="_blank" rel="noopener" href="https://e2eml.school/how_convolutional_neural_networks_work.html">这篇文章</a>，真正的大神</p>
 
     </div>
 
@@ -368,7 +373,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">8k</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -427,7 +432,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="正式进入NLP学习！ RNNRNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！） 相比CNN的经典卷积核，循环卷积核有一个变化。 循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。 这样处理，可以说考虑了前文的所有内容。 看这篇文章，写的特别清楚。 但是问题在于，存在梯度的问题。如果要顾及很长文章的">
+    <meta name="description" content="正式进入NLP学习！ RNN RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！） 相比CNN的经典卷积核，循环卷积核有一个变化。 循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。 这样处理，可以说考虑了前文的所有内容。 看这篇文章，写的特别清楚。 但是问题在于，存在梯度的问题。如果">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="NLP笔记1-2：RNN和LSTM">
 <meta property="og:url" content="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-2%EF%BC%9ARNN%E5%92%8CLSTM/index.html">
 <meta property="og:site_name" content="Parallel Space">
-<meta property="og:description" content="正式进入NLP学习！ RNNRNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！） 相比CNN的经典卷积核，循环卷积核有一个变化。 循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。 这样处理，可以说考虑了前文的所有内容。 看这篇文章，写的特别清楚。 但是问题在于，存在梯度的问题。如果要顾及很长文章的">
+<meta property="og:description" content="正式进入NLP学习！ RNN RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！） 相比CNN的经典卷积核，循环卷积核有一个变化。 循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。 这样处理，可以说考虑了前文的所有内容。 看这篇文章，写的特别清楚。 但是问题在于，存在梯度的问题。如果">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-14T14:48:00.000Z">
 <meta property="article:modified_time" content="2023-11-14T14:53:22.141Z">
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSTM"><span class="nav-number">2.</span> <span class="nav-text">LSTM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#LSTM%E5%8F%98%E7%A7%8D"><span class="nav-number">2.1.</span> <span class="nav-text">LSTM变种</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#rnn"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lstm"><span class="nav-number">2.</span> <span class="nav-text">LSTM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#lstm%E5%8F%98%E7%A7%8D"><span class="nav-number">2.1.</span> <span class="nav-text">LSTM变种</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -278,21 +278,30 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>正式进入NLP学习！</p>
-<h4 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h4><p>RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！）</p>
+<h4 id="rnn">RNN</h4>
+<p>RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！）</p>
 <p>相比CNN的经典卷积核，循环卷积核有一个变化。</p>
 <p>循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。</p>
 <p>这样处理，可以说考虑了前文的所有内容。</p>
-<p>看<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30844905">这篇文章</a>，写的特别清楚。</p>
+<p>看<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30844905">这篇文章</a>，写的特别清楚。</p>
 <p>但是问题在于，存在梯度的问题。如果要顾及很长文章的情况，循环卷积核旁边的权重就会被乘很多次。在反向传播时，由于梯度过小，学习会直接停止；或者由于梯度过大，会直接梯度爆炸。</p>
-<h4 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h4><p>在RNN网络结构基础上，把单纯的循环卷积核改成了三个门，遗忘门，输入门，输出门。核心信息储存在随时间变化的cell state里。</p>
+<h4 id="lstm">LSTM</h4>
+<p>在RNN网络结构基础上，把单纯的循环卷积核改成了三个门，遗忘门，输入门，输出门。核心信息储存在随时间变化的cell
+state里。</p>
 <p>遗忘门用于确定是否需要遗忘之前的某些元素。</p>
-<p>输入门用于确定加入cell state的信息。注意输入门和遗忘门两个sigmoid层作用不一样，前者确定是否需要遗忘cell中的信息，后者确定是否需要向cell中加入信息。</p>
+<p>输入门用于确定加入cell
+state的信息。注意输入门和遗忘门两个sigmoid层作用不一样，前者确定是否需要遗忘cell中的信息，后者确定是否需要向cell中加入信息。</p>
 <p>输出门用于确定输出。这个sigmoid层用来确定是否向下传递，tanh层用来加非线性。</p>
 <p>非常精彩的改动，爱来自中国。</p>
-<p>参考<a target="_blank" rel="noopener" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTM Network</a>，这篇文章绝绝子哈哈</p>
-<h5 id="LSTM变种"><a href="#LSTM变种" class="headerlink" title="LSTM变种"></a>LSTM变种</h5><p>peephole：在sigmoid函数那里连接了cell，好像考虑全面了一些。</p>
+<p>参考<a
+target="_blank" rel="noopener" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding
+LSTM Network</a>，这篇文章绝绝子哈哈</p>
+<h5 id="lstm变种">LSTM变种</h5>
+<p>peephole：在sigmoid函数那里连接了cell，好像考虑全面了一些。</p>
 <p>coupled forget and input gate：只向cell中input刚刚忘记的。</p>
-<p>Gate Recurrent Unit（GRU）：cell都被整合了？没看懂，但据说很好用，先就这样吧。</p>
+<p>Gate Recurrent
+Unit（GRU）：cell都被整合了？没看懂，但据说很好用，先就这样吧。</p>
 
     </div>
 
@@ -367,7 +376,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">8k</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -426,7 +435,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

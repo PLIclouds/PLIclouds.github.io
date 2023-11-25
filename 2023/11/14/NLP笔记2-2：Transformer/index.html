@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="能不能找到实习就看这一篇了 总体来说看这个，细节不到位但是文章架构没问题。 更详细的解答还得看李沐大神的论文逐段分析 Positional Encoding就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇文章讲挺明白，but先观察这个函数形式： $$PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&amp;">
+    <meta name="description" content="能不能找到实习就看这一篇了 总体来说看这个，细节不到位但是文章架构没问题。 更详细的解答还得看李沐大神的论文逐段分析 Positional Encoding 就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇文章讲挺明白，but先观察这个函数形式： \[ PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="NLP笔记2-2：Transformer">
 <meta property="og:url" content="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B02-2%EF%BC%9ATransformer/index.html">
 <meta property="og:site_name" content="Parallel Space">
-<meta property="og:description" content="能不能找到实习就看这一篇了 总体来说看这个，细节不到位但是文章架构没问题。 更详细的解答还得看李沐大神的论文逐段分析 Positional Encoding就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇文章讲挺明白，but先观察这个函数形式： $$PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&amp;">
+<meta property="og:description" content="能不能找到实习就看这一篇了 总体来说看这个，细节不到位但是文章架构没问题。 更详细的解答还得看李沐大神的论文逐段分析 Positional Encoding 就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇文章讲挺明白，but先观察这个函数形式： \[ PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-14T14:56:00.000Z">
 <meta property="article:modified_time" content="2023-11-14T14:58:16.520Z">
@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">1.</span> <span class="nav-text">Positional Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Self-Attention%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">Self-Attention自注意力机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Normalize"><span class="nav-number">3.</span> <span class="nav-text">Add&amp;Normalize</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#positional-encoding"><span class="nav-number">1.</span> <span class="nav-text">Positional Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">Self-Attention自注意力机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addnormalize"><span class="nav-number">3.</span> <span class="nav-text">Add&amp;Normalize</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -154,18 +154,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -277,18 +277,33 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>能不能找到实习就看这一篇了</p>
-<p>总体来说看<a target="_blank" rel="noopener" href="https://blog.csdn.net/Tink1995/article/details/105080033?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918474216800188596218%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169918474216800188596218&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105080033-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Transformer&spm=1018.2226.3001.4187">这个</a>，细节不到位但是文章架构没问题。</p>
-<p>更详细的解答还得看李沐大神的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pu411o7BE/?spm_id_from=333.999.0.0&vd_source=2496b4033bb7934a9c794f73f3b41282">论文逐段分析</a></p>
-<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p>就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106644634">文章</a>讲挺明白，but先观察这个函数形式：</p>
-<p>$$<br>PE_{(pos, 2i)} &#x3D; sin(\frac{pos}{10000^{2i&#x2F;d_{model}}})<br>$$</p>
-<p>$$<br>PE_{(pos, 2i+1)} &#x3D; cos(\frac{pos}{10000^{2i&#x2F;d_{model}}})<br>$$</p>
-<p>这里的pos一旦大一点，例如$pos&#x3D;100，2i&#x2F;d_{model} &#x3D; 0.5$和$ pos&#x3D;728，2i&#x2F;d_{model} &#x3D; 0.5$，这两个值就特别接近，很容易让机器误解。其实还有很多这样的情况。具体的优化可以看2.2.1。</p>
-<h4 id="Self-Attention自注意力机制"><a href="#Self-Attention自注意力机制" class="headerlink" title="Self-Attention自注意力机制"></a>Self-Attention自注意力机制</h4><p>原始的Attention模型使用了循环卷积中的隐藏状态作为注意力参数的计算方法。Transformer这里用的是另一种叫做Self-Attention的方法。其核心解决的问题就一个：</p>
+<p>总体来说看<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/Tink1995/article/details/105080033?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918474216800188596218%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169918474216800188596218&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105080033-null-null.142%5Ev96%5Epc_search_result_base7&amp;utm_term=Transformer&amp;spm=1018.2226.3001.4187">这个</a>，细节不到位但是文章架构没问题。</p>
+<p>更详细的解答还得看李沐大神的<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pu411o7BE/?spm_id_from=333.999.0.0&amp;vd_source=2496b4033bb7934a9c794f73f3b41282">论文逐段分析</a></p>
+<h4 id="positional-encoding">Positional Encoding</h4>
+<p>就是把位置信息加入词向量中，毕竟没有中间状态可以用了嘛。原文给了个三角形式的位置编码还没解释清楚，这有篇<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106644634">文章</a>讲挺明白，but先观察这个函数形式：</p>
+<p><span class="math display">\[
+PE_{(pos, 2i)} = sin(\frac{pos}{10000^{2i/d_{model}}})
+\]</span></p>
+<p><span class="math display">\[
+PE_{(pos, 2i+1)} = cos(\frac{pos}{10000^{2i/d_{model}}})
+\]</span></p>
+<p>这里的pos一旦大一点，例如<span
+class="math inline">\(pos=100，2i/d_{model} = 0.5\)</span>和$
+pos=728，2i/d_{model} =
+0.5$，这两个值就特别接近，很容易让机器误解。其实还有很多这样的情况。具体的优化可以看2.2.1。</p>
+<h4 id="self-attention自注意力机制">Self-Attention自注意力机制</h4>
+<p>原始的Attention模型使用了循环卷积中的隐藏状态作为注意力参数的计算方法。Transformer这里用的是另一种叫做Self-Attention的方法。其核心解决的问题就一个：</p>
 <p>如何在已知每个词的词向量后，计算每个词之间的关联程度？算内积。然后把这个内积归一化后乘到词向量上，好像有点意思但又没太看懂这个加权。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38890412/article/details/120601834?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918813716800192223678%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169918813716800192223678&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-120601834-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=self-attention&spm=1018.2226.3001.4187">这篇文章</a>讲的很清楚。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38890412/article/details/120601834?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169918813716800192223678%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169918813716800192223678&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-120601834-null-null.142%5Ev96%5Epc_search_result_base7&amp;utm_term=self-attention&amp;spm=1018.2226.3001.4187">这篇文章</a>讲的很清楚。</p>
 <p>multi就是整了八组权重，整了八个输出最后拼起来加了个线性变换。而masked呢，就是为了在对输出进行回传的时候，保证字符编码的一致性。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaohongfei_358/article/details/122861751?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169919352616800184141681%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169919352616800184141681&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-122861751-null-null.142%5Ev96%5Epc_search_result_base7&utm_term=Masked%20Multi-Head%20Attention&spm=1018.2226.3001.4187">这篇文章</a>究极详细地讲了这几个部分的内容以及实操。</p>
-<h4 id="Add-Normalize"><a href="#Add-Normalize" class="headerlink" title="Add&amp;Normalize"></a>Add&amp;Normalize</h4><p>残差块都是熟悉的老朋友了，就是避免深度过大产生梯度等等问题的。这里用到的LayerNorm倒是值得一看。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/zhaohongfei_358/article/details/122861751?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169919352616800184141681%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=169919352616800184141681&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-122861751-null-null.142%5Ev96%5Epc_search_result_base7&amp;utm_term=Masked%20Multi-Head%20Attention&amp;spm=1018.2226.3001.4187">这篇文章</a>究极详细地讲了这几个部分的内容以及实操。</p>
+<h4 id="addnormalize">Add&amp;Normalize</h4>
+<p>残差块都是熟悉的老朋友了，就是避免深度过大产生梯度等等问题的。这里用到的LayerNorm倒是值得一看。</p>
 
     </div>
 
@@ -362,7 +377,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">8k</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -421,7 +436,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

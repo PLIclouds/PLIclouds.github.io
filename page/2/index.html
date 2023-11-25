@@ -147,18 +147,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,466 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-3%EF%BC%9A%E6%9D%A1%E4%BB%B6%E9%9A%8F%E6%9C%BA%E5%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B01-3%EF%BC%9A%E6%9D%A1%E4%BB%B6%E9%9A%8F%E6%9C%BA%E5%9C%BA/" class="post-title-link" itemprop="url">NLP笔记1-3：条件随机场</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-14 22:51:21 / 修改时间：22:52:52" itemprop="dateCreated datePublished" datetime="2023-11-14T22:51:21+08:00">2023-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>301</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>文义分割基础</p>
+<h4 id="一堆概念">一堆概念</h4>
+<h5 id="马尔可夫随机场">马尔可夫随机场</h5>
+<p>马尔可夫随机场：具有马尔可夫性质（下一个状态仅由当前状态预测得到）的随机场（随机变量组成的场）？no。</p>
+<p>这里的马尔可夫只关注空间上的条件依赖关系。而所谓随机场也是指由随机变量（节点）和条件依赖关系（边）构成的无向图。</p>
+<p>实在没看懂这个随机场和概率无向图的区别。真难啊这鬼东西，先润了，回头看看能不能看懂。</p>
+<h5 id="团">团</h5>
+<p>团：图中的全连接子图</p>
+<p>最大团：无法从图中加入任意其他元素的团（和团中顶点个数无关）</p>
+<p>能量函数：给定的团会存在一个能量函数，代表该团中所有变量取值的合理性。能量越高越不合理。该函数一般靠问题具体规则而定。在马尔可夫随机场中，这个函数一般与概率无向图的概率分布有关，具体形式形如<span
+class="math inline">\(P(X_1, X_2, ... , X_n) ∝e^{-E(X_1, X_2, ... ,
+X_n)}\)</span>，具体证明没看</p>
+<h5 id="crf">CRF</h5>
+<p>真麻了，啥也看不懂，先这样吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-2%EF%BC%9ARNN%E5%92%8CLSTM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B01-2%EF%BC%9ARNN%E5%92%8CLSTM/" class="post-title-link" itemprop="url">NLP笔记1-2：RNN和LSTM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-14 22:48:00 / 修改时间：22:53:22" itemprop="dateCreated datePublished" datetime="2023-11-14T22:48:00+08:00">2023-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>469</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>正式进入NLP学习！</p>
+<h4 id="rnn">RNN</h4>
+<p>RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！）</p>
+<p>相比CNN的经典卷积核，循环卷积核有一个变化。</p>
+<p>循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。</p>
+<p>这样处理，可以说考虑了前文的所有内容。</p>
+<p>看<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30844905">这篇文章</a>，写的特别清楚。</p>
+<p>但是问题在于，存在梯度的问题。如果要顾及很长文章的情况，循环卷积核旁边的权重就会被乘很多次。在反向传播时，由于梯度过小，学习会直接停止；或者由于梯度过大，会直接梯度爆炸。</p>
+<h4 id="lstm">LSTM</h4>
+<p>在RNN网络结构基础上，把单纯的循环卷积核改成了三个门，遗忘门，输入门，输出门。核心信息储存在随时间变化的cell
+state里。</p>
+<p>遗忘门用于确定是否需要遗忘之前的某些元素。</p>
+<p>输入门用于确定加入cell
+state的信息。注意输入门和遗忘门两个sigmoid层作用不一样，前者确定是否需要遗忘cell中的信息，后者确定是否需要向cell中加入信息。</p>
+<p>输出门用于确定输出。这个sigmoid层用来确定是否向下传递，tanh层用来加非线性。</p>
+<p>非常精彩的改动，爱来自中国。</p>
+<p>参考<a
+target="_blank" rel="noopener" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding
+LSTM Network</a>，这篇文章绝绝子哈哈</p>
+<h5 id="lstm变种">LSTM变种</h5>
+<p>peephole：在sigmoid函数那里连接了cell，好像考虑全面了一些。</p>
+<p>coupled forget and input gate：只向cell中input刚刚忘记的。</p>
+<p>Gate Recurrent
+Unit（GRU）：cell都被整合了？没看懂，但据说很好用，先就这样吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/" class="post-title-link" itemprop="url">NLP笔记1-1：从CNN开始</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-14 22:42:19" itemprop="dateCreated datePublished" datetime="2023-11-14T22:42:19+08:00">2023-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-15 22:40:07" itemprop="dateModified" datetime="2023-11-15T22:40:07+08:00">2023-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>525</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。</p>
+<p>神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入<span
+class="math inline">\(x\)</span>和输出<span
+class="math inline">\(y\)</span>的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。</p>
+<p>不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。</p>
+<h4 id="cnn特征提取分类预测">CNN特征提取&amp;分类预测</h4>
+<p>三步走：卷积，激活，池化。</p>
+<p>卷积很像在算互相关函数，也就是在提取特征。输入和卷积核作卷积就是计算相似程度的感觉。具体的卷积核是通过训练得到的。</p>
+<p>激活函数可以加入一些非线性在网络中（毕竟拟合如果只是线性的那可太没意思了），而ReLU又是很简单的非线性，于是就用这个了。</p>
+<p>池化就是减少冗杂信息量加快计算速度。最大池化保留了最好的匹配结果。</p>
+<p>三步之后，看似只是输出匹配结果，但其实对应特征已经被提取出来了。这些特征未必在人眼看来是显性的，但这就是特征。</p>
+<p>加深网络层数，CNN的特征提取部分就结束了。</p>
+<p>特征提取后，还要将提取的特征转化为分类结果，这个时候加全连接层，就像加权投票一样，算出结果。</p>
+<h4 id="反向传播">反向传播</h4>
+<p>如何进行优化？这是一种有监督学习。必须给神经网络喂标注好的数据。</p>
+<p>如果给一个随机的初值，它会产生一个误差值。根据这个误差值，可以计算每一步的梯度。再根据学习率，对网络参数进行调整，直至最后收敛。</p>
+<p>大体内容都在这了，详细可以看<a
+target="_blank" rel="noopener" href="https://e2eml.school/how_convolutional_neural_networks_work.html">这篇文章</a>，真正的大神</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/13/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%952%EF%BC%9A%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">建站记录2：基本功能部署</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-13 16:31:14" itemprop="dateCreated datePublished" datetime="2023-11-13T16:31:14+08:00">2023-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-25 22:49:48" itemprop="dateModified" datetime="2023-11-25T22:49:48+08:00">2023-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">建站记录</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>454</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>现在的博客只是一个毛坯，我们给它上个漆，把家具都摆上，然后再体验一下。</p>
+<p>另外hexo的官方文档放在<a target="_blank" rel="noopener" href="https://hexo.io/docs/">这里</a>。</p>
+<h3 id="主题修改">主题修改</h3>
+<p><a
+target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo官方网站</a>上就有很多模板，Github上也有很多，下载一个然后按着教程随便玩就行了。我喜欢NexT，这个主题精简美观，很符合我的审美。NexT官方文档在<a
+target="_blank" rel="noopener" href="https://theme-next.js.org/">这里</a>。后面都是关于这个主题的介绍。</p>
+<p>用npm把主题导入进来是最容易的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo-site</span><br><span class="line">$ npm install hexo-theme-next@latest</span><br></pre></td></tr></table></figure>
+<p>这个时候如果尝试
+<code>hexo server</code>，就会发现主题已经改过来了。</p>
+<h3 id="博客自定义基础设置">博客自定义基础设置</h3>
+<p>这个主要是在博客的根目录和主题文件夹的_config.yaml文件里修改配置，官方文档一看就会，也没什么阻力。</p>
+<p>博客根目录没看到相关修改的参考文档，NexT的就在官方文档里。</p>
+<p>我改了标题，副标题，目录，目录页，图标，大部分都没什么讲究。</p>
+<h3 id="发博客">发博客</h3>
+<p>到目前为止我好像没有看到可以改
+<code>hexo new</code>命令创建post的模板，设置得自己改，大概格式就是这样，反正我觉得比较好用：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: Title</span><br><span class="line">date: yyyy-mm-dd hh:mm:ss</span><br><span class="line"><span class="keyword">tags:</span> [Tag, Another Tag]</span><br><span class="line">categories: [Cat, Subcat]</span><br></pre></td></tr></table></figure>
+<p>写完后保存就行了，hexo三连进行上传。</p>
+<p>发博客里经常要用数学公式，这个要在NexT主题里修改_config.yml文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment"># 这里改成true</span></span><br><span class="line">    <span class="comment"># Available values: none | ams | all</span></span><br><span class="line">    <span class="attr">tags:</span> <span class="string">none</span></span><br></pre></td></tr></table></figure>
+<p>然后在文章开头加上一行：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>其实博客支持每页自动解析，在 <code>math</code>中有一个
+<code>every page</code>选项，改成true就行了。</p>
+<p>另外后面出现了各种问题，部分LaTeX语法不支持，好像也没啥办法，虽然加了一堆东西但是没啥用，主要参考的<a
+target="_blank" rel="noopener" href="https://seekstar.github.io/2021/11/16/hexo%E6%94%AF%E6%8C%81latex%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%85%AC%E5%BC%8F%E7%BC%96%E8%BE%91/">这篇博客</a>的方案。<del>放在这里单纯为了出问题的时候复原</del></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -231,7 +691,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-15 21:46:05" itemprop="dateModified" datetime="2023-11-15T21:46:05+08:00">2023-11-15</time>
+      <time title="修改时间：2023-11-25 22:49:37" itemprop="dateModified" datetime="2023-11-25T22:49:37+08:00">2023-11-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,16 +721,22 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>记录一下建站过程。主要参考网上的hexo博客教程。</p>
-<h3 id="安装Nodejs和hexo"><a href="#安装Nodejs和hexo" class="headerlink" title="安装Nodejs和hexo"></a>安装Nodejs和hexo</h3><p>好像很简单，一直next，直到最后确认npm版本都没什么问题。然后就是这行代码：</p>
+<h3 id="安装nodejs和hexo">安装Nodejs和hexo</h3>
+<p>好像很简单，一直next，直到最后确认npm版本都没什么问题。然后就是这行代码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>安装的时候一直显示packages have changed，但是看版本就是不行。后来不知道哪里查到资料说是修改权限的问题，在安装前把nodejs里所有文件权限全部开放后，hexo就能用了。</p>
-<h3 id="github创建个人仓库并创建连接"><a href="#github创建个人仓库并创建连接" class="headerlink" title="github创建个人仓库并创建连接"></a>github创建个人仓库并创建连接</h3><p>创建的.github.io库其实就是<a target="_blank" rel="noopener" href="https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages">Github Pages</a>，就是在Github上的托管站点。</p>
+<p>安装的时候一直显示packages have
+changed，但是看版本就是不行。后来不知道哪里查到资料说是修改权限的问题，在安装前把nodejs里所有文件权限全部开放后，hexo就能用了。</p>
+<h3 id="github创建个人仓库并创建连接">github创建个人仓库并创建连接</h3>
+<p>创建的.github.io库其实就是<a
+target="_blank" rel="noopener" href="https://docs.github.com/zh/pages/getting-started-with-github-pages/about-github-pages">Github
+Pages</a>，就是在Github上的托管站点。</p>
 <p>创建仓库后要建立ssh连接。ssh，简单来讲，就是一个私人密钥一个公共秘钥，私人秘钥不能给别人看的，公共秘钥可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。反正我之前也用Github，所以我早都弄好了。</p>
 <p>建立连接更简单，改_config.yaml里的deploy就行。网上branch都写的master，其实是main，Github早都改了。</p>
-<h3 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h3><p>安装deploy-git，然后hexo三连部署就行了。</p>
+<h3 id="部署博客">部署博客</h3>
+<p>安装deploy-git，然后hexo三连部署就行了。</p>
 <p>至此，建站完毕。Github需要一段时间缓存你的网站，所以当你部署后，等个十来分钟半个小时才会显示，不是网络问题。</p>
-<h3 id="个人域名"><a href="#个人域名" class="headerlink" title="个人域名"></a>个人域名</h3><p>懒得弄，没啥必要感觉</p>
+<h3 id="个人域名">个人域名</h3>
+<p>懒得弄，没啥必要感觉</p>
 
       
     </div>
@@ -312,7 +778,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">5k</span>
+    <span title="站点总字数">8k</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -371,7 +837,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
