@@ -147,7 +147,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -195,6 +195,106 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/08/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%954%EF%BC%9A%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/08/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%954%EF%BC%9A%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">建站记录4：插入图片</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-08 20:37:05 / 修改时间：21:33:52" itemprop="dateCreated datePublished" datetime="2023-12-08T20:37:05+08:00">2023-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">建站记录</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>660</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这插入图片本来看起来挺容易的，但是实际弄下来也花了我整整一天时间才算差不多解决这个问题，也算挺折磨的。</p>
+<p>众所周知，插入图片有两种办法，绝对路径和相对路径。相对路径看似简单，但是如果用在博客里会出大问题。这里只能用绝对路径。</p>
+<h3 id="相对路径的尝试">相对路径的尝试</h3>
+<p>我尝试了在各种地方建立image文件夹，改了各种路径，把图片引用到markdown文档里，本地显然没啥问题，但是本地测试服务器的时候就出了各种各样的问题。我还在想是否是hexo没有把图片连带着加载到博客中，突然想到点什么，打开开发者工具，一下发现了不对劲的地方：</p>
+<p>同一篇博客，<strong>主页上博客的图片路径和点开博客后图片的路径居然不是同一个</strong>。</p>
+<p>我瞬间就明白了，这压根就是两个页面啊，存放在仓库不同的位置，用相对路径找图片，即使图片路径在一个页面能显示了，另一个页面也必然不能显示，这样肯定出问题。</p>
+<h3 id="绝对路径">绝对路径</h3>
+<p>我啪一下很快啊，直接去查CSDN（其实我一开始看到了那篇博客，但是我始终觉得我的相对路径没啥问题）最终还是使用了根目录那套方案。</p>
+<p>在Hexo的目录source中创建一个图片文件夹</p>
+<p>把你要插入的图片文件放到该目录下面，在你的文章中正常使用markdown的语法插入图片即可</p>
+<p>例如</p>
+<p><code>![img](/pic/xxx.png)</code></p>
+<p>到此你就完成了插图，并且图片在你的博客上面也会正常显示！</p>
+<p>记住在pic前面有一个/,表示根目录的意思，因为对于hexo来说它的资源文件的根目录就是source,当然你也可以修改_config.yml改变这个配置。</p>
+<p>这个以根目录开头的绝对路径就是目前的方案了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -223,9 +323,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-12-07 21:17:42 / 修改时间：23:12:48" itemprop="dateCreated datePublished" datetime="2023-12-07T21:17:42+08:00">2023-12-07</time>
+      <time title="创建时间：2023-12-07 21:17:42" itemprop="dateCreated datePublished" datetime="2023-12-07T21:17:42+08:00">2023-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-10 15:04:36" itemprop="dateModified" datetime="2023-12-10T15:04:36+08:00">2023-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">CSAPP学习笔记</span></a>
+        </span>
     </span>
 
   
@@ -234,7 +349,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>991</span>
+      <span>3k</span>
     </span>
 </div>
 
@@ -252,18 +367,16 @@
 <p>使用有限的数位组合去表示数域上无限扩张的数，这必然会导致一些问题。这一部分在第二章会详细阐述</p>
 <h3 id="程序从文本到可执行文件">程序从文本到可执行文件</h3>
 <p>程序编写好后，在机器上被转变为低级机器语言指令，按照<strong>可执行目标程序</strong>的格式打包好后，以二进制磁盘文件的形式储存。就像这样：</p>
-<p><img src="image/CSAPP学习笔记1：计算机系统漫游/1701956036242.png"
-alt="1701956036242" /></p>
+<p><img src="/images/1701956036242.png" alt="1701956036242" /></p>
 <p>预处理阶段：根据#开头的预处理命令修改原始C程序。</p>
 <p>编译阶段：将程序改写为汇编语言</p>
-<p>汇编阶段：将汇编语言转换为机器语言指令，并且打包成一个二进制的<strong>可重定位目标程序</strong>，在我的理解中，这就是一个还没链接外部的可执行文件</p>
+<p>汇编阶段：将汇编语言转换为机器语言指令，并且打包成一个二进制的<strong>可重定位目标程序</strong>，在我的理解中，这就是一个还没链接外部的可执行文件。</p>
 <p>链接阶段：合并外部链接，得到可执行文件。</p>
 <p>之后就可以在命令行解释器上加载可执行文件了。</p>
 <p>汇编语言只需要能够看懂编译器生成的就行了，不需要自己编写。本书关注x86-64，是因特尔的汇编语言，64位的指令集。</p>
 <h3 id="处理器运行指令的方式">处理器运行指令的方式</h3>
 <p>要解释这个问题，需要一点系统的硬件知识，如下图：<br />
-<img src="image/CSAPP学习笔记1：计算机系统漫游/1701957897928.png"
-alt="1701957897928" /></p>
+<img src="/images/1701957897928.png" alt="1701957897928" /></p>
 <p>总线：负责信息在部件间的传递。通常传递一定长度的字节块，被称为<strong>字</strong>。字长就是所谓的32位和64位了。</p>
 <p>I/O设备：即输入输出设备，系统和外部的交互通道。二者通过控制器或者适配器进行交换信息。</p>
 <p>主存：即主存储器或者内存，物理上由一组<strong>动态随机存取存储器(DRAM)</strong>组成。</p>
@@ -279,15 +392,86 @@ file）</strong>是一个小储存设备，由一些单个字长的寄存器组�
 <h3 id="高速缓存">高速缓存</h3>
 <p>一个显然的事实是，较大储存设备往往意味着更慢的运行速度和更便宜的内存。因此用缓存的思想，把可能要处理的数据划分一个区域，用更小的存储设备。于是系统设计者在CPU中加入了<strong>高速缓存存储器（cache
 memory）</strong>，如下图：</p>
-<p><img src="image/CSAPP学习笔记1：计算机系统漫游/1701961720166.png"
-alt="1701961720166" /></p>
+<p><img src="/images/1701961720166.png" alt="1701961720166" /></p>
 <p>cache同样分级，即包含L1, L2,
 L3三级存储，使用的硬件技术为<strong>静态随机访问存储器（SRAM）</strong>。于是计算机有如下存储结构：</p>
-<p><img src="image/CSAPP学习笔记1：计算机系统漫游/1701961899138.png"
-alt="1701961899138" /></p>
-<p>现代计算机的存储系统非常复杂，拥有高性能和高储存，但同时存在很多可能的错误，这常常体现在c语言的边界处理上。</p>
-<p>算法有时需要一些更底层的优化，需要了解系统运作的原理。</p>
-<p>计算机不仅执行程序，还要和外界进行交换，要拥有IO口。</p>
+<p><img src="/images/1701961899138.png" alt="1701961899138" /></p>
+<p>现代计算机的存储系统非常复杂，拥有高性能和高储存，但同时存在很多可能的错误，这常常体现在c语言的边界处理上。了解储存结构的作用就在这里。</p>
+<h3 id="操作系统">操作系统</h3>
+<p>操作系统是应用程序和处理器，主存和I/O设备的媒介。所有应用程序都必须通过操作系统操作硬件。我的理解是，应用的编写需要操作系统对底层硬件抽象；应用的运行需要操作系统对不同应用和硬件的协调。</p>
+<blockquote>
+<p>操作系统有两个基本功能：</p>
+<ol type="1">
+<li><p>防止硬件被失控的应用程序滥用；</p></li>
+<li><p>向应用程序提供简单一致的机制来控制复杂而又大不相同的低级硬件设备。</p></li>
+</ol>
+</blockquote>
+<p>如何实现上述内容？操作系统用了三个抽象的概念来实现：进程，虚拟内存和处理器。</p>
+<h4 id="进程">进程</h4>
+<blockquote>
+<p><strong>进程</strong>是操作系统对一个正在运行的程序的一种抽象。</p>
+</blockquote>
+<p>说白了，操作系统排除了其他程序的存在，单独告诉程序，你在我这就是个<strong>进程</strong>，你运行你的，别管其他程序。</p>
+<p>很多系统中，需要运行的程序的数量都是远大于核的数量的，而一个核在同一个时刻只能运行同一个程序，这就需要<strong>并发运行</strong>，这个概念很像通信里的时分复用，就是处理器将多个应用程序的进程<br />
+交错运行，达到看起来像并发运行的样子。</p>
+<p>这种操作系统的调度机制称为<strong>上下文切换</strong>。进程运行所需的所有状态信息称为<strong>上下文</strong>。该过程分三步：保存当前进程上下文，恢复新进程上下文，控制权传递给新进程。应用程序调用操作系统的指令被称为<strong>系统调用</strong>指令，这个操作是操作系统内核完成的。</p>
+<blockquote>
+<p><strong>内核</strong>是操作系统代码常驻主存的部分。</p>
+</blockquote>
+<h5 id="线程">线程</h5>
+<p>其实线程某种意义上就是对进程的并发复用。他们共享进程的上下文，数据和代码。</p>
+<h4 id="虚拟内存">虚拟内存</h4>
+<p>和进程类似，操作系统排除了应用程序操作实际内存的复杂性，单独告诉程序，你只需要操控我给你的一片区域就行了，实际数据区域你不用管，我会映射过去。</p>
+<p>Linux的虚拟地址空间入下图所示，图中地址从下往上增大：</p>
+<p><img src="/images/2023-12-09%20170651.png" /></p>
+<p>中间的蓝色是预留区域，其他的区域下面分别介绍一下：</p>
+<ul>
+<li>程序数据和代码：对所有进程而言，代码从固定地址开始，然后是全局变量。该区域根据可执行文件初始化。</li>
+<li>堆：显式管理动态内存的区域。可以在程序中调用函数动态扩展收缩。采用队列的数据结构管理</li>
+<li>共享库：C标准库等共享库</li>
+<li>栈：局部变量存储和函数调用的存储区域。采用堆(stack，不是上面那个堆)的数据结构管理</li>
+<li>内核虚拟内存：只有内核能操作的区域。</li>
+</ul>
+<p>虚拟内存基本的工作方法是将内容存在磁盘上，用主存做缓存。</p>
+<h4 id="文件">文件</h4>
+<p>文件就是字节序列。所有的I/O设备都能看作文件。系统中的输入输出就是通过调用API来实现控制I/O设备读写的。在Unix规范下，这些系统函数被称为Unix
+I/O。</p>
+<h3 id="网络通信">网络通信</h3>
+<p>网络适配器是系统之间用来网络交换的设备，将信息从一台计算机系统传递到另一台也是计算机的主要功能之一。</p>
+<h3 id="重要主题">重要主题</h3>
+<h4 id="amdahl定律">Amdahl定律</h4>
+<blockquote>
+<p>当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。</p>
+</blockquote>
+<p>若令加速比为<span class="math inline">\(S =
+\frac{T_{old}}{T_{new}}\)</span>，其中<span
+class="math inline">\(T_{old}\)</span>是局部提升前程序运行总时间，<span
+class="math inline">\(T_{new}\)</span>是局部提升后程序运行总时长，<span
+class="math inline">\(\alpha\)</span>是提升的局部占总时长的比例，<span
+class="math inline">\(k\)</span>是这个局部性能提升的比例，那么有：<br />
+<span class="math display">\[
+T_{new} = T_{old}[(1-\alpha)+\alpha/k]
+\]</span><br />
+<span class="math display">\[
+S = \frac{1}{(1-\alpha)+\alpha/k}
+\]</span><br />
+我们用性能提升2.2<span class="math inline">\(\times\)</span>来说明<span
+class="math inline">\(S=2.2\)</span>。</p>
+<p>这个公式意义在于，要想加速大部分的系统，必须提升相当大一部分的速度。</p>
+<h4 id="并发和并行">并发和并行</h4>
+<p><strong>并发</strong>是指同时具有多个活动的系统，<strong>并行</strong>指用并发来使得一个系统运行更快。</p>
+<h5 id="线程级并发">线程级并发</h5>
+<p>用一个进程执行多个任务流。如果大多数实际运算由同一个处理器完成，这样的系统被称作<strong>单处理器系统</strong>。</p>
+<p>而多核处理器（<em>Attention：此“核”(core)非彼“内核”(kernel</em>)，这里指的就是CPU核，内核是操作系统层面的东西）是将多个CPU集成到同一块芯片上。这些CPU核有独立的寄存器，计数器和L1、L2缓存，共享L3缓存和主存。</p>
+<p><strong>超线程</strong>是一项允许一个CPU执行多个控制流的技术。超线程的处理器能够单个时钟周期决定执行哪个线程。现在的4核8线程就是这个技术。</p>
+<p>多处理器的出现减少了模拟并发的需要，也让应用程序可以利用多线程跑得更快。</p>
+<h5 id="指令级并行">指令级并行</h5>
+<p>CPU可以利用一些技巧来同时执行多条指令。流水线的使用可以大大加快指令的执行速度。大多数处理器都能支持比一个周期一条指令更快的执行速度，我们称之为<strong>超标量</strong>。</p>
+<h5 id="单指令多数据并行">单指令、多数据并行</h5>
+<p><strong>单指令、多数据（SIMD并行）</strong>允许一条指令产生多个可以并行的操作。</p>
+<h4 id="抽象">抽象</h4>
+<p>抽象就是屏蔽底层细节，只展示实用的模型。一些常见的抽象如下图：</p>
+<p><img src="/images/2023-12-10%20145919.png" /></p>
 
       
     </div>
@@ -362,7 +546,7 @@ alt="1701961899138" /></p>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>349</span>
+      <span>480</span>
     </span>
 </div>
 
@@ -441,9 +625,15 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iW411d7hd
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-12-07 16:45:13 / 修改时间：18:12:52" itemprop="dateCreated datePublished" datetime="2023-12-07T16:45:13+08:00">2023-12-07</time>
+      <time title="创建时间：2023-12-07 16:45:13" itemprop="dateCreated datePublished" datetime="2023-12-07T16:45:13+08:00">2023-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 15:22:51" itemprop="dateModified" datetime="2023-12-09T15:22:51+08:00">2023-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -465,7 +655,7 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iW411d7hd
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>301</span>
+      <span>1.8k</span>
     </span>
 </div>
 
@@ -476,8 +666,8 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iW411d7hd
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为<strong>剪枝</strong>，剪掉搜索树中不存在的分支。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。</p>
-<h3 id="搜索树">搜索树</h3>
+          <p>针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为<strong>剪枝</strong>。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。</p>
+<h3 id="搜索">搜索</h3>
 <p>为了更加彻底地了解搜索这一方法，我们必须提前引入图论里的一些概念。</p>
 <blockquote>
 <p><strong>图 (graph)</strong> 是一个二元组 <span
@@ -489,12 +679,46 @@ set)</strong> ，其中的每个元素，我们称其为<strong>顶点
 class="math inline">\(E(G)\)</span>为各结点之间边的集合，称为<strong>边集
 (edge set)</strong> 。</p>
 </blockquote>
-<p>这个概念总的来说，图就是由点和边组成的。</p>
-<p><img src="image/算法入门2-6：搜索优化/1701939446745.png"
-alt="1701939446745" /></p>
-<p>至于树的概念嘛，</p>
-<p><img src="image/算法入门2-6：搜索优化/1701939705415.png"
-alt="1701939705415" /></p>
+<p>这个概念总的来说，图就是由点和边组成的。边分为有向边和无向边。</p>
+<p><img src="/images/1701939446745.png" alt="Alt text" /></p>
+<p>至于“树”的概念嘛，从图形上理解会比从严谨图论概念上理解更加容易。</p>
+<p><img src="/images/300px-Treedatastructure.png" alt="Alt text" /></p>
+<p>这个图有一点不太合理，“树”这种数据结构一般不会用有向边来表示，大部分的树都是无向边构成的。</p>
+<p>可以发现，“树”这种数据结构，最大的特点就是从一个点发出延申开来，我们把最顶端的点<span
+class="math inline">\(A\)</span>称为<strong>根节点</strong>。扩展到最外端的节点<span
+class="math inline">\(K\)</span>，节点<span
+class="math inline">\(O\)</span>，节点<span
+class="math inline">\(P\)</span>，节点<span
+class="math inline">\(J\)</span>和节点<span
+class="math inline">\(L\)</span>称作<strong>叶节点</strong>或者<strong>叶子节点</strong>。这很像现实生活中的树，从一个点出发，向下生长（当然现实中树是向上生长的），最下面的就是一些叶子了。</p>
+<p>我们定义了一些连接关系。以上图的树为例，例如我们称节点<span
+class="math inline">\(B\)</span>是节点<span
+class="math inline">\(D\)</span>的<strong>父节点</strong>；相反地，我们称节点<span
+class="math inline">\(D\)</span>是节点<span
+class="math inline">\(B\)</span>的<strong>子节点</strong>。我们还称节点<span
+class="math inline">\(A\)</span>和节点<span
+class="math inline">\(B\)</span>是都是节点<span
+class="math inline">\(D\)</span>的<strong>祖先</strong>。</p>
+<p>我们还定义了节点的深度。一个节点和根节点之间相隔的边的数量称为节点的<strong>深度</strong>，例如节点<span
+class="math inline">\(A\)</span>的深度为0（因为自己就是根节点），<span
+class="math inline">\(B\)</span>和<span
+class="math inline">\(C\)</span>的深度为1，<span
+class="math inline">\(O\)</span>的深度为4。</p>
+<p>如果有仔细观察的同学一定会发现，如果不指定根节点的位置，树上的任何一个点都可以当作根节点。当然暂时来看这不重要，说明这一点只是为了更好地理解上面的定义。<em>一个节点和另一个节点的关系和该节点的深度，只有在确定了根节点后才有定论。</em></p>
+<h3 id="搜索算法和树的关系">搜索算法和树的关系</h3>
+<p>从上面介绍深度开始，如果你已经学明白了之前的内容，你一定已经明白这个关系。其实整个搜索过程就可以等效为<em>遍历这棵树</em>的过程。根节点是搜索的开始，叶子节点就是搜索的结束。深度优先搜索优先向更深的方向搜索，以上面的树为例，遍历顺序为：</p>
+<p><span class="math inline">\(A\to B\to D\to I\to K\to E\to J\to F\to
+L\to C\to G\to M\to O\to H\to N\to P\)</span></p>
+<p>可能这样还是有点抽象，我们把这题换成一道算法题：</p>
+<p>一只蜗牛要爬到树上去吃树叶，输入是这颗树，怎样爬才能最快吃到叶子？</p>
+<p>按照上面的方法搜索，从根节点开始，搜到叶子节点后更新最小深度，直到遍历结束即可完成答案。</p>
+<p>所有的搜索都可以转化为这样的一颗树，这是思考搜索问题的一个途径。</p>
+<h3 id="更好的搜索策略">更好的搜索策略</h3>
+<p>或许你在思考上面的问题时发现了一个问题，为什么要深度优先？这个策略看起来不是很聪明的样子。能想到这，说明还是很有质疑精神并且善于发现的。确实，这样的搜索策略浪费了资源，把整个树遍历了一遍。与深度优先搜索DFS对应，还有一种搜索方法叫做<strong>广度优先搜索</strong>，这是将同一个深度的所有节点搜索完一遍后再搜索下一个深度的搜索策略。依照这个策略，我们只需要在搜索时判断是否是叶子节点，如果是即可立即输出答案，因为按照这个策略，我们保证了这是深度最小的叶子节点。这样无需遍历整个树。</p>
+<p>这样的搜索策略性优化还有很多，会在之后的搜索专题里详细阐述。</p>
+<h3 id="剪枝">剪枝</h3>
+<p>有时候，这个搜索过程中会出现很多无意义的分支，我们可以在搜索阶段就删除，这种策略我们称之为<strong>剪枝</strong>，这是一个十分形象的比喻，也非常的tricky，在我打NOIP的时候就特别喜欢用这种办法优化搜索。千万不要觉得这些小技巧不入流，有时候这些小技巧远胜于那些高级算法；我个人觉得，我打NOIP时本来就技不如人，就是靠这种技巧性拿的奖。这种技巧性需要在实战中多总结经验，多尝试，才能运用熟练，出类拔萃。</p>
+<p>当然，技巧性另一方面也说明了，这个技能确实不是一个非常具有普适性的作用的技能。例如上面的算法题就用不了这个技巧。具体问题具体分析，只能是这样。</p>
 
       
     </div>
@@ -573,7 +797,7 @@ alt="1701939705415" /></p>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>1.8k</span>
     </span>
 </div>
 
@@ -717,7 +941,7 @@ class="math inline">\(O(n+w)\)</span></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-07 16:46:27" itemprop="dateModified" datetime="2023-12-07T16:46:27+08:00">2023-12-07</time>
+      <time title="修改时间：2023-12-09 15:19:09" itemprop="dateModified" datetime="2023-12-09T15:19:09+08:00">2023-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -739,7 +963,7 @@ class="math inline">\(O(n+w)\)</span></p>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
+      <span>1.2k</span>
     </span>
 </div>
 
@@ -774,7 +998,6 @@ class="math inline">\(\Theta(n^n)\)</span>。</p>
 class="math inline">\(\Theta(n\times
 n!)\)</span>，和使用库函数已经没有区别。</p>
 <p>重点看维护vis部分代码，进入下一层递归前把vis置1显然是代表这个数选中了，下一层不能选，从下一层退出后还要把vis置0是有些同学会忘记的。这一步相当于撤销选择这个数的决定，回溯到以前的状态。这样要在<strong>搜索过程中维护的数组</strong>都需要这样的操作（其实包括当前的答案数组本身，只不过这题不影响而已，有些题是影响的）。这被称为<strong>回溯</strong>，其实就是字面意思，撤回之前的决定。这部分代码容易写错，在写完这种回溯搜索后一定得检查自己在搜索过程中维护的变量是否正确回溯。</p>
-<h4 id="优化思路">优化思路</h4>
 
       
     </div>
@@ -859,7 +1082,7 @@ n!)\)</span>，和使用库函数已经没有区别。</p>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>943</span>
+      <span>1k</span>
     </span>
 </div>
 
@@ -983,7 +1206,7 @@ n!)\)</span>，和使用库函数已经没有区别。</p>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>842</span>
+      <span>1.1k</span>
     </span>
 </div>
 
@@ -1122,7 +1345,7 @@ target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-sum-of-rec
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.8k</span>
     </span>
 </div>
 
@@ -1292,7 +1515,7 @@ class="math inline">\(n\)</span>次操作后每个元素需要改变的值。</p
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>338</span>
+      <span>415</span>
     </span>
 </div>
 
@@ -1337,144 +1560,6 @@ class="math inline">\(O(1)\)</span>（将数组分为已排序的区域和未排
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/26/%E4%B8%8D%E5%A4%A7%E4%B8%A5%E8%B0%A8%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%95%B0%E5%AD%A6%E6%A1%86%E6%9E%B65%EF%BC%9A%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E7%A7%AF%E5%88%86%E5%AD%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/26/%E4%B8%8D%E5%A4%A7%E4%B8%A5%E8%B0%A8%E7%9A%84%E5%A4%A7%E5%AD%A6%E6%95%B0%E5%AD%A6%E6%A1%86%E6%9E%B65%EF%BC%9A%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E7%A7%AF%E5%88%86%E5%AD%A6/" class="post-title-link" itemprop="url">不大严谨的大学数学框架5：多元函数积分学</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-26 08:34:26" itemprop="dateCreated datePublished" datetime="2023-11-26T08:34:26+08:00">2023-11-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-28 20:36:14" itemprop="dateModified" datetime="2023-11-28T20:36:14+08:00">2023-11-28</time>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>571</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="重积分">重积分</h3>
-<p>重积分的定义和一元函数积分的定义类似，性质也类似，常用性质有：比较定理，估值定理（积分上下界）和中值定理。</p>
-<h4 id="二重积分计算">二重积分计算</h4>
-<p>总的来说就两种办法：化为累次积分，用极坐标计算。二者本质上是同一种方法。</p>
-<p>还有一些小技巧例如利用奇偶性，对称性等。以下重点介绍累次积分和极坐标计算。</p>
-<h5 id="累次积分">累次积分</h5>
-<p>若变量<span class="math inline">\(y\)</span>的范围可由变量 <span
-class="math inline">\(x\)</span> 确定，即<br />
-<span class="math display">\[
-\begin{cases}
-\varphi_1(x)\leq y\leq \varphi_2(x) \\
-a\leq x\leq b
-\end{cases}
-\]</span><br />
-则可将积分转换为如下形式：<br />
-<span class="math display">\[
-\iint_Df(x,y)\mathrm{d}\sigma =
-\int_a^b\mathrm{d}x\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\mathrm{d}y
-\]</span></p>
-<p>这里的 <span class="math inline">\(x\)</span> 和 <span
-class="math inline">\(y\)</span> 可以是任何变量。</p>
-<h5 id="用极坐标计算">用极坐标计算</h5>
-<p>将 <span class="math inline">\(x\)</span> 和 <span
-class="math inline">\(y\)</span> 换元成 <span
-class="math inline">\(r\)</span> 和 <span
-class="math inline">\(\theta\)</span> 后方法同上。只不过一般是用 <span
-class="math inline">\(\theta\)</span> 表示 <span
-class="math inline">\(r\)</span> ，而且积分形式如下：<br />
-<span class="math display">\[
-\iint_Df(x,y)\mathrm{d}\sigma =
-\int_\alpha^\beta\mathrm{d}r\int_{\varphi_1(\theta)}^{\varphi_2(\theta)}f(r,\theta){\color{red}r}\mathrm{d}\theta
-\]</span><br />
-一般情况下，被积函数的自变量一般含有“平方和”和“分数”的形式。</p>
-<h4 id="三重积分计算">三重积分计算</h4>
-<p>三重积分和二重积分的方法类似，二重积分中的两个方法分别对应三重积分中的切片（切条）法和坐标系转换。</p>
-<h5 id="切片切条法">切片（切条）法</h5>
-<p>更直观的叫法应该是“先一后二”法和“先二后一”，只不过我感觉容易引起误会，于是选择了更接近计算本质的名称。</p>
-<p>总的来说就是两种分解计算三重积分的方法：<br />
-<span class="math display">\[
-\iiint_\Omega f(x,y,z)\mathrm{d}v =
-\iint_{D_{xy}}\mathrm{d}x\mathrm{d}y\int_{z_1(x,y)}^{z_2(x,y)}
-\]</span><br />
-或<br />
-<span class="math display">\[
-\iiint_\Omega f(x,y,z)\mathrm{d}v =
-\int_{c_1}^{c_2}\mathrm{d}z\iint_{D_z}f(x,y,z)\mathrm{d}x\mathrm{d}y
-\]</span></p>
-<h5 id="坐标系变换">坐标系变换</h5>
-<p>可选的变换方案有：柱坐标和球坐标。同样也是变换后，问题转换到上面。</p>
-<p>需要注意体积微元。柱坐标下为<span class="math inline">\(\mathrm{d}v =
-r\mathrm{d}r\mathrm{d}\theta\mathrm{d}z\)</span>，球坐标为<span
-class="math inline">\(\mathrm{d}v =
-r^2sin\varphi\mathrm{d}r\mathrm{d}\varphi\mathrm{d}\theta\)</span></p>
-<h3 id="曲线积分">曲线积分</h3>
-<h3 id="曲面积分">曲面积分</h3>
-<p>挖个坑来不及了，我先跳过这一部分。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1498,7 +1583,7 @@ r^2sin\varphi\mathrm{d}r\mathrm{d}\varphi\mathrm{d}\theta\)</span></p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">28k</span>
   </span>
 </div>
 <div class="busuanzi-count">

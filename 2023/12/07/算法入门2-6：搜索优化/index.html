@@ -19,23 +19,23 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为剪枝，剪掉搜索树中不存在的分支。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。 搜索树 为了更加彻底">
+    <meta name="description" content="针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为剪枝。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。 搜索 为了更加彻底地了解搜索这一方法，我们必须">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="算法入门2-6：搜索优化">
 <meta property="og:url" content="https://pliclouds.github.io/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="Parallel Space">
-<meta property="og:description" content="针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为剪枝，剪掉搜索树中不存在的分支。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。 搜索树 为了更加彻底">
+<meta property="og:description" content="针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为剪枝。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。 搜索 为了更加彻底地了解搜索这一方法，我们必须">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pliclouds.github.io/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/image/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/1701939446745.png">
-<meta property="og:image" content="https://pliclouds.github.io/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/image/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/1701939705415.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/1701939446745.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/300px-Treedatastructure.png">
 <meta property="article:published_time" content="2023-12-07T08:45:13.000Z">
-<meta property="article:modified_time" content="2023-12-07T10:12:52.576Z">
+<meta property="article:modified_time" content="2023-12-09T07:22:51.578Z">
 <meta property="article:author" content="黄浩诚">
 <meta property="article:tag" content="剪枝">
 <meta property="article:tag" content="记忆化搜索">
 <meta property="article:tag" content="树">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pliclouds.github.io/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/image/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/1701939446745.png">
+<meta name="twitter:image" content="https://pliclouds.github.io/images/1701939446745.png">
 
 
 <link rel="canonical" href="https://pliclouds.github.io/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-6%EF%BC%9A%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96/">
@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">搜索树</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">1.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E5%92%8C%E6%A0%91%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">搜索算法和树的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%A5%BD%E7%9A%84%E6%90%9C%E7%B4%A2%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">更好的搜索策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E6%9E%9D"><span class="nav-number">4.</span> <span class="nav-text">剪枝</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,7 +158,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -235,9 +235,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-12-07 16:45:13 / 修改时间：18:12:52" itemprop="dateCreated datePublished" datetime="2023-12-07T16:45:13+08:00">2023-12-07</time>
+      <time title="创建时间：2023-12-07 16:45:13" itemprop="dateCreated datePublished" datetime="2023-12-07T16:45:13+08:00">2023-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-09 15:22:51" itemprop="dateModified" datetime="2023-12-09T15:22:51+08:00">2023-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +272,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>301</span>
+      <span>1.8k</span>
     </span>
 </div>
 
@@ -276,8 +282,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为<strong>剪枝</strong>，剪掉搜索树中不存在的分支。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。</p>
-<h3 id="搜索树">搜索树</h3>
+    <div class="post-body" itemprop="articleBody"><p>针对代码的优化应该回归方法，针对方法的优化应该回归思想。我们前文已经分析过，很多情况枚举可能答案是时间复杂度产生的主要原因，那有没有可能，缩小可能的答案集合，就可以达到比较好的效果呢？这就是搜索算法的朴素优化方案。它不存在一个通用的办法，而是考虑解决问题的一个方向，这种做法也被称为<strong>剪枝</strong>。另外，记忆化搜索和优化搜索路径也是两个有效的优化搜索的方法。</p>
+<h3 id="搜索">搜索</h3>
 <p>为了更加彻底地了解搜索这一方法，我们必须提前引入图论里的一些概念。</p>
 <blockquote>
 <p><strong>图 (graph)</strong> 是一个二元组 <span
@@ -289,12 +295,46 @@ set)</strong> ，其中的每个元素，我们称其为<strong>顶点
 class="math inline">\(E(G)\)</span>为各结点之间边的集合，称为<strong>边集
 (edge set)</strong> 。</p>
 </blockquote>
-<p>这个概念总的来说，图就是由点和边组成的。</p>
-<p><img src="image/算法入门2-6：搜索优化/1701939446745.png"
-alt="1701939446745" /></p>
-<p>至于树的概念嘛，</p>
-<p><img src="image/算法入门2-6：搜索优化/1701939705415.png"
-alt="1701939705415" /></p>
+<p>这个概念总的来说，图就是由点和边组成的。边分为有向边和无向边。</p>
+<p><img src="/images/1701939446745.png" alt="Alt text" /></p>
+<p>至于“树”的概念嘛，从图形上理解会比从严谨图论概念上理解更加容易。</p>
+<p><img src="/images/300px-Treedatastructure.png" alt="Alt text" /></p>
+<p>这个图有一点不太合理，“树”这种数据结构一般不会用有向边来表示，大部分的树都是无向边构成的。</p>
+<p>可以发现，“树”这种数据结构，最大的特点就是从一个点发出延申开来，我们把最顶端的点<span
+class="math inline">\(A\)</span>称为<strong>根节点</strong>。扩展到最外端的节点<span
+class="math inline">\(K\)</span>，节点<span
+class="math inline">\(O\)</span>，节点<span
+class="math inline">\(P\)</span>，节点<span
+class="math inline">\(J\)</span>和节点<span
+class="math inline">\(L\)</span>称作<strong>叶节点</strong>或者<strong>叶子节点</strong>。这很像现实生活中的树，从一个点出发，向下生长（当然现实中树是向上生长的），最下面的就是一些叶子了。</p>
+<p>我们定义了一些连接关系。以上图的树为例，例如我们称节点<span
+class="math inline">\(B\)</span>是节点<span
+class="math inline">\(D\)</span>的<strong>父节点</strong>；相反地，我们称节点<span
+class="math inline">\(D\)</span>是节点<span
+class="math inline">\(B\)</span>的<strong>子节点</strong>。我们还称节点<span
+class="math inline">\(A\)</span>和节点<span
+class="math inline">\(B\)</span>是都是节点<span
+class="math inline">\(D\)</span>的<strong>祖先</strong>。</p>
+<p>我们还定义了节点的深度。一个节点和根节点之间相隔的边的数量称为节点的<strong>深度</strong>，例如节点<span
+class="math inline">\(A\)</span>的深度为0（因为自己就是根节点），<span
+class="math inline">\(B\)</span>和<span
+class="math inline">\(C\)</span>的深度为1，<span
+class="math inline">\(O\)</span>的深度为4。</p>
+<p>如果有仔细观察的同学一定会发现，如果不指定根节点的位置，树上的任何一个点都可以当作根节点。当然暂时来看这不重要，说明这一点只是为了更好地理解上面的定义。<em>一个节点和另一个节点的关系和该节点的深度，只有在确定了根节点后才有定论。</em></p>
+<h3 id="搜索算法和树的关系">搜索算法和树的关系</h3>
+<p>从上面介绍深度开始，如果你已经学明白了之前的内容，你一定已经明白这个关系。其实整个搜索过程就可以等效为<em>遍历这棵树</em>的过程。根节点是搜索的开始，叶子节点就是搜索的结束。深度优先搜索优先向更深的方向搜索，以上面的树为例，遍历顺序为：</p>
+<p><span class="math inline">\(A\to B\to D\to I\to K\to E\to J\to F\to
+L\to C\to G\to M\to O\to H\to N\to P\)</span></p>
+<p>可能这样还是有点抽象，我们把这题换成一道算法题：</p>
+<p>一只蜗牛要爬到树上去吃树叶，输入是这颗树，怎样爬才能最快吃到叶子？</p>
+<p>按照上面的方法搜索，从根节点开始，搜到叶子节点后更新最小深度，直到遍历结束即可完成答案。</p>
+<p>所有的搜索都可以转化为这样的一颗树，这是思考搜索问题的一个途径。</p>
+<h3 id="更好的搜索策略">更好的搜索策略</h3>
+<p>或许你在思考上面的问题时发现了一个问题，为什么要深度优先？这个策略看起来不是很聪明的样子。能想到这，说明还是很有质疑精神并且善于发现的。确实，这样的搜索策略浪费了资源，把整个树遍历了一遍。与深度优先搜索DFS对应，还有一种搜索方法叫做<strong>广度优先搜索</strong>，这是将同一个深度的所有节点搜索完一遍后再搜索下一个深度的搜索策略。依照这个策略，我们只需要在搜索时判断是否是叶子节点，如果是即可立即输出答案，因为按照这个策略，我们保证了这是深度最小的叶子节点。这样无需遍历整个树。</p>
+<p>这样的搜索策略性优化还有很多，会在之后的搜索专题里详细阐述。</p>
+<h3 id="剪枝">剪枝</h3>
+<p>有时候，这个搜索过程中会出现很多无意义的分支，我们可以在搜索阶段就删除，这种策略我们称之为<strong>剪枝</strong>，这是一个十分形象的比喻，也非常的tricky，在我打NOIP的时候就特别喜欢用这种办法优化搜索。千万不要觉得这些小技巧不入流，有时候这些小技巧远胜于那些高级算法；我个人觉得，我打NOIP时本来就技不如人，就是靠这种技巧性拿的奖。这种技巧性需要在实战中多总结经验，多尝试，才能运用熟练，出类拔萃。</p>
+<p>当然，技巧性另一方面也说明了，这个技能确实不是一个非常具有普适性的作用的技能。例如上面的算法题就用不了这个技巧。具体问题具体分析，只能是这样。</p>
 
     </div>
 
@@ -369,7 +409,7 @@ alt="1701939705415" /></p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">28k</span>
   </span>
 </div>
 <div class="busuanzi-count">

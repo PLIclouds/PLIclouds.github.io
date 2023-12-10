@@ -26,15 +26,17 @@
 <meta property="og:site_name" content="Parallel Space">
 <meta property="og:description" content="这一章主要是为后续章节铺垫。 信息的含义 计算机中的整数和浮点数并不是数学概念的整数和实数。事实上，系统中所有的信息都是由一串比特组成的，区分不同对象的唯一方法则是其上下文。因此： 信息 &#x3D; 位 + 上下文。 使用有限的数位组合去表示数域上无限扩张的数，这必然会导致一些问题。这一部分在第二章会详细阐述 程序从文本到可执行文件 程序编写好后，在机器上被转变为低级机器语言指令，按照可执行目">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/1701956036242.png">
-<meta property="og:image" content="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/1701957897928.png">
-<meta property="og:image" content="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/1701961720166.png">
-<meta property="og:image" content="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/1701961899138.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/1701956036242.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/1701957897928.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/1701961720166.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/1701961899138.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/2023-12-09%20170651.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/2023-12-10%20145919.png">
 <meta property="article:published_time" content="2023-12-07T13:17:42.000Z">
-<meta property="article:modified_time" content="2023-12-07T15:12:48.717Z">
+<meta property="article:modified_time" content="2023-12-10T07:04:36.983Z">
 <meta property="article:author" content="黄浩诚">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/1701956036242.png">
+<meta name="twitter:image" content="https://pliclouds.github.io/images/1701956036242.png">
 
 
 <link rel="canonical" href="https://pliclouds.github.io/2023/12/07/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
@@ -144,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">信息的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E4%BB%8E%E6%96%87%E6%9C%AC%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">程序从文本到可执行文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E8%A1%8C%E6%8C%87%E4%BB%A4%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">处理器运行指令的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="nav-number">4.</span> <span class="nav-text">高速缓存</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">信息的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E4%BB%8E%E6%96%87%E6%9C%AC%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">程序从文本到可执行文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E8%A1%8C%E6%8C%87%E4%BB%A4%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">处理器运行指令的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="nav-number">4.</span> <span class="nav-text">高速缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">5.1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.1.1.</span> <span class="nav-text">线程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">5.2.</span> <span class="nav-text">虚拟内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-number">5.3.</span> <span class="nav-text">文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1"><span class="nav-number">6.</span> <span class="nav-text">网络通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E4%B8%BB%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">重要主题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#amdahl%E5%AE%9A%E5%BE%8B"><span class="nav-number">7.1.</span> <span class="nav-text">Amdahl定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C"><span class="nav-number">7.2.</span> <span class="nav-text">并发和并行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%BA%A7%E5%B9%B6%E5%8F%91"><span class="nav-number">7.2.1.</span> <span class="nav-text">线程级并发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C"><span class="nav-number">7.2.2.</span> <span class="nav-text">指令级并行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E6%8C%87%E4%BB%A4%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C"><span class="nav-number">7.2.3.</span> <span class="nav-text">单指令、多数据并行</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1"><span class="nav-number">7.3.</span> <span class="nav-text">抽象</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -234,9 +236,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-12-07 21:17:42 / 修改时间：23:12:48" itemprop="dateCreated datePublished" datetime="2023-12-07T21:17:42+08:00">2023-12-07</time>
+      <time title="创建时间：2023-12-07 21:17:42" itemprop="dateCreated datePublished" datetime="2023-12-07T21:17:42+08:00">2023-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-10 15:04:36" itemprop="dateModified" datetime="2023-12-10T15:04:36+08:00">2023-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CSAPP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">CSAPP学习笔记</span></a>
+        </span>
     </span>
 
   
@@ -252,7 +269,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>991</span>
+      <span>3k</span>
     </span>
 </div>
 
@@ -269,18 +286,16 @@
 <p>使用有限的数位组合去表示数域上无限扩张的数，这必然会导致一些问题。这一部分在第二章会详细阐述</p>
 <h3 id="程序从文本到可执行文件">程序从文本到可执行文件</h3>
 <p>程序编写好后，在机器上被转变为低级机器语言指令，按照<strong>可执行目标程序</strong>的格式打包好后，以二进制磁盘文件的形式储存。就像这样：</p>
-<p><img src="image/CSAPP学习笔记1：计算机系统漫游/1701956036242.png"
-alt="1701956036242" /></p>
+<p><img src="/images/1701956036242.png" alt="1701956036242" /></p>
 <p>预处理阶段：根据#开头的预处理命令修改原始C程序。</p>
 <p>编译阶段：将程序改写为汇编语言</p>
-<p>汇编阶段：将汇编语言转换为机器语言指令，并且打包成一个二进制的<strong>可重定位目标程序</strong>，在我的理解中，这就是一个还没链接外部的可执行文件</p>
+<p>汇编阶段：将汇编语言转换为机器语言指令，并且打包成一个二进制的<strong>可重定位目标程序</strong>，在我的理解中，这就是一个还没链接外部的可执行文件。</p>
 <p>链接阶段：合并外部链接，得到可执行文件。</p>
 <p>之后就可以在命令行解释器上加载可执行文件了。</p>
 <p>汇编语言只需要能够看懂编译器生成的就行了，不需要自己编写。本书关注x86-64，是因特尔的汇编语言，64位的指令集。</p>
 <h3 id="处理器运行指令的方式">处理器运行指令的方式</h3>
 <p>要解释这个问题，需要一点系统的硬件知识，如下图：<br />
-<img src="image/CSAPP学习笔记1：计算机系统漫游/1701957897928.png"
-alt="1701957897928" /></p>
+<img src="/images/1701957897928.png" alt="1701957897928" /></p>
 <p>总线：负责信息在部件间的传递。通常传递一定长度的字节块，被称为<strong>字</strong>。字长就是所谓的32位和64位了。</p>
 <p>I/O设备：即输入输出设备，系统和外部的交互通道。二者通过控制器或者适配器进行交换信息。</p>
 <p>主存：即主存储器或者内存，物理上由一组<strong>动态随机存取存储器(DRAM)</strong>组成。</p>
@@ -296,15 +311,86 @@ file）</strong>是一个小储存设备，由一些单个字长的寄存器组�
 <h3 id="高速缓存">高速缓存</h3>
 <p>一个显然的事实是，较大储存设备往往意味着更慢的运行速度和更便宜的内存。因此用缓存的思想，把可能要处理的数据划分一个区域，用更小的存储设备。于是系统设计者在CPU中加入了<strong>高速缓存存储器（cache
 memory）</strong>，如下图：</p>
-<p><img src="image/CSAPP学习笔记1：计算机系统漫游/1701961720166.png"
-alt="1701961720166" /></p>
+<p><img src="/images/1701961720166.png" alt="1701961720166" /></p>
 <p>cache同样分级，即包含L1, L2,
 L3三级存储，使用的硬件技术为<strong>静态随机访问存储器（SRAM）</strong>。于是计算机有如下存储结构：</p>
-<p><img src="image/CSAPP学习笔记1：计算机系统漫游/1701961899138.png"
-alt="1701961899138" /></p>
-<p>现代计算机的存储系统非常复杂，拥有高性能和高储存，但同时存在很多可能的错误，这常常体现在c语言的边界处理上。</p>
-<p>算法有时需要一些更底层的优化，需要了解系统运作的原理。</p>
-<p>计算机不仅执行程序，还要和外界进行交换，要拥有IO口。</p>
+<p><img src="/images/1701961899138.png" alt="1701961899138" /></p>
+<p>现代计算机的存储系统非常复杂，拥有高性能和高储存，但同时存在很多可能的错误，这常常体现在c语言的边界处理上。了解储存结构的作用就在这里。</p>
+<h3 id="操作系统">操作系统</h3>
+<p>操作系统是应用程序和处理器，主存和I/O设备的媒介。所有应用程序都必须通过操作系统操作硬件。我的理解是，应用的编写需要操作系统对底层硬件抽象；应用的运行需要操作系统对不同应用和硬件的协调。</p>
+<blockquote>
+<p>操作系统有两个基本功能：</p>
+<ol type="1">
+<li><p>防止硬件被失控的应用程序滥用；</p></li>
+<li><p>向应用程序提供简单一致的机制来控制复杂而又大不相同的低级硬件设备。</p></li>
+</ol>
+</blockquote>
+<p>如何实现上述内容？操作系统用了三个抽象的概念来实现：进程，虚拟内存和处理器。</p>
+<h4 id="进程">进程</h4>
+<blockquote>
+<p><strong>进程</strong>是操作系统对一个正在运行的程序的一种抽象。</p>
+</blockquote>
+<p>说白了，操作系统排除了其他程序的存在，单独告诉程序，你在我这就是个<strong>进程</strong>，你运行你的，别管其他程序。</p>
+<p>很多系统中，需要运行的程序的数量都是远大于核的数量的，而一个核在同一个时刻只能运行同一个程序，这就需要<strong>并发运行</strong>，这个概念很像通信里的时分复用，就是处理器将多个应用程序的进程<br />
+交错运行，达到看起来像并发运行的样子。</p>
+<p>这种操作系统的调度机制称为<strong>上下文切换</strong>。进程运行所需的所有状态信息称为<strong>上下文</strong>。该过程分三步：保存当前进程上下文，恢复新进程上下文，控制权传递给新进程。应用程序调用操作系统的指令被称为<strong>系统调用</strong>指令，这个操作是操作系统内核完成的。</p>
+<blockquote>
+<p><strong>内核</strong>是操作系统代码常驻主存的部分。</p>
+</blockquote>
+<h5 id="线程">线程</h5>
+<p>其实线程某种意义上就是对进程的并发复用。他们共享进程的上下文，数据和代码。</p>
+<h4 id="虚拟内存">虚拟内存</h4>
+<p>和进程类似，操作系统排除了应用程序操作实际内存的复杂性，单独告诉程序，你只需要操控我给你的一片区域就行了，实际数据区域你不用管，我会映射过去。</p>
+<p>Linux的虚拟地址空间入下图所示，图中地址从下往上增大：</p>
+<p><img src="/images/2023-12-09%20170651.png" /></p>
+<p>中间的蓝色是预留区域，其他的区域下面分别介绍一下：</p>
+<ul>
+<li>程序数据和代码：对所有进程而言，代码从固定地址开始，然后是全局变量。该区域根据可执行文件初始化。</li>
+<li>堆：显式管理动态内存的区域。可以在程序中调用函数动态扩展收缩。采用队列的数据结构管理</li>
+<li>共享库：C标准库等共享库</li>
+<li>栈：局部变量存储和函数调用的存储区域。采用堆(stack，不是上面那个堆)的数据结构管理</li>
+<li>内核虚拟内存：只有内核能操作的区域。</li>
+</ul>
+<p>虚拟内存基本的工作方法是将内容存在磁盘上，用主存做缓存。</p>
+<h4 id="文件">文件</h4>
+<p>文件就是字节序列。所有的I/O设备都能看作文件。系统中的输入输出就是通过调用API来实现控制I/O设备读写的。在Unix规范下，这些系统函数被称为Unix
+I/O。</p>
+<h3 id="网络通信">网络通信</h3>
+<p>网络适配器是系统之间用来网络交换的设备，将信息从一台计算机系统传递到另一台也是计算机的主要功能之一。</p>
+<h3 id="重要主题">重要主题</h3>
+<h4 id="amdahl定律">Amdahl定律</h4>
+<blockquote>
+<p>当我们对系统的某个部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度。</p>
+</blockquote>
+<p>若令加速比为<span class="math inline">\(S =
+\frac{T_{old}}{T_{new}}\)</span>，其中<span
+class="math inline">\(T_{old}\)</span>是局部提升前程序运行总时间，<span
+class="math inline">\(T_{new}\)</span>是局部提升后程序运行总时长，<span
+class="math inline">\(\alpha\)</span>是提升的局部占总时长的比例，<span
+class="math inline">\(k\)</span>是这个局部性能提升的比例，那么有：<br />
+<span class="math display">\[
+T_{new} = T_{old}[(1-\alpha)+\alpha/k]
+\]</span><br />
+<span class="math display">\[
+S = \frac{1}{(1-\alpha)+\alpha/k}
+\]</span><br />
+我们用性能提升2.2<span class="math inline">\(\times\)</span>来说明<span
+class="math inline">\(S=2.2\)</span>。</p>
+<p>这个公式意义在于，要想加速大部分的系统，必须提升相当大一部分的速度。</p>
+<h4 id="并发和并行">并发和并行</h4>
+<p><strong>并发</strong>是指同时具有多个活动的系统，<strong>并行</strong>指用并发来使得一个系统运行更快。</p>
+<h5 id="线程级并发">线程级并发</h5>
+<p>用一个进程执行多个任务流。如果大多数实际运算由同一个处理器完成，这样的系统被称作<strong>单处理器系统</strong>。</p>
+<p>而多核处理器（<em>Attention：此“核”(core)非彼“内核”(kernel</em>)，这里指的就是CPU核，内核是操作系统层面的东西）是将多个CPU集成到同一块芯片上。这些CPU核有独立的寄存器，计数器和L1、L2缓存，共享L3缓存和主存。</p>
+<p><strong>超线程</strong>是一项允许一个CPU执行多个控制流的技术。超线程的处理器能够单个时钟周期决定执行哪个线程。现在的4核8线程就是这个技术。</p>
+<p>多处理器的出现减少了模拟并发的需要，也让应用程序可以利用多线程跑得更快。</p>
+<h5 id="指令级并行">指令级并行</h5>
+<p>CPU可以利用一些技巧来同时执行多条指令。流水线的使用可以大大加快指令的执行速度。大多数处理器都能支持比一个周期一条指令更快的执行速度，我们称之为<strong>超标量</strong>。</p>
+<h5 id="单指令多数据并行">单指令、多数据并行</h5>
+<p><strong>单指令、多数据（SIMD并行）</strong>允许一条指令产生多个可以并行的操作。</p>
+<h4 id="抽象">抽象</h4>
+<p>抽象就是屏蔽底层细节，只展示实用的模型。一些常见的抽象如下图：</p>
+<p><img src="/images/2023-12-10%20145919.png" /></p>
 
     </div>
 
@@ -340,6 +426,9 @@ alt="1701961899138" /></p>
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2023/12/08/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%954%EF%BC%9A%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/" rel="next" title="建站记录4：插入图片">
+                  建站记录4：插入图片 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -371,7 +460,7 @@ alt="1701961899138" /></p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">28k</span>
   </span>
 </div>
 <div class="busuanzi-count">
