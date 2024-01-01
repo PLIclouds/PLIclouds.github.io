@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16.png">
+  <link rel="mask-icon" href="/images/svg.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="决定走后端路线这一决定其实特别特别简单。决定做程序员是因为对通信和硬件确实提不起什么兴趣（这一点我花了三年来验证）；而程序员中，算法实在太卷门槛太高，而且“需要做研究”这一点就够我把这个选项排除在外了，申了港新就已经没有回头路了。那剩下那些测试运维啥的，实在没做过，而且好歹我也学过点算法，而且我本人也对后端颇有兴趣，那后端对我而言就是最优选择了。 这个选择唯一的问题就是，我确实一点后端基础都没有">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Java梦的起点0：JDK和Eclipse">
+<meta property="og:url" content="https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/index.html">
+<meta property="og:site_name" content="Parallel Space">
+<meta property="og:description" content="决定走后端路线这一决定其实特别特别简单。决定做程序员是因为对通信和硬件确实提不起什么兴趣（这一点我花了三年来验证）；而程序员中，算法实在太卷门槛太高，而且“需要做研究”这一点就够我把这个选项排除在外了，申了港新就已经没有回头路了。那剩下那些测试运维啥的，实在没做过，而且好歹我也学过点算法，而且我本人也对后端颇有兴趣，那后端对我而言就是最优选择了。 这个选择唯一的问题就是，我确实一点后端基础都没有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pliclouds.github.io/images/jdk-include-jre.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/2023-12-23%20171709.png">
+<meta property="article:published_time" content="2023-12-23T06:25:54.000Z">
+<meta property="article:modified_time" content="2023-12-25T02:34:52.659Z">
+<meta property="article:author" content="黄浩诚">
+<meta property="article:tag" content="JDK">
+<meta property="article:tag" content="Eclipse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pliclouds.github.io/images/jdk-include-jre.png">
+
+
+<link rel="canonical" href="https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/","path":"2023/12/23/Java梦的起点0：JDK和Eclipse/","title":"Java梦的起点0：JDK和Eclipse"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java梦的起点0：JDK和Eclipse | Parallel Space</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Parallel Space</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">平凡即伟大</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk"><span class="nav-number">2.</span> <span class="nav-text">JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eclipse"><span class="nav-number">3.</span> <span class="nav-text">Eclipse</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">创建工程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黄浩诚</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/pliclouds" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;pliclouds" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/huang.hch@gmail.com" title="E-Mail → huang.hch@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java梦的起点0：JDK和Eclipse | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java梦的起点0：JDK和Eclipse
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-23 14:25:54" itemprop="dateCreated datePublished" datetime="2023-12-23T14:25:54+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-25 10:34:52" itemprop="dateModified" datetime="2023-12-25T10:34:52+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>697</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>决定走后端路线这一决定其实特别特别简单。决定做程序员是因为对通信和硬件确实提不起什么兴趣（这一点我花了三年来验证）；而程序员中，算法实在太卷门槛太高，而且“需要做研究”这一点就够我把这个选项排除在外了，申了港新就已经没有回头路了。那剩下那些测试运维啥的，实在没做过，而且好歹我也学过点算法，而且我本人也对后端颇有兴趣，那后端对我而言就是最优选择了。</p>
+<p>这个选择唯一的问题就是，我确实一点后端基础都没有。一年前我还太软弱，没有坚定去执行自己的目标，项目什么的都荒废了。今年不同的是，我的心态已经好了太多。经历的更多，越知道如何处变不惊，越能保持初心，可能这就是成长吧。</p>
+<p>这个系列对我来说是一个几乎全新的领域。不过既然选择了，就带着热情放手做了。</p>
+<h3 id="资源">资源</h3>
+<p>参考书用的是《Java 从入门到精通》。</p>
+<p>一些网站：</p>
+<p><a target="_blank" rel="noopener" href="https://javaguide.cn/">JavaGuide</a></p>
+<h3 id="jdk">JDK</h3>
+<p>JDK即Java的Develop Kit，不同公司有不同的JDK，这里使用的是Open JDK
+11，官网下载安装教程随便去网上找找就有。</p>
+<p>这种开发包其实就是编译器，调试器之类的东西，有这些就已经可以用记事本和命令行来运行开发Java程序了。</p>
+<p>肯定有同学看到JDK，JRE(Java Runtime Environment)，JVM(Java virtual
+Machine)啥的不知道什么意思，这里放一张图：</p>
+<p><img src="/images/jdk-include-jre.png" /></p>
+<p>先知道意思就行。</p>
+<h3 id="eclipse">Eclipse</h3>
+<p>Eclipse是一种大型集成开发工具（IDE），其实就是给一个可视化界面，管理项目更加方便。</p>
+<p>下载就在官网，汉化包也在官网。都是压缩包。只需要把汉化版覆盖Eclipse里的原文件就可以完成汉化。</p>
+<h4 id="创建工程">创建工程</h4>
+<p>Java有些不一样的是，在创建工程后还要创建一个类，还要创建一个<code>main()</code>方法。</p>
+<ul>
+<li>Tip：创建类的时候可以不给所在的包取名（最好别，如果不命名会被放入默认包default
+package中），但是运行之前一定得命名。我尝试新建了个包，然后把类文件重构进去了。</li>
+</ul>
+<p><img src="/images/2023-12-23%20171709.png" /></p>
+<p>其实可以看出来，Java的工程逻辑和大部分面向对象的语言一样。最顶层是工程，然后是包，接着是类。main函数存不存在无所谓。应用程序从main函数进入开始运行。</p>
+<p>调试也和其他语言差不多，就是单步跳入，单步跳过和单步跳出。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>黄浩诚
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/" title="Java梦的起点0：JDK和Eclipse">https://pliclouds.github.io/2023/12/23/Java梦的起点0：JDK和Eclipse/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JDK/" rel="tag"># JDK</a>
+              <a href="/tags/Eclipse/" rel="tag"># Eclipse</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/21/%E8%8B%B1%E8%AF%AD%E9%9D%A2%E8%AF%95%E8%AF%8D%E6%B1%87%E5%BA%93/" rel="prev" title="英语面试词汇库">
+                  <i class="fa fa-angle-left"></i> 英语面试词汇库
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B91%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" rel="next" title="Java梦的起点1：基础语法">
+                  Java梦的起点1：基础语法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">黄浩诚</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"PLIclouds/BlogComments","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

@@ -147,18 +147,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,886 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/" class="post-title-link" itemprop="url">MMDetection：目标检测工具包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-30 21:29:05" itemprop="dateCreated datePublished" datetime="2023-12-30T21:29:05+08:00">2023-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-01 16:26:47" itemprop="dateModified" datetime="2024-01-01T16:26:47+08:00">2024-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>MMDetection是由香港中文大学MMLab开发的一款目标检测的工具包，属于OpenMMLab项目的一部分。经过使用，这个工具包真的很好用（虽然囿于水平用不明白），而国内资料又是真的很少。最近做专业综合设计恰好发现了这个东西，于是分享一下这几天我自己的学习心得。</p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/open-mmlab/mmdetection/tree/main">仓库地址</a></p>
+<h3 id="优质资料">优质资料</h3>
+<p>这几天我基本把国内有含金量的教程都看了一遍，下面是一些优秀的参考资料：</p>
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://mmdetection.readthedocs.io/zh-cn/latest/">官方文档</a>：没有什么会比官方文档好使，但是MMDetection的除外。你可以在这里轻松找到环境配置和安装方法，但除此之外其他东西都得你自己去仔细找。反正很多细节我是在文档里找不到的，只能去硬啃源码。</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Jb4y1r7ir/">mmdetection教程(使用篇)</a>：这是b站的教程，是西交大一个学长做的，虽然是做来比赛的，但也适用于初学者，可以说是这几个教程里最实用的一个了。当然，不能是完全的初学者，至少要了解python的面向对象，并且能稍微理解一些项目架构的同学，最好上手训练过。</li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16137569/article/details/121316235">MMDetection框架入门教程（完全版）</a>：高屋建瓴从源码开始剖析MMDetection的结构，自底层到实用分析整个工程，确实是完整版（这直接大乘飞升了太强了orz）。新手可以先理解其注册机制和继承机制</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/369826931">不得不知的
+MMDetection
+学习路线(个人经验版)</a>：不要被名字蒙蔽了，这是知乎OpenMMLab官方账号发布的，这篇文章后面有博主写的七篇关于MMDetection的文章，这解析可以说这个解析比上一个还狠，反正我是看不下去。</li>
+</ol>
+<p>还有不少教程教人把这个仓库clone一下然后改人源代码，我是真的看的迷惑了，还有的有不少阅读量，这不纯纯误导新手吗？这环境是一次性用完就不用了是吧？到时候有问题都不知道怎么查。当然，如果有稳定的较为优秀的修改方案倒也不是不能接受，可惜我目前没有发现特别合理的修正，大部分修正看起来都是新手做的。</p>
+<h3 id="新手上路">新手上路</h3>
+<h4 id="安装">安装</h4>
+<p>这个直接看<a
+target="_blank" rel="noopener" href="https://mmdetection.readthedocs.io/zh-cn/stable/get_started.html">官方教程</a>，conda和pytorch环境有了就可以不用装了。记得装gpu版的pytorch。换源啥的教程网上都有。</p>
+<h4 id="训练流程">训练流程</h4>
+<p>我借用<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16137569/article/details/121316235">这篇博客</a>的一张图来说明这个过程：</p>
+<p><img src="/images/a13afdb1195f46148843a818cc8f5bbf.png" /></p>
+<p>MMDetection参考了pytorch的抽象方式，将训练过程简化为四个步骤：</p>
+<ol type="1">
+<li>数据集准备</li>
+<li>选择基准模型</li>
+<li>自定义配置</li>
+<li>训练</li>
+</ol>
+<p>数据集准备其实就是获取数据集的过程，我一般不用它带的库，而是自己去准备。建立数据集网上教程挺多的，应该不成问题。</p>
+<p>基准模型就是你想训练的模型的默认形式。这些模型都存储在<code>tools/config/</code>里，需要用什么网络就选择哪个网络作为配置就行。</p>
+<p>由于默认参数总有些不适用于自己的训练情况，最次也需要修改数据集的位置，因此需要修改原配置。当然，最简单的办法就是进入mmdetection直接修改源码。但为了不影响后续训练其他模型，最好还是自己写一个配置文件，这也是博客后续的重点内容。</p>
+<p>训练只需要用python启动框架已经写好的train.py即可，命令行如下：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/train.py <span class="variable">$&#123;CONFIG&#125;</span></span><br></pre></td></tr></table></figure><br />
+<code>$&#123;CONFIG&#125;</code>就是自定义配置文件路径。</p>
+<p>官方有一个简单的<a
+target="_blank" rel="noopener" href="https://mmdetection.readthedocs.io/zh-cn/stable/user_guides/train.html#id7">实战教程</a>，可以跟着官方做一下，了解一下这个过程。</p>
+<h4 id="测试过程">测试过程</h4>
+<p>和训练类似，也是只需要用python启动test.py。命令行如下：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/test.py <span class="variable">$&#123;CONFIG&#125;</span> <span class="variable">$&#123;CHECKPOINT&#125;</span></span><br></pre></td></tr></table></figure><br />
+<code>$CHECKPOINT</code>是训练时产生的检查点，里面主要存储了模型的权重信息。这个文件可以在训练时创建的文件夹<code>work_dir</code>里找到。</p>
+<h4 id="检测过程">检测过程</h4>
+<p>我不好说，image_demo好像没什么问题，但是video_demo.py（包括那个gpu加速版本）这个功能甚至有bug。我在issue里找到一样问这个问题的人了。虽然不是什么非常重要的bug，但是感觉还是功能太少了。我发了个评论，但愿官方能看见。</p>
+<p>这两个文件共同点就是都调用了一个叫<code>track_iter_progress()</code>的函数，这个应该是代码已经过时了，而且这个功能没啥用。把它去掉就行了。</p>
+<p>要运行的话，命令行如下：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python demo/video_demo.py <span class="variable">$&#123;VIDEO&#125;</span> <span class="variable">$&#123;CONFIG&#125;</span> <span class="variable">$&#123;CHECKPOINT&#125;</span> --show --out <span class="variable">$&#123;OUTFILE&#125;</span></span><br></pre></td></tr></table></figure><br />
+后面两个选项二选一使用即可。</p>
+<p>刚刚又发现gpu加速版<code>--out</code>选项不好使哈哈。这代码可以重写了。</p>
+<h3 id="数据集准备">数据集准备</h3>
+<p>如果是使用公共数据集，网站也不少，去网上找就行了。</p>
+<p>如果自己建数据集，拿到图片后找人标就行了，网上教程也不少。注意要做数据集就认真花时间做，数据标注也是有标准的，不符合标准的数据集只会让训练结果大打折扣。另外需要注意的就是，主流数据集有三种格式：COCO，YOLO和VOC，这几个数据集可以相互转化，<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/461488682">这篇文章</a>提供了相关代码。</p>
+<p>官方说是用COCO格式的，但我看扒了下源码，发现<del>这官方虽然嘴上说着不要，身体还是蛮诚实的……</del>其实是支持各种数据集的，就是麻烦一点。</p>
+<h3 id="基准模型选择">基准模型选择</h3>
+<p>模型选择和目的本身有关。例如精准度要求高，自然模型要选参数多一些的。如果要实时性好的话，选yolo系列就比RCNN系列好一些。这和机器学习相关知识有关，就不详细说明了。</p>
+<h3 id="自定义配置">自定义配置</h3>
+<p>新手学习最大的阻碍应该就在这里。一看要自己写配置文件就感觉是一件特别困难的事。确实很难，但如果仔细扒它的源码就会发现，其实也还好。我们慢慢分析。</p>
+<p>如果按照教程训练一个神经网络，你会发现在<code>work_dir</code>的训练日志子文件夹里会出现一个config文件，这个文件特别的长，包含了原始的训练模型配置，也包含了我们的自定义配置，这才是完整的模型配置文件的样子。</p>
+<p>这些组件新手或许看不懂，但你或许会想起原始配置文件上的内容其实正是这些内容。</p>
+<p>事实上，MMDetection中的配置文件被分为以下三个部分：<br />
+1. 模型Model<br />
+2. 数据集Dataset<br />
+3. 调度器Scheduler</p>
+<p>这一点从<code>tools/configs/_base_</code>文件夹中也可以得到印证。下面，我们先尝试理解这些代码，然后再尝试做一些小的调整。</p>
+<p>（如果你硬要杠还有一个default_runtime.py的话那你对）</p>
+<h4 id="模型model">模型Model</h4>
+<p>这里的模型就是模型具体的架构了。</p>
+<p>在MMDetection框架下，任何神经网络都被分为了这么几部分：</p>
+<p><img src="/images/v2-7ecc8e5e19c59a3e6682c5e3cdc34918_r.jpg" /></p>
+<p>看不懂？别急，我们再看从<code>tools/configs/_base_/models/faster-rcnn_r50_fpn.py</code>节选的部分代码：<br />
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="built_in">type</span>=<span class="string">&#x27;FasterRCNN&#x27;</span>,</span><br><span class="line">    data_preprocessor=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    backbone=<span class="built_in">dict</span>(</span><br><span class="line">        <span class="built_in">type</span>=<span class="string">&#x27;ResNet&#x27;</span>,</span><br><span class="line">        depth=<span class="number">50</span>,</span><br><span class="line">        num_stages=<span class="number">4</span>,</span><br><span class="line">        out_indices=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line">        frozen_stages=<span class="number">1</span>,</span><br><span class="line">        norm_cfg=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;BN&#x27;</span>, requires_grad=<span class="literal">True</span>),</span><br><span class="line">        norm_eval=<span class="literal">True</span>,</span><br><span class="line">        style=<span class="string">&#x27;pytorch&#x27;</span>,</span><br><span class="line">        init_cfg=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;Pretrained&#x27;</span>, checkpoint=<span class="string">&#x27;torchvision://resnet50&#x27;</span>)),</span><br><span class="line">    neck=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    rpn_head=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    roi_head=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    <span class="comment"># model training and testing settings</span></span><br><span class="line">    train_cfg=<span class="built_in">dict</span>(</span><br><span class="line">        rpn=<span class="built_in">dict</span>(</span><br><span class="line">            assigner=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            sampler=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            allowed_border=-<span class="number">1</span>,</span><br><span class="line">            pos_weight=-<span class="number">1</span>,</span><br><span class="line">            debug=<span class="literal">False</span>),</span><br><span class="line">        rpn_proposal=<span class="built_in">dict</span>(</span><br><span class="line">            ...),</span><br><span class="line">        rcnn=<span class="built_in">dict</span>(</span><br><span class="line">            assigner=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            sampler=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            pos_weight=-<span class="number">1</span>,</span><br><span class="line">            debug=<span class="literal">False</span>)),</span><br><span class="line">    test_cfg=<span class="built_in">dict</span>(</span><br><span class="line">        ...</span><br><span class="line">    ))</span><br></pre></td></tr></table></figure></p>
+<p>你就会惊讶地发现，<strong>这个文件通篇只定义了一个字典，而且每一个键值对都是对网络结构的细致描述</strong>。</p>
+<p>而且，即便没有学过python，你也可以通过改变里面的数值，轻松调整神经网络的参数。</p>
+<h4 id="数据集dataset">数据集Dataset</h4>
+<p>这一部分官网并没有给出比较明确的代码结构，于是我去扒源码看了看，发现这个结构更加简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">dataset_type = <span class="string">&#x27;CocoDataset&#x27;</span></span><br><span class="line">data_root = <span class="string">&#x27;data/coco/&#x27;</span></span><br><span class="line"></span><br><span class="line">backend_args = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">train_pipeline = [</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;LoadImageFromFile&#x27;</span>, backend_args=backend_args),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;LoadAnnotations&#x27;</span>, with_bbox=<span class="literal">True</span>),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;Resize&#x27;</span>, scale=(<span class="number">1333</span>, <span class="number">800</span>), keep_ratio=<span class="literal">True</span>),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;RandomFlip&#x27;</span>, prob=<span class="number">0.5</span>),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;PackDetInputs&#x27;</span>)</span><br><span class="line">]</span><br><span class="line">test_pipeline = [</span><br><span class="line">   ...</span><br><span class="line">]</span><br><span class="line">train_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    batch_size=<span class="number">2</span>,</span><br><span class="line">    num_workers=<span class="number">2</span>,</span><br><span class="line">    persistent_workers=<span class="literal">True</span>,</span><br><span class="line">    sampler=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;DefaultSampler&#x27;</span>, shuffle=<span class="literal">True</span>),</span><br><span class="line">    batch_sampler=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;AspectRatioBatchSampler&#x27;</span>),</span><br><span class="line">    dataset=<span class="built_in">dict</span>(</span><br><span class="line">        <span class="built_in">type</span>=dataset_type,</span><br><span class="line">        data_root=data_root,</span><br><span class="line">        ann_file=<span class="string">&#x27;annotations/instances_train2017.json&#x27;</span>,</span><br><span class="line">        data_prefix=<span class="built_in">dict</span>(img=<span class="string">&#x27;train2017/&#x27;</span>),</span><br><span class="line">        filter_cfg=<span class="built_in">dict</span>(filter_empty_gt=<span class="literal">True</span>, min_size=<span class="number">32</span>),</span><br><span class="line">        pipeline=train_pipeline,</span><br><span class="line">        backend_args=backend_args))</span><br><span class="line">val_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    ...)</span><br><span class="line">test_dataloader = val_dataloader</span><br><span class="line"></span><br><span class="line">val_evaluator = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="built_in">type</span>=<span class="string">&#x27;CocoMetric&#x27;</span>,</span><br><span class="line">    ann_file=data_root + <span class="string">&#x27;annotations/instances_val2017.json&#x27;</span>,</span><br><span class="line">    metric=<span class="string">&#x27;bbox&#x27;</span>,</span><br><span class="line">    format_only=<span class="literal">False</span>,</span><br><span class="line">    backend_args=backend_args)</span><br><span class="line">test_evaluator = val_evaluator</span><br></pre></td></tr></table></figure>
+<p>按照一样的方法，我们可以看出其实这个文件主要就是三个组件，pipeline，dataloader和evaluator。里面的参数未必能看懂，但也大概能猜出这些组件有什么用吧。</p>
+<h4 id="调度器scheduler">调度器Scheduler</h4>
+<p>同样的方法，我就不放代码了影响观感，直接放结论。这一部分只有三个组件，分别是参数调度器（控制学习率的变化），优化器（控制学习率的调整策略）和自动学习率调整（根据你的GPU数量和batch_size帮你算初始学习率）</p>
+<h4 id="自定义配置文件">自定义配置文件</h4>
+<p>看到这里可能朋友们又要抱怨了，这么长的配置文件我得写多久？别急，你看看官方怎么偷懒的。以下代码为<code>/configs/faster_rcnn/faster-rcnn_r101_fpn_1x_coco.py</code>文件的全部代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_base_ = <span class="string">&#x27;./faster-rcnn_r50_fpn_1x_coco.py&#x27;</span></span><br><span class="line">model = <span class="built_in">dict</span>(</span><br><span class="line">    backbone=<span class="built_in">dict</span>(</span><br><span class="line">        depth=<span class="number">101</span>,</span><br><span class="line">        init_cfg=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;Pretrained&#x27;</span>,</span><br><span class="line">                      checkpoint=<span class="string">&#x27;torchvision://resnet101&#x27;</span>)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>就五行。从_base_里copy了一个文件，下面写了下backbone的一些参数就结束了。</p>
+<p>理解能力好的同学一下就反应过来，这个其实就是只用写修改的部分。确实是这样的。咱们不用管它到底怎么实现这个过程的，咱们只需要知道，可以用<code>_base_</code>来copy重复的代码，然后后面加上修改的部分就行了。</p>
+<p>如果大家已经用这个作为配置文件训练过了，从运行后的实际config.py文件来看，这个配置文件可一点都不短。但仔细分析，其实也就改动了这么点地方。</p>
+<p>所以说，我们的主要任务只需要写好要修改的部分就好了。这里有一个我写的算是比较通用的自定义模板，大部分网络都需要修改这些东西，大部分改完就能跑起来了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新配置继承了基本配置，并做了必要的修改</span></span><br><span class="line">_base_ = ...</span><br><span class="line"></span><br><span class="line">model = <span class="built_in">dict</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改数据集相关配置</span></span><br><span class="line">data_root = ...</span><br><span class="line">metainfo = &#123;</span><br><span class="line">    <span class="string">&#x27;classes&#x27;</span>: (... )</span><br><span class="line">&#125;</span><br><span class="line">roi_head = <span class="built_in">dict</span>(</span><br><span class="line">    bbox_head = <span class="built_in">dict</span> (</span><br><span class="line">        <span class="comment"># 我们还需要更改 head 中的 num_classes 以匹配数据集中的类别数</span></span><br><span class="line">    	num_classes = <span class="number">2</span>))</span><br><span class="line">train_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="comment"># batch_size=32,  # 自己调</span></span><br><span class="line">    dataset=<span class="built_in">dict</span>(</span><br><span class="line">        data_root=data_root,</span><br><span class="line">        metainfo=metainfo,</span><br><span class="line">        ann_file=<span class="string">&#x27;train.json&#x27;</span>,</span><br><span class="line">        data_prefix=<span class="built_in">dict</span>(img=<span class="string">&#x27;train/&#x27;</span>)))</span><br><span class="line">val_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    dataset=<span class="built_in">dict</span>(</span><br><span class="line">        data_root=data_root,</span><br><span class="line">        metainfo=metainfo,</span><br><span class="line">        ann_file=<span class="string">&#x27;val.json&#x27;</span>,</span><br><span class="line">        data_prefix=<span class="built_in">dict</span>(img=<span class="string">&#x27;val/&#x27;</span>)))</span><br><span class="line">test_dataloader = val_dataloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 几个路径自己看着改，看不懂就跟着官网的教程实例跑一遍</span></span><br><span class="line">val_evaluator = <span class="built_in">dict</span>(ann_file=data_root + <span class="string">&#x27;/val.json&#x27;</span>)</span><br><span class="line">test_evaluator = val_evaluator</span><br></pre></td></tr></table></figure>
+<p>但是那么多参数，我们怎么知道要修改哪些呢？我也看不懂，但我一直遵循一个原则，默认的总差不到哪里去。如果不懂，那就别改。</p>
+<h4 id="进阶">进阶</h4>
+<p>如果一定想弄懂，当然也是可以的，但官方没有非常好用的相关文档，需要大家手动去扒源码。如果要修改数据集Dataset和模型Model部分的配置，可以到<code>/mmdet/datasets/</code>和<code>/mmdet/models/</code>下查看，看类别就主要看<code>__init__</code>，看细节参数就去相关文件里看，实用细节先不用管，弄明白参数有什么用就行。但如果要修改调配器Scheduler的配置，要到另一个仓库<a
+target="_blank" rel="noopener" href="https://github.com/open-mmlab/mmengine">MMEngine</a>下的<code>/optim/scheduler/</code>下寻找（这个路径找了我好久），因为MMDetection很多基本的东西都是基于MMEngine和MMCV来实现的，而这两个东西又是基于Pytorch实现的，所以如果要进一步研究更底层的原理，还需要把这些东西都学明白。<del>我不搞AI我不想研究。</del></p>
+<p>其实包括train.py，test.py这些都有很多参数，很多内容官方文档和大佬们都懒得写，都是自己去看才知道。只能说多看源码吧。</p>
+<h3 id="总结">总结</h3>
+<p>这篇文档就是一个新手文档，深度和精度远没有官方和各位大佬（受我一拜orz）优秀，我只是觉得好像大家没有太考虑萌新的感受，也想借此机会记录一下自己的学习经历，因此写的一篇文章。这个框架确实是一个优秀的框架，值得大家关注。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/" class="post-title-link" itemprop="url">Java梦的起点2：面向对象的世界</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-23 21:43:31" itemprop="dateCreated datePublished" datetime="2023-12-23T21:43:31+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-25 15:27:13" itemprop="dateModified" datetime="2023-12-25T15:27:13+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="面向对象杂谈">面向对象杂谈</h3>
+<p>面向对象，这四个字可真够有意思的。引用书中的一句话：</p>
+<blockquote>
+<p>类实质上就是封装对象属性和行为的载体，而对象则是从类抽象出来的一个实例。</p>
+</blockquote>
+<p>面向对象认为研究事物只需要研究清楚它的属性和行为就是将一个事物研究透了。怎么说呢，看起来有点机械论的样子，忽略事物发展规律了。但总之，现在大部分程序设计语言都是这么设计的。将事物抽象成属性和行为的载体，倒也不失一种简化方法。</p>
+<p>面向对象的三大特质：封装性，继承性，多态性</p>
+<p>封装性强调了外部的不可干扰性。类只提供接口，外部只能通过接口操作类。至于类的内部结构功能，外部无法知晓也无法修改。</p>
+<p>继承性和多态性都是在说类与类之间的关联。继承性指的是，子类可以继承父类的方法和属性。多态性指的是同一操作可以作用于不同对象。</p>
+<p>继承性以子类为主体，说明了子类可以使用父类的方法，拥有父类的属性。而多态性则是将父类的引用指向子类的对象。这一段或许目前看起来难以理解，在看完这一章后，回看这里会了解更深一些。</p>
+<h3 id="类的基础知识">类的基础知识</h3>
+<p>这一部分主要研究类本身及其对象。</p>
+<h4 id="变量和方法">变量和方法</h4>
+<p>在类里定义的变量叫做<strong>成员变量</strong>，在类方法里定义的变量被称为<strong>局部变量</strong>。</p>
+<p>Java中定义成员方法的例子如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] exchange(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">    <span class="comment">// 方法具体内容</span></span><br><span class="line">    <span class="keyword">return</span> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以发现，java允许数组作为返回值和形参。</p>
+<h4 id="修饰符">修饰符</h4>
+<p>在Java中，成员变量和类方法可以被四种类修饰符修饰，以下是四个修饰符的作用范围：<br />
+<img src="/images/2023-12-24%20143027.png" /></p>
+<p>我的理解是，私有和默认就是完全不想给用户使用，仅仅是自己开发时有用，私有就只能这个类内部用，默认就包内都可以用。保护允许用户作继承但不允许直接访问原内容，公共就是随便访问。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/I_r_o_n_M_a_n/article/details/119024516">这篇文章</a>详细讲了四个修饰符及其使用规则。</p>
+<h4 id="构造函数">构造函数</h4>
+<p>Java用构造函数完成对象的创建，假设要创建图书类，其构造函数格式如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">Book</span><span class="params">(...)</span> &#123;  <span class="comment">// 名字和类名一样，无返回值</span></span><br><span class="line">   ...  <span class="comment">// 构造方法   </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+若不在类中添加任何构造方法，编译器会自动放一个无参构造方法。</p>
+<p><code>this</code>指的是类的一个实例，我们会用<code>this.成员变量</code>或者<code>this.成员方法</code>来操作，但其实它还可以调用构造方法<code>this(...)</code>。</p>
+<p>下面是一个鸡蛋灌饼的例子，例子从书上抄的。默认加一个，除非顾客刻意要求：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Eggcake</span> &#123;</span><br><span class="line">    <span class="type">int</span> eggCount;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Eggcake</span><span class="params">(<span class="type">int</span> eggCount)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.eggCount = eggCount;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Eggcake</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="静态变量和静态方法">静态变量和静态方法</h4>
+<p>静态变量和静态方法可以理解为类本身的变量和方法。Java用static来修饰静态变量和方法。调用方法为<code>类名.静态变量</code>或者<code>类名.静态方法</code>。（可以按照<code>成员.静态方法</code>来进行调用，但是容易引起误解，最好不要这么干）</p>
+<p>由于它和类本身有关，它不能和类的实例产生任何关系。例如，不能使用this关键字，不能直接调用非静态方法。局部变量也不能是静态的。</p>
+<p>java允许在类第一次加载时（首次创建对象，或者首次访问类中的静态方法或者静态成员时）运行一个代码块，称为<strong>静态代码块</strong>，格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        ...  <span class="comment">// 静态代码块</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类的主方法">类的主方法</h4>
+<p>如果要在类中定义主方法，它的语法可以说是唯一的：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主方法可以传参数进去，在Eclipse中，可以在要运行的java文件上右键，然后选择运行方式，运行配置，在自变量选项卡中输入参数。</p>
+<h4 id="对象">对象</h4>
+<p>在有了构造函数后，假设我们要操作的类名为<code>Test</code>，要创建了一个对象<code>test</code>，可以按如下格式创建：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br></pre></td></tr></table></figure><br />
+这段代码应该理解为，Java创建了一个<code>Test</code>类型，名为<code>test</code>的引用变量，<code>new Test()</code>创建了一个<code>Test</code>类型的实体，<code>test</code>是这个实体的代理人。</p>
+<p>用<code>new</code>创建的实体，超过作用范围会被视为<strong>垃圾</strong>，会被<strong>垃圾回收器</strong>自动回收。也可以给它赋值<code>null</code>，则引用对象指向的实体自动被标记为垃圾。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="继承多态抽象类与接口">继承，多态，抽象类与接口</h3>
+<p>这一部分主要研究类和类之间的关系。</p>
+<h4 id="继承">继承</h4>
+<p>在Java中，继承需要使用关键字<code>extends</code>，格式如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_">Parent</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+Java只支持单继承。</p>
+<p>创建子类对象会先执行父类的构造函数，再执行子类的构造函数。</p>
+<h4 id="final">final</h4>
+<p>我们都知道，声明常量使用的是关键字<code>final</code>，但其实方法也可以是常量，这是为了防止子类在继承时意外修改了不应该修改的成员方法或者静态方法。</p>
+<p>甚至你可以用<code>final</code>来修饰一个类，用以说明此类不可继承。</p>
+<h4 id="object类">Object类</h4>
+<p>所有的类都是继承于<code>Object</code>类，下面是<code>Object</code>类中常用的几个方法。</p>
+<p><code>getClass()</code>可以获取对象所在类。有时候会搭配<code>getName()</code>获取类的名称。</p>
+<p><code>toString()</code>是一个将对象返回为字符串的形式的方法，通常需要重写使用</p>
+<p><code>equal()</code>是判断两个对象是否相同的方法。<code>==</code>虽然可以做到，但它要求对象的所有成员变量均一致，但有时候判断是同一个对象并不需要这么严格的标准。</p>
+<h4 id="对象类型的转换">对象类型的转换</h4>
+<p>对象类型转换有两种方法，但本质上并没有真正对实体产生影响，只不过是引用类型上的小trick。换句话来说，这只不过是它被看作什么的区别，它还是它本身。</p>
+<p>有时候，子类的对象要用父类来解释，即将子类对象转成父类对象，就像书上的例子:<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Bird</span> <span class="variable">bird</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Pigeon</span>();</span><br></pre></td></tr></table></figure><br />
+这是可以的。此时子类的细节被屏蔽，它作为一个父类对象存在，但若你尝试用<code>bird.getClass()</code>去获取它的类型，它其实还是鸽子。父类引用指向子类对象的过程被称为<strong>向上转型</strong>。这个过程是安全的，因为子类对象一定是父类对象，用父类引用指向子类对象是没有任何问题的。</p>
+<p>那如果现在我想用子类解释它能行吗？可以的。只需要再建立一个引用：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Pigeon</span> <span class="variable">pigeon</span> <span class="operator">=</span> (Pigeon)bird;</span><br></pre></td></tr></table></figure><br />
+这个过程将父类对象强制转成子类对象，赋值给子类引用<code>pigeon</code>。子类引用指向父类对象称为<strong>向下转型</strong>。这个过程不一定是安全的，因为父类对象不一定就是子类对象，强制转换可能出现RE。因此需要结合函数<code>instanceof</code>进行判断，格式如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatherObject <span class="keyword">instanceof</span> SonClass</span><br></pre></td></tr></table></figure><br />
+如果是子类对象，就会返回<code>true</code>，否则返回<code>false</code>。</p>
+<p>当然这个函数的用法不止这一种。</p>
+<h4 id="多态">多态</h4>
+<p>在上一个小节我们讨论了向上转型的安全性，这其实就是多态的基础。我们知道，类的成员方法只能作用于本类，同一个方法如何作用于不同对象？这就要用到上面说到的对象类型转换中的向上转型了。通过向上转型将子类对象当作一个父类对象来解释，就可以将子类对象运用于父类的成员方法了。</p>
+<p>例如，如果我需要创建一个<code>Shape</code>类，里面有一个成员函数是<code>draw()</code>，图像类下继承有<code>Square</code>，<code>Circular</code>类。如果不使用多态性质，我需要给每一个子类都创建一个画图成员方法，但是有了多态性质，我只需要把子类解释成一个<code>Shape</code>，在<code>Shape</code>类中实现<code>draw()</code>函数即可，我不需要关注具体的形状类型，我只需要画这个图形。</p>
+<h4 id="抽象类">抽象类</h4>
+<p>上一个小节说到在<code>Shape</code>类里创建画图函数，但这会产生一个问题：<code>Shape</code>类对象本身是不能调用这个函数的，因为一个抽象概念的图像是画不出来的。于是我们需要引入<strong>抽象类</strong>的概念。</p>
+<p>Java中使用<code>abstract</code>关键字定义抽象类，该类里抽象的成员方法被称为<strong>抽象方法</strong>。抽象类唯一的意义就是被继承，抽象方法本身也没有方法体，抽象类不可被实例化为对象。</p>
+<p>对于抽象类的继承类，被继承后<em>必须实现里面的所有抽象方法</em>。</p>
+<h4 id="接口">接口</h4>
+<p>上面说到，抽象类的子类必须实现所有抽象方法，但是这会产生一个问题。例如我创建了一个图形抽象类，就需要在每个子类中实现一次这样的代码。而且或许有一些图形我不太需要这个功能，却也被迫要实现这个功能了。</p>
+<p>如果是Python的话，我只需要再创建一个画图类，使用多继承就可以解决了。在Java中，这个问题如何解决呢？</p>
+<p>我们可以让子类继承接口。这时只需要在需要这个功能的子类中是实现这个接口即可。</p>
+<p>接口可以看作一个纯粹的抽象类，其中只有全局静态常量<code>public final static</code>和公共抽象方法<code>public abstract</code>。</p>
+<p>创建接口的语法如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Intface</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>继承接口的类只需要加上<code>implements Intface</code>即可继承接口了。</p>
+<p>子类继承接口</p>
+<h4 id="方法重载">方法重载</h4>
+<p>方法的重载使得一个类中拥有同名（但是参数类型，顺序，或个数不同）的多个函数。</p>
+<p>当然，不定长参数方法也是一种不错的方法，在Java中定义如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> ... a)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        s += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以发现，<code>int ... a</code>在方法体内可以被看作一个一维数组。</p>
+<h3 id="包">包</h3>
+<p>Java中的包机制和Python的差不多。<strong>包（package）</strong>是为了更好的管理多个类而出现的。实际工程中，每个类都会在一个包里。（当然你硬是不给它放包里也是可以的，它会被放入默认包default
+package中。但是最好不要这么做）</p>
+<p>每个包都有一个<strong>完整类路径</strong>。这个路径是包名和类名的组合。在调用不同包的时候，需要使用完整包路径进行调用。由于在Java中，一个文件最多对应一个公开类，只需要在文件第一行定义所在包：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 包名</span><br></pre></td></tr></table></figure></p>
+<p>若要导入一个包，只需要使用<code>import</code>关键字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.Math</span><br></pre></td></tr></table></figure>
+<p>也可以直接引入单个静态成员。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.System.out</span><br></pre></td></tr></table></figure>
+<h3 id="内部类">内部类</h3>
+<p>内部类顾名思义就是类内部的类，例如汽车一定会有一个引擎，引擎有点火启动之类的功能。如果要创建内部类对象，可以用如下语法：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Outer</span> <span class="variable">outer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Outer</span>();</span><br><span class="line">Outer.<span class="type">Inner</span> <span class="variable">inner</span> <span class="operator">=</span> outer.<span class="keyword">new</span> <span class="title class_">Inner</span>();  <span class="comment">// 内部类对象依附于外部类对象，不存在独立的内部类对象</span></span><br></pre></td></tr></table></figure></p>
+<p>有时候内部类会出现成员变量和外部类命名一样的情况，书上有一个例子说明了这种情况:<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TheSameName</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Inner</span> &#123;</span><br><span class="line">        <span class="type">private</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">9</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doit</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">11</span>;</span><br><span class="line">            x++;  <span class="comment">// 局部变量自加</span></span><br><span class="line">            <span class="built_in">this</span>.x++;  <span class="comment">// 内部类成员变量自加</span></span><br><span class="line">            TheSameName.<span class="built_in">this</span>.x++;  <span class="comment">// 外部成员变量自加</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="匿名内部类">匿名内部类</h4>
+<p>这种类的存在就像是临时创建的，一次性的类，对象生命周期结束后直接就被Java虚拟机销毁。创建语法如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Parent</span>() &#123;</span><br><span class="line">    ...  <span class="comment">// 子类实现的内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+由于这就是一个一次性的类，它既不能拥有静态方法，也不能拥有构造方法了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B91%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B91%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">Java梦的起点1：基础语法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-23 17:31:14" itemprop="dateCreated datePublished" datetime="2023-12-23T17:31:14+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-24 21:30:27" itemprop="dateModified" datetime="2023-12-24T21:30:27+08:00">2023-12-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>514</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>基础语法当然越快越好啦，所以我可不会事无巨细的做一个博客的。</p>
+<h3 id="基础数据类型">基础数据类型</h3>
+<p>Java必须显式定义变量类型。整数部分有<code>byte</code>，<code>short</code>，<code>int</code>，<code>long</code>四种，浮点类型有<code>float</code>和<code>double</code>两种，字符型是<code>char</code>，布尔类型是<code>boolean</code>。取值范围和用法和c++几个类型完全能对应上。</p>
+<p>Java的变量命名有一个很抽象的地方就是，除了下划线，字母和数字，它还允许出现美元符号“$”是我没想到的。</p>
+<p>声明常量需要在前面加上<code>final</code>修饰。</p>
+<h3 id="运算符">运算符</h3>
+<p>不能说和c++完全一样吧，倒也有99%差不多。算术运算符就不说了，逻辑运算符，位运算符，三目元运算符，该有的都一样。</p>
+<p>目前发现有个不同之处就是，Java提供了一个无符号右移<code>&gt;&gt;&gt;</code>，就算是负数最高位也填0。</p>
+<h3 id="类型转换">类型转换</h3>
+<p>隐式转换按照其他-&gt;int-&gt;long-&gt;float-&gt;double的顺序，显式也是和c++一样。这俩语言基本语法上真的快无缝衔接了。</p>
+<h3 id="控制语句">控制语句</h3>
+<p>四个字，一模一样。</p>
+<h3 id="数组">数组</h3>
+<p>这里倒略有不同。看代码，一眼就懂了。在Java中，创建完的数组会自动赋值为0。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arr1d[] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">5</span>]; <span class="comment">// 创建一个5个int组成的一维数组</span></span><br><span class="line"><span class="type">int</span> arr2d[][] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>][<span class="number">4</span>]  <span class="comment">// 创建一个2行4列的二维数组</span></span><br></pre></td></tr></table></figure>
+<p>初始化也有两种方法：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> myarr[][] = <span class="keyword">new</span> <span class="title class_">int</span>&#123;&#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125;&#125;;</span><br><span class="line"><span class="type">int</span> myarr[][] = &#123;&#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125;&#125;;  <span class="comment">// 省略new int</span></span><br></pre></td></tr></table></figure></p>
+<p>Java中数组遍历和c++中的vector很像啊，存在两种遍历方式：</p>
+<p>for循环：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr; i++) &#123;</span><br><span class="line">    ...  <span class="comment">// 循环体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+foreach循环：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x : arr) &#123;</span><br><span class="line">    ...  <span class="comment">// 循环体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="几个实用的函数">几个实用的函数</h4>
+<p>c++有algorithm库，Java不甘示弱，用Array类把c++中最有用的几个函数都直接变成它的类方法：</p>
+<p><code>fill(int a[], int fromIndex, int toIndex, int value)</code>：将<code>value</code>分配到数组中下标为[<code>fromIndex</code>,<code>toIndex</code>)的每个元素中。中间两个参数可以同时省略（这两个参数无论在这个类的哪个方法内都能同时省略，省略后对默认整个数组操作）。</p>
+<p><code>sort(object)</code>：对数组排序。</p>
+<p><code>binarySearch(Object[] a, int fromIndex, int toIndex, Object key)</code>：对数组进行二分搜索，搜到了返回索引，否则返回-1。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B90%EF%BC%9AJDK%E5%92%8CEclipse/" class="post-title-link" itemprop="url">Java梦的起点0：JDK和Eclipse</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-23 14:25:54" itemprop="dateCreated datePublished" datetime="2023-12-23T14:25:54+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-25 10:34:52" itemprop="dateModified" datetime="2023-12-25T10:34:52+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>697</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>决定走后端路线这一决定其实特别特别简单。决定做程序员是因为对通信和硬件确实提不起什么兴趣（这一点我花了三年来验证）；而程序员中，算法实在太卷门槛太高，而且“需要做研究”这一点就够我把这个选项排除在外了，申了港新就已经没有回头路了。那剩下那些测试运维啥的，实在没做过，而且好歹我也学过点算法，而且我本人也对后端颇有兴趣，那后端对我而言就是最优选择了。</p>
+<p>这个选择唯一的问题就是，我确实一点后端基础都没有。一年前我还太软弱，没有坚定去执行自己的目标，项目什么的都荒废了。今年不同的是，我的心态已经好了太多。经历的更多，越知道如何处变不惊，越能保持初心，可能这就是成长吧。</p>
+<p>这个系列对我来说是一个几乎全新的领域。不过既然选择了，就带着热情放手做了。</p>
+<h3 id="资源">资源</h3>
+<p>参考书用的是《Java 从入门到精通》。</p>
+<p>一些网站：</p>
+<p><a target="_blank" rel="noopener" href="https://javaguide.cn/">JavaGuide</a></p>
+<h3 id="jdk">JDK</h3>
+<p>JDK即Java的Develop Kit，不同公司有不同的JDK，这里使用的是Open JDK
+11，官网下载安装教程随便去网上找找就有。</p>
+<p>这种开发包其实就是编译器，调试器之类的东西，有这些就已经可以用记事本和命令行来运行开发Java程序了。</p>
+<p>肯定有同学看到JDK，JRE(Java Runtime Environment)，JVM(Java virtual
+Machine)啥的不知道什么意思，这里放一张图：</p>
+<p><img src="/images/jdk-include-jre.png" /></p>
+<p>先知道意思就行。</p>
+<h3 id="eclipse">Eclipse</h3>
+<p>Eclipse是一种大型集成开发工具（IDE），其实就是给一个可视化界面，管理项目更加方便。</p>
+<p>下载就在官网，汉化包也在官网。都是压缩包。只需要把汉化版覆盖Eclipse里的原文件就可以完成汉化。</p>
+<h4 id="创建工程">创建工程</h4>
+<p>Java有些不一样的是，在创建工程后还要创建一个类，还要创建一个<code>main()</code>方法。</p>
+<ul>
+<li>Tip：创建类的时候可以不给所在的包取名（最好别，如果不命名会被放入默认包default
+package中），但是运行之前一定得命名。我尝试新建了个包，然后把类文件重构进去了。</li>
+</ul>
+<p><img src="/images/2023-12-23%20171709.png" /></p>
+<p>其实可以看出来，Java的工程逻辑和大部分面向对象的语言一样。最顶层是工程，然后是包，接着是类。main函数存不存在无所谓。应用程序从main函数进入开始运行。</p>
+<p>调试也和其他语言差不多，就是单步跳入，单步跳过和单步跳出。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/21/%E8%8B%B1%E8%AF%AD%E9%9D%A2%E8%AF%95%E8%AF%8D%E6%B1%87%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/21/%E8%8B%B1%E8%AF%AD%E9%9D%A2%E8%AF%95%E8%AF%8D%E6%B1%87%E5%BA%93/" class="post-title-link" itemprop="url">英语面试词汇库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-21 13:11:57" itemprop="dateCreated datePublished" datetime="2023-12-21T13:11:57+08:00">2023-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-23 14:29:57" itemprop="dateModified" datetime="2023-12-23T14:29:57+08:00">2023-12-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>402</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>鬼知道什么时候就得用上，准备着比较好</p>
+<h2 id="意向类">意向类：</h2>
+<h3 id="客观">客观</h3>
+<p>learn practical skills 获得实用的技能</p>
+<p>continuosly upgrading skills 持续更新技能</p>
+<p>accumulate valuable work and practical experience 积累工作经验</p>
+<p>broaden my horizons 扩展视野</p>
+<p>positioning myself on a more exceptional platform
+给自己更好的平台</p>
+<p>propose innovative solutions for real-world challenges
+提出创造性的解决方案</p>
+<h3 id="主观">主观：</h3>
+<p>strong interest in emerging technologies 对不断出现的科技的好奇</p>
+<p>intense enthusiasm to solve problems 对解决问题的热忱</p>
+<p>aligns perfectly with my passion (for sth.) 完美符合了我的热情</p>
+<p>progress further 进步</p>
+<h2 id="能力类">能力类</h2>
+<h3 id="编程能力">编程能力</h3>
+<p>extensive programming experience 出色的编程经验</p>
+<p>participate in various coding competitions 参加各类编程比赛</p>
+<p>bronze medal in an international collegiate programming contest
+ICPC铜</p>
+<p>continuous practice 持续练习</p>
+<h3 id="领导合作能力">领导/合作能力</h3>
+<p>excellent collaboration and leadership abilities 领导和合作能力</p>
+<p>collaborative projects 合作项目</p>
+<p>held the position of President in our university's computer club
+曾经是计算机社团的社长</p>
+<p>responsible for organizing daily training sessions and competitions
+负责日常训练和比赛</p>
+<p>cultivate my leadership skills 培养领导能力</p>
+<p>served as a coach 作为教练</p>
+<p>learned the importance of effective communication and teamwork
+沟通和团队合作的重要性</p>
+<h3 id="项目经历">项目经历</h3>
+<p>Rich project experience 丰富项目经历</p>
+<p>primarily focusing on two 主要专注于两个项目</p>
+<p>took on the technical aspects of the projects 主要负责技术部分</p>
+<p>image-based underground safety protection system
+基于图像的井下安全系统</p>
+<p>pre-process 预处理</p>
+<p>public opinion analysis management system 舆情分析管理系统</p>
+<h3 id="跨学科背景">跨学科背景</h3>
+<p>Interdisciplinary background 跨学科背景</p>
+<p>expertise in computer-related knowledge 计算机相关知识</p>
+<p>quickly adapt to different disciplinary 快速适应不同学科</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/17/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%95%AA%E5%A4%962%EF%BC%9A%E4%BA%8C%E5%88%86%E4%BD%9C%E5%A6%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/17/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%95%AA%E5%A4%962%EF%BC%9A%E4%BA%8C%E5%88%86%E4%BD%9C%E5%A6%96/" class="post-title-link" itemprop="url">算法入门番外2：二分作妖</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-17 15:58:51 / 修改时间：17:05:58" itemprop="dateCreated datePublished" datetime="2023-12-17T15:58:51+08:00">2023-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E7%95%AA%E5%A4%96/" itemprop="url" rel="index"><span itemprop="name">番外</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>402</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>其实二分有两种常见的写法：</p>
+<h3 id="维护搜索区间">维护搜索区间</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">	mid = l + ((r - l) &gt;&gt; <span class="number">1</span>); <span class="comment">// 注意优先级，位运算括号不可去</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">right_side</span>(mid)) &#123; <span class="comment">// 往右搜</span></span><br><span class="line">		ans = mid; <span class="comment">// 这一行也可以在left_side那里</span></span><br><span class="line">		l = mid + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是一种记录潜在答案的写法，维护的其实是[l,
+r]的未来搜索区间。就是说，接下来二分搜索还会搜索[l,
+r]区间内的答案，其他区域不搜索了。</p>
+<p>注意记录答案不可省略，后面的更新区间的代码也不能修改，否则会退化成下面的写法。</p>
+<h3 id="维护答案所在区间">维护答案所在区间</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt; r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r = mid;  <span class="comment">// 往左搜</span></span><br><span class="line">    <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,l); <span class="comment">//r也可以</span></span><br></pre></td></tr></table></figure>
+<p>这种写法更少一些，因为虽然不用记录潜在答案，但写法更麻烦。这里也是在维护[l,
+r]，但由于这里维护的是答案所在区间，所以循环条件少了l =
+r的情况。同理，如果答案是一个潜在的解，r只能等于mid而不能等于mid -
+1。</p>
+<p>其实mid也有讲究，直接背结论即可，解释也没什么意义，不会让你对二分理解更深刻一些。</p>
+<p>如果下面是<code>r = mid</code>，上面就是<code>mid = (l + r) &gt;&gt; 1</code>；如果下面是<code>l = mid</code>，上面就是<code>mid = (l + r) &gt;&gt; 1 + 1</code></p>
+<p>不服可以自己去试一试，不这么做后果就是死循环。</p>
+<h3 id="我的一些看法">我的一些看法</h3>
+<p>最近看到有一篇题解用的是后一种写法，没看懂代码所以来写这篇博客。但其实这两种写法本质上没有任何区别，目前看来不存在一种方法只能用某种写法实现。事实上，前者的写法更加简洁，理解更加容易。强推前者。</p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/KyleDeng/p/9378187.html">参考博客1</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/Alanrookie/article/details/106158251#:~:text=%E5%AF%B9%E4%BA%8E%E4%BA%8C%E5%88%86%E7%9A%84%E8%BE%B9%E7%95%8C%E9%97%AE%E9%A2%98%EF%BC%8C%E6%88%91%E4%BB%AC%E4%B8%BB%E8%A6%81%E8%A6%81%E6%8A%93%E4%BD%8F%E6%88%91%E4%BB%AC%E5%9C%A8%E5%86%99%E4%BA%8C%E5%88%86%E6%B3%95%E6%97%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E3%80%82%20%E8%80%8C%E6%9C%80%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%98%AF%E8%A6%81%E5%88%86%E6%9E%90while%20%28%29%E5%BE%AA%E7%8E%AF%E5%86%85%E6%9D%A1%E4%BB%B6%EF%BC%8C%E5%B9%B6%E6%8D%AE%E6%AD%A4%E8%A7%A3%E5%86%B3l%E5%92%8Cr%E7%9A%84%E8%BE%B9%E7%95%8C%E5%A4%84%E7%90%86%E9%97%AE%E9%A2%98%E3%80%82,NO.1%20%E5%BE%AA%E7%8E%AF%E6%9D%A1%E4%BB%B6%EF%BC%88%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%AF%B4%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%89%E5%86%B3%E5%AE%9A%E5%B7%A6%E5%8F%B3%E8%BE%B9%E7%95%8C%E7%9A%84%E5%8F%96%E5%80%BC%E5%B8%B8%E8%A7%81%E5%A5%BD%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%E4%B8%80%E5%85%B1%E6%9C%89%E4%B8%A4%E7%A7%8D%EF%BC%9A%E5%BE%AA%E7%8E%AF%E6%9D%A1%E4%BB%B6%E4%B8%80%EF%BC%9Awhile%20%28l%3C%3Dr%29%EF%BC%8C%E5%88%A9%E7%94%A8ans%3Dmid%E8%AE%B0%E5%BD%95%E4%B8%8B%E7%AD%94%E6%A1%88%E8%BF%99%E6%97%B6%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9B%B8%E5%BA%94%E7%9A%84ans%3Dmid%2Cl%3Dmid%2B1%2Cr%3Dmid-1%EF%BC%8C%E5%85%B7%E4%BD%93%E8%A7%81%E4%B8%8B%E9%9D%A2%E4%BB%A3%E7%A0%81while%20%28l%3C%3Dr%29">参考博客2</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -243,7 +1123,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>660</span>
+      <span>533</span>
     </span>
 </div>
 
@@ -349,7 +1229,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
+      <span>2.4k</span>
     </span>
 </div>
 
@@ -546,7 +1426,7 @@ class="math inline">\(S=2.2\)</span>。</p>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>480</span>
+      <span>349</span>
     </span>
 </div>
 
@@ -655,7 +1535,7 @@ target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iW411d7hd
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
+      <span>1.5k</span>
     </span>
 </div>
 
@@ -737,831 +1617,8 @@ L\to C\to G\to M\to O\to H\to N\to P\)</span></p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%95%AA%E5%A4%961%EF%BC%9A%E6%8E%92%E5%BA%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/07/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%95%AA%E5%A4%961%EF%BC%9A%E6%8E%92%E5%BA%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/" class="post-title-link" itemprop="url">算法入门番外1：排序的那些事</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-12-07 15:43:00 / 修改时间：16:22:31" itemprop="dateCreated datePublished" datetime="2023-12-07T15:43:00+08:00">2023-12-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E7%95%AA%E5%A4%96/" itemprop="url" rel="index"><span itemprop="name">番外</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前段时间整理排序那块的知识，感觉放哪都不合适，但是又很重要，所以干脆开个番外，把排序里一部分内容重新整理一下。</p>
-<h3 id="比较排序">比较排序</h3>
-<p>从实用的角度来看，<strong>建议直接用sort代替这里的所有排序方法，它们面对sort毫无优势</strong>。但从学习的角度看，这些算法里的思想，还是相当值得学习的。</p>
-<h4 id="归并排序">归并排序</h4>
-<p>什么是归并？归并就是合并（merge），这个排序算法的设计是基于合并两个有序数组的算法思想来的。将两个有序数组合并为一个有序数组是简单的，因此，对一个有序数组的排列问题就转换为对这个有序数组的前半段数组和后半段数组进行排序的问题，而这恰好是原问题的两个子问题，符合分治的规则。代码参考<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/justidle/article/details/104203958">这篇博客</a>，简洁明了。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Merge</span><span class="params">(<span class="type">int</span> sourceArr[],<span class="type">int</span> tempArr[], <span class="type">int</span> startIndex, <span class="type">int</span> midIndex, <span class="type">int</span> endIndex)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i = startIndex, j=midIndex+<span class="number">1</span>, k = startIndex;</span><br><span class="line">    <span class="keyword">while</span>(i!=midIndex+<span class="number">1</span> &amp;&amp; j!=endIndex+<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(sourceArr[i] &gt; sourceArr[j])</span><br><span class="line">            tempArr[k++] = sourceArr[j++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            tempArr[k++] = sourceArr[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i != midIndex+<span class="number">1</span>)</span><br><span class="line">        tempArr[k++] = sourceArr[i++];</span><br><span class="line">    <span class="keyword">while</span>(j != endIndex+<span class="number">1</span>)</span><br><span class="line">        tempArr[k++] = sourceArr[j++];</span><br><span class="line">    <span class="keyword">for</span>(i=startIndex; i&lt;=endIndex; i++)</span><br><span class="line">        sourceArr[i] = tempArr[i];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//内部使用递归</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MergeSort</span><span class="params">(<span class="type">int</span> sourceArr[], <span class="type">int</span> tempArr[], <span class="type">int</span> startIndex, <span class="type">int</span> endIndex)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> midIndex;</span><br><span class="line">    <span class="keyword">if</span>(startIndex &lt; endIndex) &#123;</span><br><span class="line">        midIndex = startIndex + (endIndex-startIndex) / <span class="number">2</span>;<span class="comment">//避免溢出int</span></span><br><span class="line">        <span class="built_in">MergeSort</span>(sourceArr, tempArr, startIndex, midIndex);</span><br><span class="line">        <span class="built_in">MergeSort</span>(sourceArr, tempArr, midIndex+<span class="number">1</span>, endIndex);</span><br><span class="line">        <span class="built_in">Merge</span>(sourceArr, tempArr, startIndex, midIndex, endIndex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">————————————————</span><br><span class="line">版权声明：本文为CSDN博主「努力的老周」的原创文章，遵循CC <span class="number">4.0</span> BY-SA版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https:<span class="comment">//blog.csdn.net/justidle/article/details/104203958</span></span><br></pre></td></tr></table></figure>
-<p>这种排序方法时间复杂度为<span class="math inline">\(O(n\log
-n)\)</span>，空间复杂度由于要多开一个辅助数组，所以是<span
-class="math inline">\(O(n)\)</span>。</p>
-<p>小tips：这种排序方式可以用来计算逆序对（对于<span
-class="math inline">\(a[i]\)</span>和<span
-class="math inline">\(a[j]\)</span>，若有<span class="math inline">\(i
-&lt; j\)</span> 且 <span class="math inline">\(a[i] &gt;
-a[j]\)</span>，则称<span
-class="math inline">\((i,j)\)</span>是一对逆序对）的个数，貌似只有这个<span
-class="math inline">\(O(nlogn)\)</span>的方法。</p>
-<h4 id="堆排序">堆排序</h4>
-<p>虽然stl十分强大，但是咱们还是要好好学习理论。堆排序的核心是维护一个<strong>二叉堆</strong>，这是一个特殊的二叉树，若父节点取值均大于子节点，则被称为<strong>最大堆</strong>，若父节点取值均小于子节点，则被称为<strong>最小堆</strong>。这里涉及二叉树的储存和读取，会在后面的章节中学到。</p>
-<p>该排序从叶子节点开始，慢慢向上维护二叉堆性质，从而达到建立二叉堆的目的。在建立二叉堆之后，每次取出堆顶元素（表现为与倒数第i个数交换），调整二叉堆，不断循环这两步，即可完成对数组的排序。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">heapify</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; array, <span class="type">int</span> size, <span class="type">int</span> root)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> largest = root;  <span class="comment">// 最大值的索引</span></span><br><span class="line">    <span class="type">int</span> left = <span class="number">2</span> * root + <span class="number">1</span>; <span class="comment">// 左子节点索引</span></span><br><span class="line">    <span class="type">int</span> right = <span class="number">2</span> * root + <span class="number">2</span>; <span class="comment">// 右子节点索引</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到左子节点和根节点中的较大值</span></span><br><span class="line">    <span class="keyword">if</span> (left &lt; size &amp;&amp; array[left] &gt; array[largest]) &#123;</span><br><span class="line">        largest = left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到右子节点和当前最大值的较大值</span></span><br><span class="line">    <span class="keyword">if</span> (right &lt; size &amp;&amp; array[right] &gt; array[largest]) &#123;</span><br><span class="line">        largest = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果最大值不是根节点，则交换根节点和最大值，并递归调整交换后的子树</span></span><br><span class="line">    <span class="keyword">if</span> (largest != root) &#123;</span><br><span class="line">        <span class="built_in">swap</span>(array[root], array[largest]);</span><br><span class="line">        <span class="built_in">heapify</span>(array, size, largest);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 堆排序函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heapSort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; array)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> size = array.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构建最大堆，从最后一个非叶子节点开始调整</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = size / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        <span class="built_in">heapify</span>(array, size, i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 交换堆顶元素和最后一个元素，然后调整堆</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = size - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        <span class="built_in">swap</span>(array[<span class="number">0</span>], array[i]);</span><br><span class="line">        <span class="built_in">heapify</span>(array, i, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于调整堆（heapify）的过程最差时间复杂度就是<span
-class="math inline">\(O(\log
-n)\)</span>，因此算法整体的时间复杂度就是<span
-class="math inline">\(O(n\log n)\)</span>。空间复杂度是<span
-class="math inline">\(O(1)\)</span>。<del>虽然stl优先队列不讲道理</del></p>
-<h4 id="快速排序">快速排序</h4>
-<p>快速排序的思想仍然是分治的思想，只不过这次的分治要保证的是：数列被划分为相对大小关系明确的两部分（一部分中的任意一个元素大于另一部分中的任意一个元素）。</p>
-<p>那如何解决这个问题呢？双指针可以解决。假设想让左部小于右部，一个指针p指向数列首部，一个指向尾部p。q先启动往前扫描，找一个小于base的值，覆盖p的值，然后p启动，找一个大于base的值，覆盖q的值。当两指针重合时，用base覆盖那个值，这个问题就都得到解决了。</p>
-<p>下面的代码来自<a
-target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39181839/article/details/109478094">这个博客</a>，所有排序算法的总结以及关于快排解释的例子都写的非常好，可供学习。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">quickSort</span><span class="params">(<span class="type">int</span> nums[], <span class="type">int</span> start, <span class="type">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//数组有多个元素进行排序</span></span><br><span class="line">    <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="type">int</span> base = nums[start];<span class="comment">//以要进行排序数组第0个元素为base</span></span><br><span class="line">        <span class="type">int</span> left = start;<span class="comment">//左指针</span></span><br><span class="line">        <span class="type">int</span> right = end;<span class="comment">//右指针</span></span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="comment">//从右向左找，比base大，right--</span></span><br><span class="line">            <span class="keyword">while</span> (left&lt; right &amp;&amp; nums[right] &gt;= base) &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//比base小，替换left所在位置的数字</span></span><br><span class="line">            nums[left] = nums[right];</span><br><span class="line">            <span class="comment">//从左向右找，比base小，left++</span></span><br><span class="line">            <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] &lt;= base)&#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//比base大，替换right所在位置的数字</span></span><br><span class="line">            nums[right] = nums[left];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[left] = base;<span class="comment">//此时left=right，用base替换这个位置的数字</span></span><br><span class="line">        <span class="comment">//排列比base小的数字的数组</span></span><br><span class="line">        <span class="built_in">quickSort</span>(nums, start, left - <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//排列比base大的数字的数组</span></span><br><span class="line">        <span class="built_in">quickSort</span>(nums, left + <span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>聪明的小伙伴应该发现问题了，这样玩复杂度好像有点没法保证，递归虽然每一层都要计算<span
-class="math inline">\(n\)</span>次，但是递归层数是无法保证的。如果数组本身是有序的，那么每一次分割将是极度不平衡的，也就是说，其最坏时间复杂度实际上为<span
-class="math inline">\(O(n^2)\)</span>。为此，还有部分解决方案，这里不做扩展。当然，在大部分情况下，复杂度仍然是<span
-class="math inline">\(O(n\log
-n)\)</span>，而且常数小于前两种。显然，空间复杂度为<span
-class="math inline">\(O(1)\)</span>。</p>
-<p>在《算法导论》中有这样一个结论：</p>
-<blockquote>
-<p>在最坏情况下，任何比较排序算法都需要做 <span
-class="math inline">\(\Omega(n\lg n)\)</span> 次比较。</p>
-</blockquote>
-<p>因此，<strong>堆排序和归并排序都是渐近最优的比较排序算法。</strong>优化的意义已经不大，比较排序的发展转到了常数优化上。</p>
-<p><del>所以真正的实战我选择sort</del></p>
-<h3 id="线性排序算法">线性排序算法</h3>
-<p>编程里有种思想叫做“时间换空间”。算法快了，那么，代价是什么呢？空间。这里的排序算法更加容易理解，也更好写，因此简单带过。</p>
-<h4 id="计数排序">计数排序</h4>
-<p>我印象中它还被叫做统计排序，就是统计数字出现的次数。oi-wiki上三句话就讲明白了：</p>
-<ol type="1">
-<li>计算每个数出现了几次；</li>
-<li>求出每个数出现次数的 前缀和；</li>
-<li>利用出现次数的前缀和，从右至左计算每个数的排名。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> W = <span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, w, a[N], cnt[W], b[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">counting_sort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(cnt, <span class="number">0</span>, <span class="built_in">sizeof</span>(cnt));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) ++cnt[a[i]];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= w; ++i) cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>; --i) b[cnt[a[i]]--] = a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>显然，其时间复杂度为<span
-class="math inline">\(O(n+w)\)</span>，空间复杂度为<span
-class="math inline">\(O(n+w)\)</span></p>
-<h4 id="桶排序">桶排序</h4>
-<p>桶排序按下列步骤进行：</p>
-<ol type="1">
-<li>设置一个定量的数组当作空桶；</li>
-<li>遍历序列，并将元素一个个放到对应的桶中；</li>
-<li>对每个不是空的桶进行排序；</li>
-<li>从不是空的桶里把元素再放回原来的序列中。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, w, a[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; bucket[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insertion_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; A)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; A.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        <span class="type">int</span> key = A[i];</span><br><span class="line">        <span class="type">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; A[j] &gt; key) &#123;</span><br><span class="line">        A[j + <span class="number">1</span>] = A[j];</span><br><span class="line">        --j;</span><br><span class="line">        &#125;</span><br><span class="line">        A[j + <span class="number">1</span>] = key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bucket_sort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> bucket_size = w / n + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        bucket[i].<span class="built_in">clear</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        bucket[a[i] / bucket_size].<span class="built_in">push_back</span>(a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> p = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="built_in">insertion_sort</span>(bucket[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; bucket[i].<span class="built_in">size</span>(); ++j) &#123;</span><br><span class="line">        a[++p] = bucket[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个领会个思想就行了。时间和空间都和选的排序算法有关系。</p>
-<h4 id="基数排序">基数排序</h4>
-<p>这种排序和桶排序很像。只不过，它是对数的每一位进行拆解，根据那一位来决定把数放到哪个桶里，然后排下一位，直到最后所有数字都被排好。</p>
-<p>没有看到特别优雅的代码，也没有看到特别好的解析，也不常用，就这样吧。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/06/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-5%EF%BC%9A%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%90%9C%E7%B4%A2%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/06/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-5%EF%BC%9A%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%90%9C%E7%B4%A2%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">算法入门2-5：枚举和搜索基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-06 13:53:03" itemprop="dateCreated datePublished" datetime="2023-12-06T13:53:03+08:00">2023-12-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-09 15:19:09" itemprop="dateModified" datetime="2023-12-09T15:19:09+08:00">2023-12-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">基础算法和基本思想</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>枚举和搜索其实存在一定的关联，二者的核心思想都是<strong>尝试所有可能答案</strong>。在基础学习中，这两块也经常一同出现。</p>
-<h3 id="枚举">枚举</h3>
-<p>枚举，就是把所有可能的答案都尝试一遍，判断是否符合题目条件。在这个过程中，通常空间复杂度不成问题，而时间复杂度可能在两个部分产生：<br />
-1. 枚举所有可能的答案<br />
-2. 判断是否符合条件</p>
-<p>针对后者优化的空间不大，许多题目都是围绕前者进行的优化。不过由于此类方法过于暴力，常常都是结合数学或者其他知识，枚举仅作为一个方法工具。</p>
-<h3 id="搜索">搜索</h3>
-<p>尝试所有可能答案说来容易，但是要做到其实并不容易。和枚举一样，很多情况下尝试所有答案意味着爆炸的时间复杂度（指数爆炸都算比较低的）。因此，搜索方法出现就是为了更快的获取答案。</p>
-<h4 id="dfs">DFS</h4>
-<p>一个简单的例子，输出一个数组的全排列（不要调库）。如果采用简单的for循环枚举，由于数组有多少元素就有多少层循环，这种代码无法完成。这时候就要用到<strong>递归搜索</strong>。由于这种搜索和树的遍历存在某种一致性，这种递归搜索也被称为<strong>深度优先搜索（DFS,
-Depth First Search）</strong>。递归可以参考算法入门2-4：递归和分治。</p>
-<p>递归我们已经了解了，那么递归搜索又是什么呢？严格的说，应该是用递归的方法枚举答案。<strong>每层</strong>递归会（以同样的规则）确定答案的一部分，并且可以确定在某一层（边界）必然可以完全确定答案并进行判断。</p>
-<p>例如全排列，可以把数组的每一个元素都看作答案的一部分，每层递归确定一个元素，最终可以得到一个全排列。</p>
-<p>据此我们可以写出如下代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">50</span>];     <span class="comment">// 排列数组，按顺序储存当前搜索结果</span></span><br><span class="line"><span class="type">bool</span> vis[<span class="number">100003</span>];   <span class="comment">// 判断元素是否出现过</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[a[i]])</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        vis[a[i]] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> step)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (step == n + <span class="number">1</span>) &#123;    <span class="comment">// 边界</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">check</span>()) <span class="keyword">return</span> ;   <span class="comment">// 判断是否是全排列</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];    <span class="comment">// 保留5个场宽</span></span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        a[step] = i;</span><br><span class="line">        <span class="built_in">dfs</span>(step + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里就可以发现，这种算法时间复杂度相当之高。每次进入递归函数都要把数组访问一遍，时间复杂度高达<span
-class="math inline">\(\Theta(n^n)\)</span>。</p>
-<h4 id="回溯和简单优化">回溯和简单优化</h4>
-<p>在上文提到的全排列问题中，明显可以看出，枚举答案是时间复杂度较大的主要原因。有没有办法减少枚举数量呢？显然是有的。其实上面的枚举方法并不合理，聪明的同学一定一眼看出来了，递归出现过的数在后续过程中没必要再出现一次，这样连判断也不用写，因为依照这样规则得到的答案一定是全排列。若定义<code>vis[i]</code>为第i个元素是否被访问，只需要在搜索过程中维护vis数组，就可以解决问题了。改写代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> step)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (step == n + <span class="number">1</span>) &#123;  <span class="comment">// 边界</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];  <span class="comment">// 保留5个场宽</span></span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[i] == <span class="number">0</span>) &#123;  <span class="comment">// 判断数字i是否在正在进行的全排列中</span></span><br><span class="line">            vis[i] = <span class="number">1</span>;</span><br><span class="line">            a[step] = i;</span><br><span class="line">            <span class="built_in">dfs</span>(step + <span class="number">1</span>);</span><br><span class="line">            vis[i] = <span class="number">0</span>;  <span class="comment">// 这一步不使用该数 置0后允许下一步使用</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在这份代码中，由于每次递归到边界时的答案都是有效的，时间复杂度量级下降到<span
-class="math inline">\(\Theta(n\times
-n!)\)</span>，和使用库函数已经没有区别。</p>
-<p>重点看维护vis部分代码，进入下一层递归前把vis置1显然是代表这个数选中了，下一层不能选，从下一层退出后还要把vis置0是有些同学会忘记的。这一步相当于撤销选择这个数的决定，回溯到以前的状态。这样要在<strong>搜索过程中维护的数组</strong>都需要这样的操作（其实包括当前的答案数组本身，只不过这题不影响而已，有些题是影响的）。这被称为<strong>回溯</strong>，其实就是字面意思，撤回之前的决定。这部分代码容易写错，在写完这种回溯搜索后一定得检查自己在搜索过程中维护的变量是否正确回溯。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/01/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-4%EF%BC%9A%E9%80%92%E5%BD%92%E5%92%8C%E5%88%86%E6%B2%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/01/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-4%EF%BC%9A%E9%80%92%E5%BD%92%E5%92%8C%E5%88%86%E6%B2%BB/" class="post-title-link" itemprop="url">算法入门2-4：递归和分治</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-01 14:19:35" itemprop="dateCreated datePublished" datetime="2023-12-01T14:19:35+08:00">2023-12-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-06 15:08:49" itemprop="dateModified" datetime="2023-12-06T15:08:49+08:00">2023-12-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">基础算法和基本思想</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这两个概念其实并不适合并列在一起，因为二者并不是同一级别的关系。递归可以说是一种思考方式，而分治更像一种解决问题的具体方法。但之所以我把这二者放在一起，因为二者有时候确实联系相当紧密。这章被我命名为“基础算法和基本思想”也正是因为如此。这很像“哲学理论”和“由理论延申出来的观点思想”二者的关系。</p>
-<h3 id="递归">递归</h3>
-<p>许多新手对它的认识仅限于：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">recursiveFunc</span><span class="params">(...)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// function body</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursiveFunc</span>(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是其实这涉及到一个很重要的思考方式，递归式的思考，我想借用<strong>子结构</strong>的概念来表达这样的意思。</p>
-<p>其实很难明确给子结构下一个定义，按照人类通俗的理解方式，问题的子结构满足以下两个条件：</p>
-<ol type="1">
-<li>问题本身的答案可以自己的子结构的答案通过简单的推导得到，而子结构的答案也可以由二阶子结构以同样的方式推导得到</li>
-<li>存在某一阶子结构可以直接得到答案</li>
-</ol>
-<p>把上面的条件翻译一下，假设有一天你问一个大公司的总经理，公司里有多少人？总经理肯定不知道具体的数字，就去问它手下各个副经理，因为总经理知道，这个问题只需要让各个副经理统计一下，再加上自己不就行了；副经理也不知道，就采取了和总经理一样的策略，去问手下的各个项目部门经理；这样一直下去，直到问到员工个人，Ta可以明确告诉上一级，我就是一个人，我手下没有人！</p>
-<p>写成代码就长这样：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">countSub</span><span class="params">(<span class="type">int</span> ID)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> a: sub[ID]) </span><br><span class="line">	res += <span class="built_in">countSub</span>(a);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在上面的递归代码中，没有明确地对递归的第二个特征进行说明，但是这隐藏在了循环之中。当一个ID没有手下时，循环不会进行，也就不会继续递归，代码执行时就会直接返回1了。</p>
-<p>理解了上面的题，我们该给递归简单下个结论了：</p>
-<ol type="1">
-<li>递归的设计关键在于子结构，不仅要注意问题本身和子结构之间的关系，还要注意<strong>必然存在某种情况</strong>使得跳出递归直接返回答案</li>
-<li>根据经验，递归还要注意层数不能太深，不然会出现栈溢出的风险。（同样问题递归写法空间消耗大于非递归）</li>
-</ol>
-<p>既然递归是一种思考方式，所谓的题也就显得比较单薄了，而且这样的思考方式还会推导出其他方法。应该说，单独的例题是没办法体现出这种子结构思想的美妙之处的。这个思想<strong>十分重要</strong>，建议所有人全文理解。</p>
-<h3 id="分治">分治</h3>
-<p>在递归中，我们已经提到了子结构及其重要性。分治即是一种利用子结构解题的方法。所谓分治，就是分而治之。具体分为如下三步：</p>
-<ol type="1">
-<li>分解原问题为结构相同的子问题</li>
-<li>分解到容易求解的边界，返回到某个值</li>
-<li>合并子问题的解</li>
-</ol>
-<p>上面公司的例子其实就是这个过程的一个例子。稍微进阶一些的分治则可以看算法入门2-1：排序中的归并排序和快速排序，这两种算法都是用这种方法设计的。</p>
-<p>感觉很少这种题啊，都没有做过多少，但是很多重要的算法又都是这样设计的。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/29/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-3%EF%BC%9A%E4%BA%8C%E5%88%86%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/29/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-3%EF%BC%9A%E4%BA%8C%E5%88%86%E6%B3%95/" class="post-title-link" itemprop="url">算法入门2-3：二分法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-29 13:17:08" itemprop="dateCreated datePublished" datetime="2023-11-29T13:17:08+08:00">2023-11-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-06 15:08:50" itemprop="dateModified" datetime="2023-12-06T15:08:50+08:00">2023-12-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">基础算法和基本思想</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>二分法本来也算一个很基础的算法，但是其实题目难度会略大于前缀和和差分，因此放到了这里。</p>
-<h3 id="升序数组中查找一个数">升序数组中查找一个数</h3>
-<p>这是二分法最基本的用法。在无序数组中，要查找是否有一个数，必须逐个进行查询，但升序数组不同。我们把要查询的数称为key，现在先假设这个数在mid的位置，如果mid位置的数比key小，那么key必然在这个数后面；反之，如果mid位置的数比key大，那么key必然在这个数前面。这就是二分法查询的思路。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binary_search</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end, <span class="type">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> res = <span class="number">-1</span>;  <span class="comment">// 未搜索到数据返回-1下标</span></span><br><span class="line">    <span class="type">int</span> mid;</span><br><span class="line">    <span class="keyword">while</span> (start &lt;= end) &#123;</span><br><span class="line">        mid = start + ((end - start) &gt;&gt; <span class="number">1</span>);  <span class="comment">// 直接平均可能会溢出，所以用这个算法</span></span><br><span class="line">        <span class="keyword">if</span> (arr[mid] &lt; key)</span><br><span class="line">            start = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;  <span class="comment">// 最后检测相等是因为多数搜索情况不是大于就是小于</span></span><br><span class="line">            res = mid;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;  <span class="comment">// 单一出口</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从代码上来看，二分实质上是<strong>维护了一个答案区间</strong><span
-class="math inline">\([start,
-end]\)</span>，通过不断缩小答案区间来判断答案所在的位置。</p>
-<h3 id="二分答案">二分答案</h3>
-<p>上面说的是基础中的基础，下面说的的才是真正实用的内容。</p>
-<p>问题：要求符合某个条件的（在某个范围里）最大（或者最小）的数，</p>
-<p>其实”顺序“这个概念是可以推广的。具体而言，如果在一个范围里，答案存在<strong>单向优化</strong>的情况，就可以称这个答案区间是”有序“的。</p>
-<p>“单向优化”是什么？这说的是答案本身的性质。它表现为，<strong>如果一个答案可以被排除，那么它前面或者后面所有的答案都能被排除</strong>，这才是判断是否可用二分的法则。</p>
-<p>这句话也可以表述为，检验一个值不为key时，可以准确地判定key所在的方向（更大或者更小）。这个判断准则，甚至可以随二分过程而改变，往往容易让这题变得没那么显而易见，这也就是为什么这种题有时候是很难的。</p>
-<p>还有一些基本的题型，大矩阵第k小（对应下面第四题），最好有这样的解题思路。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l &lt;= r)<span class="comment">//在可能的范围内</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">check</span>()) <span class="built_in">update</span>(ans, ...), l = mid + <span class="number">1</span>;<span class="comment">//如果符合题意，更新答案并且优化假设</span></span><br><span class="line">    <span class="keyword">else</span> r = mid - <span class="number">1</span>;<span class="comment">//如果不符合题意，弱化假设</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>没有题总是显得这些话语单薄了些，来吧，这里的题都相对难一点，不是那么容易想到的：</p>
-<ol type="1">
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/smallest-good-base/">483.
-最小好进制 @ Leetcode</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array">153.
-寻找旋转排序数组中的最小值 @ Leetcode</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://leetcode.cn/problems/median-of-two-sorted-arrays/">4.
-寻找两个正序数组的中位数 @ Leetcode</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-smallest-number-in-multiplication-table/">668.
-乘法表中第k小的数 @ Leetcode</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/nth-magical-number/">878. 第 N
-个神奇数字 @ Leetcode</a></li>
-</ol>
-<h3 id="最大值最小化">最大值最小化</h3>
-<p>我们常常会遇到诸如“选定某个值，使得最大值最小”的问题。这是一个经典的二分答案题型，二分最小最大值，然后去判断是否符合答案，符合就强化假设（假设更小的最小最大值），否则弱化假设。</p>
-<p>如果上面的题刷明白了，其实这个很简单，看到就能秒了。但是有时候，这个问题并不那么明显，需要做一点转化，有难度的题一般会在这里挖坑，这类题并不多。</p>
-<p>经典题型：</p>
-<ol type="1">
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/split-array-largest-sum/">410.
-分割数组的最大值 @ Leetcode</a></li>
-<li><a
-target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-sum-of-rectangle-no-larger-than-k/">363.
-矩形区域不超过 K 的最大数值和 @ Leetcode</a></li>
-</ol>
-<h3 id="总结">总结</h3>
-<p>二分算法本身很简单，但衍生出来的题思考都带有一些难度，有时候还会结合动态规划等其他场景做一些更加复杂的结合，需要大家仔细思考。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/28/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-2%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C%E5%92%8C%E5%B7%AE%E5%88%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/28/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-2%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C%E5%92%8C%E5%B7%AE%E5%88%86/" class="post-title-link" itemprop="url">算法入门2-2：前缀和和差分</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-28 15:32:14" itemprop="dateCreated datePublished" datetime="2023-11-28T15:32:14+08:00">2023-11-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-08 20:32:25" itemprop="dateModified" datetime="2023-12-08T20:32:25+08:00">2023-12-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">基础算法和基本思想</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>学习本节内容可先了解前缀和，二维前缀和和差分，重点掌握其思想，进阶技巧会在后续内容详细阐述。</p>
-<h3 id="前缀和">前缀和</h3>
-<p>前缀和，顾名思义，对于一个数组<span
-class="math inline">\(\{a_i\}\)</span>，它的第<span
-class="math inline">\(i\)</span>个前缀和表现为：<br />
-<span class="math display">\[
-pre\_sum_{i} = \sum_{j=0}^ia_j
-\]</span><br />
-它的作用在于<span
-class="math inline">\(O(1)\)</span>时间复杂度内求出数组从<span
-class="math inline">\(a_i\)</span>到<span
-class="math inline">\(a_j\)</span>的代数和。即：<br />
-<span class="math display">\[
-sum_{ij} = pre\_sum_{j}-pre\_sum_{i-1}
-\]</span></p>
-<p>计算前缀和时，可用递推的方式计算：<br />
-<span class="math display">\[
-pre\_sum_i = pre\_sum_{i-1} + a_i
-\]</span></p>
-<p>看完这些就可以完成一些简单的前缀和题目了。</p>
-<h4 id="二维前缀和">二维前缀和</h4>
-<p>二维前缀和和一维前缀和类似，对于一个二维数组<span
-class="math inline">\(\{a_{ij}\}\)</span>，它的前缀和表现为：<br />
-<span class="math display">\[
-pre\_sum_{(r,c)} = \sum_{i=0}^r\sum_{j=0}^ca_{(i,j)}
-\]</span><br />
-它的作用在于<span
-class="math inline">\(O(1)\)</span>时间复杂度内求出任意连续子数组（可以简单理解为，用一个方框框住这个数组的一部分，这一部分就是子数组）的代数和。假设要求的子数组第一个（即左上方元素）位置为<span
-class="math inline">\((r_1,c_1)\)</span>，最后一个元素为<span
-class="math inline">\((r_2,c_2)\)</span>，则有：<br />
-<span class="math display">\[
-sum_{(r_1,c_1)\to(r_2,c_2)} =
-pre\_sum_{(r_2,c_2)}-pre\_sum_{(r_1-1,c_2)}-pre\_sum_{(r_2,c_1-1)}+pre\_sum_{(r_1-1,c_1-1)}
-\]</span><br />
-这个式子是基于容斥原理的，偷了张图，看着这张图，上面的公式应该好理解：<br />
-<img src="/images/image.png" /><br />
-计算前缀和时，借助上面的公式很容易就得到：<br />
-<span class="math display">\[
-pre\_sum_{(r,c)} =
-a_{(r,c)}+pre\_sum_{(r-1,c)}+pre\_sum_{(r,c-1)}-pre\_sum_{(r-1,c-1)}
-\]</span></p>
-<h4 id="后缀和">后缀和</h4>
-<p>既然可以算前缀，那么后缀和的求法也是一样的。虽然前缀和能表达后缀和，但是这个概念的出现就是为了帮助思考问题的。后缀和通常和前缀和一起出现解决问题。</p>
-<h4 id="前缀积">前缀积</h4>
-<p>这个用的很少，因为乘法多了很容易指数爆炸。知道即可。</p>
-<h4 id="树上前缀和了解">树上前缀和（了解）</h4>
-<p>树的前缀和指的是从一个节点到根节点的权值之和，可以是点权也可以是边权。它的出现是为了能在树上任何一条路径上进行点权和边权的离线统计。例如：<br />
-<span class="math display">\[
-sum_{(i,j)} = pre\_sum_i + pre\_sum_j - pre\_sum_{lca(i,j)}
-\]</span><br />
-其中，LCA是最近公共祖先，图论部分会详细介绍其求法。</p>
-<h3 id="差分">差分</h3>
-<p>差分概念如下：<br />
-<span class="math display">\[
-\Delta_i = a_i-a_{i-1}
-\]</span><br />
-这不就是前缀和公式吗有什么意义？格局小了。它的作用在于<span
-class="math inline">\(O(1)\)</span>时间复杂度内对一个区域内的数做加减运算。准确的说应该是，<span
-class="math inline">\(O(n)\)</span>执行n次对一片区域做线性运算的操作。对于一个数组<span
-class="math inline">\(a_i\)</span>而言，差分的前缀和实际就是一对逆运算，因此，一次区域的加减运算可以转化为对差分数组的<span
-class="math inline">\(O(1)\)</span>操作。</p>
-<p>具体而言，若需要对<span class="math inline">\(a_i\)</span>到<span
-class="math inline">\(a_j\)</span>之间的所有元素加上<span
-class="math inline">\(x\)</span>，只需要维护一个差分数组，初始化为0。每次对区域<span
-class="math inline">\(a_i, a_{i+1}, a_{i+2}, ...
-a_j\)</span>操作时，让<span class="math inline">\(\Delta_{i} = x,
-\Delta_{j+1} = -x\)</span>，在完成<span
-class="math inline">\(n\)</span>次操作后，用前缀和累加差分数组，即可获得<span
-class="math inline">\(n\)</span>次操作后每个元素需要改变的值。</p>
-<p>同理可以结合高维问题和后缀和衍生出各种各样的差分，根据前缀和的概念和推导，相信这些结论都可以顺利推导出来，这里不再赘述。</p>
-<p>tips:这个要求离线操作，即修改必须在查询之前，否则这个操作没有任何意义。在线操作需要用到线段树。</p>
-<h4 id="树上差分了解">树上差分（了解）</h4>
-<p>总结来说，差分和前缀和可以解决的无非就是区域离线统计和操作。而树上差分则是将这个概念在数据结构中的进一步扩展。具体而言，树上差分解决的是对树上任何一条路径上的点权和边权的离线统计和操作。图论部分会详细介绍其用途。</p>
-<h3 id="总结">总结</h3>
-<p>差分和前缀和可以解决批量的区域离线统计和操作问题。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/26/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-1%EF%BC%9A%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="黄浩诚">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Parallel Space">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/26/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A82-1%EF%BC%9A%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">算法入门2-1：排序</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-26 15:17:27" itemprop="dateCreated datePublished" datetime="2023-11-26T15:17:27+08:00">2023-11-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-07 16:16:39" itemprop="dateModified" datetime="2023-12-07T16:16:39+08:00">2023-12-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">算法入门</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3/" itemprop="url" rel="index"><span itemprop="name">基础算法和基本思想</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>415</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>想到算法，我印象中第一次编程接触到的就是排序算法了。排序算法多种多样，各有好处，但要实现的目的就是排序。这些算法未必实用，但了解其原理却是至关重要的。作为初学者，只需要了解这些朴素的排序算法即可。还有一篇算法入门番外1：排序的那些事，对排序有更多的介绍，可以在有一定理解后再进行阅读。</p>
-<h3 id="冒泡排序">冒泡排序</h3>
-<p>核心思想就是每一轮把最大的元素放到最前面。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 交换arr[j]和arr[j+1]</span></span><br><span class="line">                <span class="type">int</span> temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + <span class="number">1</span>];</span><br><span class="line">                arr[j + <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度为<span
-class="math inline">\(O(n^2)\)</span>，空间复杂度为<span
-class="math inline">\(O(1)\)</span></p>
-<h3 id="插入排序">插入排序</h3>
-<p>第一次看到这种排序方法的时候我就想起了打牌时常用的方法：摸一张牌然后插入手牌中。这恰恰就是插入排序的原理。和直观感受不同的是，向计算机中插入数据时，需要将后面的数据向后移动一位，而不像把摸到的牌插入手牌那般丝滑。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insertion_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> key = arr[i]; </span><br><span class="line">    	<span class="type">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">    	<span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; key) &#123;</span><br><span class="line">      	    arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;   <span class="comment">// 找到第一个小于当前key的元素</span></span><br><span class="line">        arr[j + <span class="number">1</span>] = key;   <span class="comment">// 把元素放在它后面</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>时间复杂度为<span
-class="math inline">\(O(n^2)\)</span>，空间复杂度为<span
-class="math inline">\(O(1)\)</span>（将数组分为已排序的区域和未排序的区域，然后在原数组上移动即可）</p>
-<h3 id="真正实用的排序">真正实用的排序</h3>
-<p>algorithm库里的sort函数，用过都说好。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">50</span>], n;</span><br><span class="line"><span class="built_in">sort</span>(a, a + n);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1572,7 +1629,7 @@ class="math inline">\(O(1)\)</span>（将数组分为已排序的区域和未排
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
@@ -1583,7 +1640,7 @@ class="math inline">\(O(1)\)</span>（将数组分为已排序的区域和未排
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">28k</span>
+    <span title="站点总字数">27k</span>
   </span>
 </div>
 <div class="busuanzi-count">

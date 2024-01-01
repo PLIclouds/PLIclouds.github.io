@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16.png">
+  <link rel="mask-icon" href="/images/svg.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="MMDetection是由香港中文大学MMLab开发的一款目标检测的工具包，属于OpenMMLab项目的一部分。经过使用，这个工具包真的很好用（虽然囿于水平用不明白），而国内资料又是真的很少。最近做专业综合设计恰好发现了这个东西，于是分享一下这几天我自己的学习心得。 仓库地址 优质资料 这几天我基本把国内有含金量的教程都看了一遍，下面是一些优秀的参考资料：  官方文档：没有什么会比官方文">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="MMDetection：目标检测工具包">
+<meta property="og:url" content="https://pliclouds.github.io/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/index.html">
+<meta property="og:site_name" content="Parallel Space">
+<meta property="og:description" content="MMDetection是由香港中文大学MMLab开发的一款目标检测的工具包，属于OpenMMLab项目的一部分。经过使用，这个工具包真的很好用（虽然囿于水平用不明白），而国内资料又是真的很少。最近做专业综合设计恰好发现了这个东西，于是分享一下这几天我自己的学习心得。 仓库地址 优质资料 这几天我基本把国内有含金量的教程都看了一遍，下面是一些优秀的参考资料：  官方文档：没有什么会比官方文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pliclouds.github.io/images/a13afdb1195f46148843a818cc8f5bbf.png">
+<meta property="og:image" content="https://pliclouds.github.io/images/v2-7ecc8e5e19c59a3e6682c5e3cdc34918_r.jpg">
+<meta property="article:published_time" content="2023-12-30T13:29:05.000Z">
+<meta property="article:modified_time" content="2024-01-01T08:26:47.686Z">
+<meta property="article:author" content="黄浩诚">
+<meta property="article:tag" content="MMDetection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pliclouds.github.io/images/a13afdb1195f46148843a818cc8f5bbf.png">
+
+
+<link rel="canonical" href="https://pliclouds.github.io/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://pliclouds.github.io/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/","path":"2023/12/30/MMDetection：目标检测工具包/","title":"MMDetection：目标检测工具包"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MMDetection：目标检测工具包 | Parallel Space</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Parallel Space</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">平凡即伟大</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E8%B4%A8%E8%B5%84%E6%96%99"><span class="nav-number">1.</span> <span class="nav-text">优质资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">新手上路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">训练流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E8%BF%87%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">检测过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">数据集准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="nav-number">4.</span> <span class="nav-text">基准模型选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8Bmodel"><span class="nav-number">5.1.</span> <span class="nav-text">模型Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86dataset"><span class="nav-number">5.2.</span> <span class="nav-text">数据集Dataset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8scheduler"><span class="nav-number">5.3.</span> <span class="nav-text">调度器Scheduler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">自定义配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">5.5.</span> <span class="nav-text">进阶</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黄浩诚</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/pliclouds" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;pliclouds" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/huang.hch@gmail.com" title="E-Mail → huang.hch@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MMDetection：目标检测工具包 | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MMDetection：目标检测工具包
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-30 21:29:05" itemprop="dateCreated datePublished" datetime="2023-12-30T21:29:05+08:00">2023-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-01 16:26:47" itemprop="dateModified" datetime="2024-01-01T16:26:47+08:00">2024-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>MMDetection是由香港中文大学MMLab开发的一款目标检测的工具包，属于OpenMMLab项目的一部分。经过使用，这个工具包真的很好用（虽然囿于水平用不明白），而国内资料又是真的很少。最近做专业综合设计恰好发现了这个东西，于是分享一下这几天我自己的学习心得。</p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/open-mmlab/mmdetection/tree/main">仓库地址</a></p>
+<h3 id="优质资料">优质资料</h3>
+<p>这几天我基本把国内有含金量的教程都看了一遍，下面是一些优秀的参考资料：</p>
+<ol type="1">
+<li><a
+target="_blank" rel="noopener" href="https://mmdetection.readthedocs.io/zh-cn/latest/">官方文档</a>：没有什么会比官方文档好使，但是MMDetection的除外。你可以在这里轻松找到环境配置和安装方法，但除此之外其他东西都得你自己去仔细找。反正很多细节我是在文档里找不到的，只能去硬啃源码。</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Jb4y1r7ir/">mmdetection教程(使用篇)</a>：这是b站的教程，是西交大一个学长做的，虽然是做来比赛的，但也适用于初学者，可以说是这几个教程里最实用的一个了。当然，不能是完全的初学者，至少要了解python的面向对象，并且能稍微理解一些项目架构的同学，最好上手训练过。</li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16137569/article/details/121316235">MMDetection框架入门教程（完全版）</a>：高屋建瓴从源码开始剖析MMDetection的结构，自底层到实用分析整个工程，确实是完整版（这直接大乘飞升了太强了orz）。新手可以先理解其注册机制和继承机制</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/369826931">不得不知的
+MMDetection
+学习路线(个人经验版)</a>：不要被名字蒙蔽了，这是知乎OpenMMLab官方账号发布的，这篇文章后面有博主写的七篇关于MMDetection的文章，这解析可以说这个解析比上一个还狠，反正我是看不下去。</li>
+</ol>
+<p>还有不少教程教人把这个仓库clone一下然后改人源代码，我是真的看的迷惑了，还有的有不少阅读量，这不纯纯误导新手吗？这环境是一次性用完就不用了是吧？到时候有问题都不知道怎么查。当然，如果有稳定的较为优秀的修改方案倒也不是不能接受，可惜我目前没有发现特别合理的修正，大部分修正看起来都是新手做的。</p>
+<h3 id="新手上路">新手上路</h3>
+<h4 id="安装">安装</h4>
+<p>这个直接看<a
+target="_blank" rel="noopener" href="https://mmdetection.readthedocs.io/zh-cn/stable/get_started.html">官方教程</a>，conda和pytorch环境有了就可以不用装了。记得装gpu版的pytorch。换源啥的教程网上都有。</p>
+<h4 id="训练流程">训练流程</h4>
+<p>我借用<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16137569/article/details/121316235">这篇博客</a>的一张图来说明这个过程：</p>
+<p><img src="/images/a13afdb1195f46148843a818cc8f5bbf.png" /></p>
+<p>MMDetection参考了pytorch的抽象方式，将训练过程简化为四个步骤：</p>
+<ol type="1">
+<li>数据集准备</li>
+<li>选择基准模型</li>
+<li>自定义配置</li>
+<li>训练</li>
+</ol>
+<p>数据集准备其实就是获取数据集的过程，我一般不用它带的库，而是自己去准备。建立数据集网上教程挺多的，应该不成问题。</p>
+<p>基准模型就是你想训练的模型的默认形式。这些模型都存储在<code>tools/config/</code>里，需要用什么网络就选择哪个网络作为配置就行。</p>
+<p>由于默认参数总有些不适用于自己的训练情况，最次也需要修改数据集的位置，因此需要修改原配置。当然，最简单的办法就是进入mmdetection直接修改源码。但为了不影响后续训练其他模型，最好还是自己写一个配置文件，这也是博客后续的重点内容。</p>
+<p>训练只需要用python启动框架已经写好的train.py即可，命令行如下：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/train.py <span class="variable">$&#123;CONFIG&#125;</span></span><br></pre></td></tr></table></figure><br />
+<code>$&#123;CONFIG&#125;</code>就是自定义配置文件路径。</p>
+<p>官方有一个简单的<a
+target="_blank" rel="noopener" href="https://mmdetection.readthedocs.io/zh-cn/stable/user_guides/train.html#id7">实战教程</a>，可以跟着官方做一下，了解一下这个过程。</p>
+<h4 id="测试过程">测试过程</h4>
+<p>和训练类似，也是只需要用python启动test.py。命令行如下：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/test.py <span class="variable">$&#123;CONFIG&#125;</span> <span class="variable">$&#123;CHECKPOINT&#125;</span></span><br></pre></td></tr></table></figure><br />
+<code>$CHECKPOINT</code>是训练时产生的检查点，里面主要存储了模型的权重信息。这个文件可以在训练时创建的文件夹<code>work_dir</code>里找到。</p>
+<h4 id="检测过程">检测过程</h4>
+<p>我不好说，image_demo好像没什么问题，但是video_demo.py（包括那个gpu加速版本）这个功能甚至有bug。我在issue里找到一样问这个问题的人了。虽然不是什么非常重要的bug，但是感觉还是功能太少了。我发了个评论，但愿官方能看见。</p>
+<p>这两个文件共同点就是都调用了一个叫<code>track_iter_progress()</code>的函数，这个应该是代码已经过时了，而且这个功能没啥用。把它去掉就行了。</p>
+<p>要运行的话，命令行如下：<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python demo/video_demo.py <span class="variable">$&#123;VIDEO&#125;</span> <span class="variable">$&#123;CONFIG&#125;</span> <span class="variable">$&#123;CHECKPOINT&#125;</span> --show --out <span class="variable">$&#123;OUTFILE&#125;</span></span><br></pre></td></tr></table></figure><br />
+后面两个选项二选一使用即可。</p>
+<p>刚刚又发现gpu加速版<code>--out</code>选项不好使哈哈。这代码可以重写了。</p>
+<h3 id="数据集准备">数据集准备</h3>
+<p>如果是使用公共数据集，网站也不少，去网上找就行了。</p>
+<p>如果自己建数据集，拿到图片后找人标就行了，网上教程也不少。注意要做数据集就认真花时间做，数据标注也是有标准的，不符合标准的数据集只会让训练结果大打折扣。另外需要注意的就是，主流数据集有三种格式：COCO，YOLO和VOC，这几个数据集可以相互转化，<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/461488682">这篇文章</a>提供了相关代码。</p>
+<p>官方说是用COCO格式的，但我看扒了下源码，发现<del>这官方虽然嘴上说着不要，身体还是蛮诚实的……</del>其实是支持各种数据集的，就是麻烦一点。</p>
+<h3 id="基准模型选择">基准模型选择</h3>
+<p>模型选择和目的本身有关。例如精准度要求高，自然模型要选参数多一些的。如果要实时性好的话，选yolo系列就比RCNN系列好一些。这和机器学习相关知识有关，就不详细说明了。</p>
+<h3 id="自定义配置">自定义配置</h3>
+<p>新手学习最大的阻碍应该就在这里。一看要自己写配置文件就感觉是一件特别困难的事。确实很难，但如果仔细扒它的源码就会发现，其实也还好。我们慢慢分析。</p>
+<p>如果按照教程训练一个神经网络，你会发现在<code>work_dir</code>的训练日志子文件夹里会出现一个config文件，这个文件特别的长，包含了原始的训练模型配置，也包含了我们的自定义配置，这才是完整的模型配置文件的样子。</p>
+<p>这些组件新手或许看不懂，但你或许会想起原始配置文件上的内容其实正是这些内容。</p>
+<p>事实上，MMDetection中的配置文件被分为以下三个部分：<br />
+1. 模型Model<br />
+2. 数据集Dataset<br />
+3. 调度器Scheduler</p>
+<p>这一点从<code>tools/configs/_base_</code>文件夹中也可以得到印证。下面，我们先尝试理解这些代码，然后再尝试做一些小的调整。</p>
+<p>（如果你硬要杠还有一个default_runtime.py的话那你对）</p>
+<h4 id="模型model">模型Model</h4>
+<p>这里的模型就是模型具体的架构了。</p>
+<p>在MMDetection框架下，任何神经网络都被分为了这么几部分：</p>
+<p><img src="/images/v2-7ecc8e5e19c59a3e6682c5e3cdc34918_r.jpg" /></p>
+<p>看不懂？别急，我们再看从<code>tools/configs/_base_/models/faster-rcnn_r50_fpn.py</code>节选的部分代码：<br />
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">model = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="built_in">type</span>=<span class="string">&#x27;FasterRCNN&#x27;</span>,</span><br><span class="line">    data_preprocessor=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    backbone=<span class="built_in">dict</span>(</span><br><span class="line">        <span class="built_in">type</span>=<span class="string">&#x27;ResNet&#x27;</span>,</span><br><span class="line">        depth=<span class="number">50</span>,</span><br><span class="line">        num_stages=<span class="number">4</span>,</span><br><span class="line">        out_indices=(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line">        frozen_stages=<span class="number">1</span>,</span><br><span class="line">        norm_cfg=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;BN&#x27;</span>, requires_grad=<span class="literal">True</span>),</span><br><span class="line">        norm_eval=<span class="literal">True</span>,</span><br><span class="line">        style=<span class="string">&#x27;pytorch&#x27;</span>,</span><br><span class="line">        init_cfg=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;Pretrained&#x27;</span>, checkpoint=<span class="string">&#x27;torchvision://resnet50&#x27;</span>)),</span><br><span class="line">    neck=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    rpn_head=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    roi_head=<span class="built_in">dict</span>(</span><br><span class="line">        ...),</span><br><span class="line">    <span class="comment"># model training and testing settings</span></span><br><span class="line">    train_cfg=<span class="built_in">dict</span>(</span><br><span class="line">        rpn=<span class="built_in">dict</span>(</span><br><span class="line">            assigner=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            sampler=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            allowed_border=-<span class="number">1</span>,</span><br><span class="line">            pos_weight=-<span class="number">1</span>,</span><br><span class="line">            debug=<span class="literal">False</span>),</span><br><span class="line">        rpn_proposal=<span class="built_in">dict</span>(</span><br><span class="line">            ...),</span><br><span class="line">        rcnn=<span class="built_in">dict</span>(</span><br><span class="line">            assigner=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            sampler=<span class="built_in">dict</span>(</span><br><span class="line">                ...),</span><br><span class="line">            pos_weight=-<span class="number">1</span>,</span><br><span class="line">            debug=<span class="literal">False</span>)),</span><br><span class="line">    test_cfg=<span class="built_in">dict</span>(</span><br><span class="line">        ...</span><br><span class="line">    ))</span><br></pre></td></tr></table></figure></p>
+<p>你就会惊讶地发现，<strong>这个文件通篇只定义了一个字典，而且每一个键值对都是对网络结构的细致描述</strong>。</p>
+<p>而且，即便没有学过python，你也可以通过改变里面的数值，轻松调整神经网络的参数。</p>
+<h4 id="数据集dataset">数据集Dataset</h4>
+<p>这一部分官网并没有给出比较明确的代码结构，于是我去扒源码看了看，发现这个结构更加简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">dataset_type = <span class="string">&#x27;CocoDataset&#x27;</span></span><br><span class="line">data_root = <span class="string">&#x27;data/coco/&#x27;</span></span><br><span class="line"></span><br><span class="line">backend_args = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">train_pipeline = [</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;LoadImageFromFile&#x27;</span>, backend_args=backend_args),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;LoadAnnotations&#x27;</span>, with_bbox=<span class="literal">True</span>),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;Resize&#x27;</span>, scale=(<span class="number">1333</span>, <span class="number">800</span>), keep_ratio=<span class="literal">True</span>),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;RandomFlip&#x27;</span>, prob=<span class="number">0.5</span>),</span><br><span class="line">    <span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;PackDetInputs&#x27;</span>)</span><br><span class="line">]</span><br><span class="line">test_pipeline = [</span><br><span class="line">   ...</span><br><span class="line">]</span><br><span class="line">train_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    batch_size=<span class="number">2</span>,</span><br><span class="line">    num_workers=<span class="number">2</span>,</span><br><span class="line">    persistent_workers=<span class="literal">True</span>,</span><br><span class="line">    sampler=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;DefaultSampler&#x27;</span>, shuffle=<span class="literal">True</span>),</span><br><span class="line">    batch_sampler=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;AspectRatioBatchSampler&#x27;</span>),</span><br><span class="line">    dataset=<span class="built_in">dict</span>(</span><br><span class="line">        <span class="built_in">type</span>=dataset_type,</span><br><span class="line">        data_root=data_root,</span><br><span class="line">        ann_file=<span class="string">&#x27;annotations/instances_train2017.json&#x27;</span>,</span><br><span class="line">        data_prefix=<span class="built_in">dict</span>(img=<span class="string">&#x27;train2017/&#x27;</span>),</span><br><span class="line">        filter_cfg=<span class="built_in">dict</span>(filter_empty_gt=<span class="literal">True</span>, min_size=<span class="number">32</span>),</span><br><span class="line">        pipeline=train_pipeline,</span><br><span class="line">        backend_args=backend_args))</span><br><span class="line">val_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    ...)</span><br><span class="line">test_dataloader = val_dataloader</span><br><span class="line"></span><br><span class="line">val_evaluator = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="built_in">type</span>=<span class="string">&#x27;CocoMetric&#x27;</span>,</span><br><span class="line">    ann_file=data_root + <span class="string">&#x27;annotations/instances_val2017.json&#x27;</span>,</span><br><span class="line">    metric=<span class="string">&#x27;bbox&#x27;</span>,</span><br><span class="line">    format_only=<span class="literal">False</span>,</span><br><span class="line">    backend_args=backend_args)</span><br><span class="line">test_evaluator = val_evaluator</span><br></pre></td></tr></table></figure>
+<p>按照一样的方法，我们可以看出其实这个文件主要就是三个组件，pipeline，dataloader和evaluator。里面的参数未必能看懂，但也大概能猜出这些组件有什么用吧。</p>
+<h4 id="调度器scheduler">调度器Scheduler</h4>
+<p>同样的方法，我就不放代码了影响观感，直接放结论。这一部分只有三个组件，分别是参数调度器（控制学习率的变化），优化器（控制学习率的调整策略）和自动学习率调整（根据你的GPU数量和batch_size帮你算初始学习率）</p>
+<h4 id="自定义配置文件">自定义配置文件</h4>
+<p>看到这里可能朋友们又要抱怨了，这么长的配置文件我得写多久？别急，你看看官方怎么偷懒的。以下代码为<code>/configs/faster_rcnn/faster-rcnn_r101_fpn_1x_coco.py</code>文件的全部代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_base_ = <span class="string">&#x27;./faster-rcnn_r50_fpn_1x_coco.py&#x27;</span></span><br><span class="line">model = <span class="built_in">dict</span>(</span><br><span class="line">    backbone=<span class="built_in">dict</span>(</span><br><span class="line">        depth=<span class="number">101</span>,</span><br><span class="line">        init_cfg=<span class="built_in">dict</span>(<span class="built_in">type</span>=<span class="string">&#x27;Pretrained&#x27;</span>,</span><br><span class="line">                      checkpoint=<span class="string">&#x27;torchvision://resnet101&#x27;</span>)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>就五行。从_base_里copy了一个文件，下面写了下backbone的一些参数就结束了。</p>
+<p>理解能力好的同学一下就反应过来，这个其实就是只用写修改的部分。确实是这样的。咱们不用管它到底怎么实现这个过程的，咱们只需要知道，可以用<code>_base_</code>来copy重复的代码，然后后面加上修改的部分就行了。</p>
+<p>如果大家已经用这个作为配置文件训练过了，从运行后的实际config.py文件来看，这个配置文件可一点都不短。但仔细分析，其实也就改动了这么点地方。</p>
+<p>所以说，我们的主要任务只需要写好要修改的部分就好了。这里有一个我写的算是比较通用的自定义模板，大部分网络都需要修改这些东西，大部分改完就能跑起来了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新配置继承了基本配置，并做了必要的修改</span></span><br><span class="line">_base_ = ...</span><br><span class="line"></span><br><span class="line">model = <span class="built_in">dict</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改数据集相关配置</span></span><br><span class="line">data_root = ...</span><br><span class="line">metainfo = &#123;</span><br><span class="line">    <span class="string">&#x27;classes&#x27;</span>: (... )</span><br><span class="line">&#125;</span><br><span class="line">roi_head = <span class="built_in">dict</span>(</span><br><span class="line">    bbox_head = <span class="built_in">dict</span> (</span><br><span class="line">        <span class="comment"># 我们还需要更改 head 中的 num_classes 以匹配数据集中的类别数</span></span><br><span class="line">    	num_classes = <span class="number">2</span>))</span><br><span class="line">train_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    <span class="comment"># batch_size=32,  # 自己调</span></span><br><span class="line">    dataset=<span class="built_in">dict</span>(</span><br><span class="line">        data_root=data_root,</span><br><span class="line">        metainfo=metainfo,</span><br><span class="line">        ann_file=<span class="string">&#x27;train.json&#x27;</span>,</span><br><span class="line">        data_prefix=<span class="built_in">dict</span>(img=<span class="string">&#x27;train/&#x27;</span>)))</span><br><span class="line">val_dataloader = <span class="built_in">dict</span>(</span><br><span class="line">    dataset=<span class="built_in">dict</span>(</span><br><span class="line">        data_root=data_root,</span><br><span class="line">        metainfo=metainfo,</span><br><span class="line">        ann_file=<span class="string">&#x27;val.json&#x27;</span>,</span><br><span class="line">        data_prefix=<span class="built_in">dict</span>(img=<span class="string">&#x27;val/&#x27;</span>)))</span><br><span class="line">test_dataloader = val_dataloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 几个路径自己看着改，看不懂就跟着官网的教程实例跑一遍</span></span><br><span class="line">val_evaluator = <span class="built_in">dict</span>(ann_file=data_root + <span class="string">&#x27;/val.json&#x27;</span>)</span><br><span class="line">test_evaluator = val_evaluator</span><br></pre></td></tr></table></figure>
+<p>但是那么多参数，我们怎么知道要修改哪些呢？我也看不懂，但我一直遵循一个原则，默认的总差不到哪里去。如果不懂，那就别改。</p>
+<h4 id="进阶">进阶</h4>
+<p>如果一定想弄懂，当然也是可以的，但官方没有非常好用的相关文档，需要大家手动去扒源码。如果要修改数据集Dataset和模型Model部分的配置，可以到<code>/mmdet/datasets/</code>和<code>/mmdet/models/</code>下查看，看类别就主要看<code>__init__</code>，看细节参数就去相关文件里看，实用细节先不用管，弄明白参数有什么用就行。但如果要修改调配器Scheduler的配置，要到另一个仓库<a
+target="_blank" rel="noopener" href="https://github.com/open-mmlab/mmengine">MMEngine</a>下的<code>/optim/scheduler/</code>下寻找（这个路径找了我好久），因为MMDetection很多基本的东西都是基于MMEngine和MMCV来实现的，而这两个东西又是基于Pytorch实现的，所以如果要进一步研究更底层的原理，还需要把这些东西都学明白。<del>我不搞AI我不想研究。</del></p>
+<p>其实包括train.py，test.py这些都有很多参数，很多内容官方文档和大佬们都懒得写，都是自己去看才知道。只能说多看源码吧。</p>
+<h3 id="总结">总结</h3>
+<p>这篇文档就是一个新手文档，深度和精度远没有官方和各位大佬（受我一拜orz）优秀，我只是觉得好像大家没有太考虑萌新的感受，也想借此机会记录一下自己的学习经历，因此写的一篇文章。这个框架确实是一个优秀的框架，值得大家关注。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>黄浩诚
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://pliclouds.github.io/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/" title="MMDetection：目标检测工具包">https://pliclouds.github.io/2023/12/30/MMDetection：目标检测工具包/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MMDetection/" rel="tag"># MMDetection</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/" rel="prev" title="Java梦的起点2：面向对象的世界">
+                  <i class="fa fa-angle-left"></i> Java梦的起点2：面向对象的世界
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">黄浩诚</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"PLIclouds/BlogComments","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

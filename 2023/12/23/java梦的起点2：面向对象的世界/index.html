@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16.png">
+  <link rel="mask-icon" href="/images/svg.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="面向对象杂谈 面向对象，这四个字可真够有意思的。引用书中的一句话：  类实质上就是封装对象属性和行为的载体，而对象则是从类抽象出来的一个实例。  面向对象认为研究事物只需要研究清楚它的属性和行为就是将一个事物研究透了。怎么说呢，看起来有点机械论的样子，忽略事物发展规律了。但总之，现在大部分程序设计语言都是这么设计的。将事物抽象成属性和行为的载体，倒也不失一种简化方法。 面向对象的三大特">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Java梦的起点2：面向对象的世界">
+<meta property="og:url" content="https://pliclouds.github.io/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/index.html">
+<meta property="og:site_name" content="Parallel Space">
+<meta property="og:description" content="面向对象杂谈 面向对象，这四个字可真够有意思的。引用书中的一句话：  类实质上就是封装对象属性和行为的载体，而对象则是从类抽象出来的一个实例。  面向对象认为研究事物只需要研究清楚它的属性和行为就是将一个事物研究透了。怎么说呢，看起来有点机械论的样子，忽略事物发展规律了。但总之，现在大部分程序设计语言都是这么设计的。将事物抽象成属性和行为的载体，倒也不失一种简化方法。 面向对象的三大特">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pliclouds.github.io/images/2023-12-24%20143027.png">
+<meta property="article:published_time" content="2023-12-23T13:43:31.000Z">
+<meta property="article:modified_time" content="2023-12-25T07:27:13.221Z">
+<meta property="article:author" content="黄浩诚">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pliclouds.github.io/images/2023-12-24%20143027.png">
+
+
+<link rel="canonical" href="https://pliclouds.github.io/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://pliclouds.github.io/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/","path":"2023/12/23/java梦的起点2：面向对象的世界/","title":"Java梦的起点2：面向对象的世界"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java梦的起点2：面向对象的世界 | Parallel Space</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Parallel Space</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">平凡即伟大</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%9D%82%E8%B0%88"><span class="nav-number">1.</span> <span class="nav-text">面向对象杂谈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">类的基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">变量和方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">2.2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">静态变量和静态方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E4%B8%BB%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.</span> <span class="nav-text">类的主方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.6.</span> <span class="nav-text">对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">继承，多态，抽象类与接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">3.1.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#final"><span class="nav-number">3.2.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#object%E7%B1%BB"><span class="nav-number">3.3.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.4.</span> <span class="nav-text">对象类型的转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">3.5.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">3.6.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.7.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-number">3.8.</span> <span class="nav-text">方法重载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85"><span class="nav-number">4.</span> <span class="nav-text">包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">5.</span> <span class="nav-text">内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">5.1.</span> <span class="nav-text">匿名内部类</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黄浩诚</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/pliclouds" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;pliclouds" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/huang.hch@gmail.com" title="E-Mail → huang.hch@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java梦的起点2：面向对象的世界 | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java梦的起点2：面向对象的世界
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-23 21:43:31" itemprop="dateCreated datePublished" datetime="2023-12-23T21:43:31+08:00">2023-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-25 15:27:13" itemprop="dateModified" datetime="2023-12-25T15:27:13+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="面向对象杂谈">面向对象杂谈</h3>
+<p>面向对象，这四个字可真够有意思的。引用书中的一句话：</p>
+<blockquote>
+<p>类实质上就是封装对象属性和行为的载体，而对象则是从类抽象出来的一个实例。</p>
+</blockquote>
+<p>面向对象认为研究事物只需要研究清楚它的属性和行为就是将一个事物研究透了。怎么说呢，看起来有点机械论的样子，忽略事物发展规律了。但总之，现在大部分程序设计语言都是这么设计的。将事物抽象成属性和行为的载体，倒也不失一种简化方法。</p>
+<p>面向对象的三大特质：封装性，继承性，多态性</p>
+<p>封装性强调了外部的不可干扰性。类只提供接口，外部只能通过接口操作类。至于类的内部结构功能，外部无法知晓也无法修改。</p>
+<p>继承性和多态性都是在说类与类之间的关联。继承性指的是，子类可以继承父类的方法和属性。多态性指的是同一操作可以作用于不同对象。</p>
+<p>继承性以子类为主体，说明了子类可以使用父类的方法，拥有父类的属性。而多态性则是将父类的引用指向子类的对象。这一段或许目前看起来难以理解，在看完这一章后，回看这里会了解更深一些。</p>
+<h3 id="类的基础知识">类的基础知识</h3>
+<p>这一部分主要研究类本身及其对象。</p>
+<h4 id="变量和方法">变量和方法</h4>
+<p>在类里定义的变量叫做<strong>成员变量</strong>，在类方法里定义的变量被称为<strong>局部变量</strong>。</p>
+<p>Java中定义成员方法的例子如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] exchange(<span class="type">int</span>[] arr) &#123;</span><br><span class="line">    <span class="comment">// 方法具体内容</span></span><br><span class="line">    <span class="keyword">return</span> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以发现，java允许数组作为返回值和形参。</p>
+<h4 id="修饰符">修饰符</h4>
+<p>在Java中，成员变量和类方法可以被四种类修饰符修饰，以下是四个修饰符的作用范围：<br />
+<img src="/images/2023-12-24%20143027.png" /></p>
+<p>我的理解是，私有和默认就是完全不想给用户使用，仅仅是自己开发时有用，私有就只能这个类内部用，默认就包内都可以用。保护允许用户作继承但不允许直接访问原内容，公共就是随便访问。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/I_r_o_n_M_a_n/article/details/119024516">这篇文章</a>详细讲了四个修饰符及其使用规则。</p>
+<h4 id="构造函数">构造函数</h4>
+<p>Java用构造函数完成对象的创建，假设要创建图书类，其构造函数格式如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">Book</span><span class="params">(...)</span> &#123;  <span class="comment">// 名字和类名一样，无返回值</span></span><br><span class="line">   ...  <span class="comment">// 构造方法   </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+若不在类中添加任何构造方法，编译器会自动放一个无参构造方法。</p>
+<p><code>this</code>指的是类的一个实例，我们会用<code>this.成员变量</code>或者<code>this.成员方法</code>来操作，但其实它还可以调用构造方法<code>this(...)</code>。</p>
+<p>下面是一个鸡蛋灌饼的例子，例子从书上抄的。默认加一个，除非顾客刻意要求：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Eggcake</span> &#123;</span><br><span class="line">    <span class="type">int</span> eggCount;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Eggcake</span><span class="params">(<span class="type">int</span> eggCount)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.eggCount = eggCount;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Eggcake</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="静态变量和静态方法">静态变量和静态方法</h4>
+<p>静态变量和静态方法可以理解为类本身的变量和方法。Java用static来修饰静态变量和方法。调用方法为<code>类名.静态变量</code>或者<code>类名.静态方法</code>。（可以按照<code>成员.静态方法</code>来进行调用，但是容易引起误解，最好不要这么干）</p>
+<p>由于它和类本身有关，它不能和类的实例产生任何关系。例如，不能使用this关键字，不能直接调用非静态方法。局部变量也不能是静态的。</p>
+<p>java允许在类第一次加载时（首次创建对象，或者首次访问类中的静态方法或者静态成员时）运行一个代码块，称为<strong>静态代码块</strong>，格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        ...  <span class="comment">// 静态代码块</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="类的主方法">类的主方法</h4>
+<p>如果要在类中定义主方法，它的语法可以说是唯一的：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主方法可以传参数进去，在Eclipse中，可以在要运行的java文件上右键，然后选择运行方式，运行配置，在自变量选项卡中输入参数。</p>
+<h4 id="对象">对象</h4>
+<p>在有了构造函数后，假设我们要操作的类名为<code>Test</code>，要创建了一个对象<code>test</code>，可以按如下格式创建：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br></pre></td></tr></table></figure><br />
+这段代码应该理解为，Java创建了一个<code>Test</code>类型，名为<code>test</code>的引用变量，<code>new Test()</code>创建了一个<code>Test</code>类型的实体，<code>test</code>是这个实体的代理人。</p>
+<p>用<code>new</code>创建的实体，超过作用范围会被视为<strong>垃圾</strong>，会被<strong>垃圾回收器</strong>自动回收。也可以给它赋值<code>null</code>，则引用对象指向的实体自动被标记为垃圾。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="继承多态抽象类与接口">继承，多态，抽象类与接口</h3>
+<p>这一部分主要研究类和类之间的关系。</p>
+<h4 id="继承">继承</h4>
+<p>在Java中，继承需要使用关键字<code>extends</code>，格式如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_">Parent</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+Java只支持单继承。</p>
+<p>创建子类对象会先执行父类的构造函数，再执行子类的构造函数。</p>
+<h4 id="final">final</h4>
+<p>我们都知道，声明常量使用的是关键字<code>final</code>，但其实方法也可以是常量，这是为了防止子类在继承时意外修改了不应该修改的成员方法或者静态方法。</p>
+<p>甚至你可以用<code>final</code>来修饰一个类，用以说明此类不可继承。</p>
+<h4 id="object类">Object类</h4>
+<p>所有的类都是继承于<code>Object</code>类，下面是<code>Object</code>类中常用的几个方法。</p>
+<p><code>getClass()</code>可以获取对象所在类。有时候会搭配<code>getName()</code>获取类的名称。</p>
+<p><code>toString()</code>是一个将对象返回为字符串的形式的方法，通常需要重写使用</p>
+<p><code>equal()</code>是判断两个对象是否相同的方法。<code>==</code>虽然可以做到，但它要求对象的所有成员变量均一致，但有时候判断是同一个对象并不需要这么严格的标准。</p>
+<h4 id="对象类型的转换">对象类型的转换</h4>
+<p>对象类型转换有两种方法，但本质上并没有真正对实体产生影响，只不过是引用类型上的小trick。换句话来说，这只不过是它被看作什么的区别，它还是它本身。</p>
+<p>有时候，子类的对象要用父类来解释，即将子类对象转成父类对象，就像书上的例子:<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Bird</span> <span class="variable">bird</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Pigeon</span>();</span><br></pre></td></tr></table></figure><br />
+这是可以的。此时子类的细节被屏蔽，它作为一个父类对象存在，但若你尝试用<code>bird.getClass()</code>去获取它的类型，它其实还是鸽子。父类引用指向子类对象的过程被称为<strong>向上转型</strong>。这个过程是安全的，因为子类对象一定是父类对象，用父类引用指向子类对象是没有任何问题的。</p>
+<p>那如果现在我想用子类解释它能行吗？可以的。只需要再建立一个引用：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Pigeon</span> <span class="variable">pigeon</span> <span class="operator">=</span> (Pigeon)bird;</span><br></pre></td></tr></table></figure><br />
+这个过程将父类对象强制转成子类对象，赋值给子类引用<code>pigeon</code>。子类引用指向父类对象称为<strong>向下转型</strong>。这个过程不一定是安全的，因为父类对象不一定就是子类对象，强制转换可能出现RE。因此需要结合函数<code>instanceof</code>进行判断，格式如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatherObject <span class="keyword">instanceof</span> SonClass</span><br></pre></td></tr></table></figure><br />
+如果是子类对象，就会返回<code>true</code>，否则返回<code>false</code>。</p>
+<p>当然这个函数的用法不止这一种。</p>
+<h4 id="多态">多态</h4>
+<p>在上一个小节我们讨论了向上转型的安全性，这其实就是多态的基础。我们知道，类的成员方法只能作用于本类，同一个方法如何作用于不同对象？这就要用到上面说到的对象类型转换中的向上转型了。通过向上转型将子类对象当作一个父类对象来解释，就可以将子类对象运用于父类的成员方法了。</p>
+<p>例如，如果我需要创建一个<code>Shape</code>类，里面有一个成员函数是<code>draw()</code>，图像类下继承有<code>Square</code>，<code>Circular</code>类。如果不使用多态性质，我需要给每一个子类都创建一个画图成员方法，但是有了多态性质，我只需要把子类解释成一个<code>Shape</code>，在<code>Shape</code>类中实现<code>draw()</code>函数即可，我不需要关注具体的形状类型，我只需要画这个图形。</p>
+<h4 id="抽象类">抽象类</h4>
+<p>上一个小节说到在<code>Shape</code>类里创建画图函数，但这会产生一个问题：<code>Shape</code>类对象本身是不能调用这个函数的，因为一个抽象概念的图像是画不出来的。于是我们需要引入<strong>抽象类</strong>的概念。</p>
+<p>Java中使用<code>abstract</code>关键字定义抽象类，该类里抽象的成员方法被称为<strong>抽象方法</strong>。抽象类唯一的意义就是被继承，抽象方法本身也没有方法体，抽象类不可被实例化为对象。</p>
+<p>对于抽象类的继承类，被继承后<em>必须实现里面的所有抽象方法</em>。</p>
+<h4 id="接口">接口</h4>
+<p>上面说到，抽象类的子类必须实现所有抽象方法，但是这会产生一个问题。例如我创建了一个图形抽象类，就需要在每个子类中实现一次这样的代码。而且或许有一些图形我不太需要这个功能，却也被迫要实现这个功能了。</p>
+<p>如果是Python的话，我只需要再创建一个画图类，使用多继承就可以解决了。在Java中，这个问题如何解决呢？</p>
+<p>我们可以让子类继承接口。这时只需要在需要这个功能的子类中是实现这个接口即可。</p>
+<p>接口可以看作一个纯粹的抽象类，其中只有全局静态常量<code>public final static</code>和公共抽象方法<code>public abstract</code>。</p>
+<p>创建接口的语法如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Intface</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>继承接口的类只需要加上<code>implements Intface</code>即可继承接口了。</p>
+<p>子类继承接口</p>
+<h4 id="方法重载">方法重载</h4>
+<p>方法的重载使得一个类中拥有同名（但是参数类型，顺序，或个数不同）的多个函数。</p>
+<p>当然，不定长参数方法也是一种不错的方法，在Java中定义如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> ... a)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">        s += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以发现，<code>int ... a</code>在方法体内可以被看作一个一维数组。</p>
+<h3 id="包">包</h3>
+<p>Java中的包机制和Python的差不多。<strong>包（package）</strong>是为了更好的管理多个类而出现的。实际工程中，每个类都会在一个包里。（当然你硬是不给它放包里也是可以的，它会被放入默认包default
+package中。但是最好不要这么做）</p>
+<p>每个包都有一个<strong>完整类路径</strong>。这个路径是包名和类名的组合。在调用不同包的时候，需要使用完整包路径进行调用。由于在Java中，一个文件最多对应一个公开类，只需要在文件第一行定义所在包：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 包名</span><br></pre></td></tr></table></figure></p>
+<p>若要导入一个包，只需要使用<code>import</code>关键字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.Math</span><br></pre></td></tr></table></figure>
+<p>也可以直接引入单个静态成员。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.System.out</span><br></pre></td></tr></table></figure>
+<h3 id="内部类">内部类</h3>
+<p>内部类顾名思义就是类内部的类，例如汽车一定会有一个引擎，引擎有点火启动之类的功能。如果要创建内部类对象，可以用如下语法：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Outer</span> <span class="variable">outer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Outer</span>();</span><br><span class="line">Outer.<span class="type">Inner</span> <span class="variable">inner</span> <span class="operator">=</span> outer.<span class="keyword">new</span> <span class="title class_">Inner</span>();  <span class="comment">// 内部类对象依附于外部类对象，不存在独立的内部类对象</span></span><br></pre></td></tr></table></figure></p>
+<p>有时候内部类会出现成员变量和外部类命名一样的情况，书上有一个例子说明了这种情况:<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TheSameName</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Inner</span> &#123;</span><br><span class="line">        <span class="type">private</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">9</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doit</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">11</span>;</span><br><span class="line">            x++;  <span class="comment">// 局部变量自加</span></span><br><span class="line">            <span class="built_in">this</span>.x++;  <span class="comment">// 内部类成员变量自加</span></span><br><span class="line">            TheSameName.<span class="built_in">this</span>.x++;  <span class="comment">// 外部成员变量自加</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="匿名内部类">匿名内部类</h4>
+<p>这种类的存在就像是临时创建的，一次性的类，对象生命周期结束后直接就被Java虚拟机销毁。创建语法如下：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Parent</span>() &#123;</span><br><span class="line">    ...  <span class="comment">// 子类实现的内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br />
+由于这就是一个一次性的类，它既不能拥有静态方法，也不能拥有构造方法了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>黄浩诚
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://pliclouds.github.io/2023/12/23/java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B92%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%96%E7%95%8C/" title="Java梦的起点2：面向对象的世界">https://pliclouds.github.io/2023/12/23/java梦的起点2：面向对象的世界/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag"># 面向对象</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/23/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B91%EF%BC%9A%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" rel="prev" title="Java梦的起点1：基础语法">
+                  <i class="fa fa-angle-left"></i> Java梦的起点1：基础语法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/30/MMDetection%EF%BC%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7%E5%8C%85/" rel="next" title="MMDetection：目标检测工具包">
+                  MMDetection：目标检测工具包 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">黄浩诚</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"PLIclouds/BlogComments","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
