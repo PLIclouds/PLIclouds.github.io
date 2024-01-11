@@ -147,7 +147,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -186,6 +186,241 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-2%EF%BC%9ARNN%E5%92%8CLSTM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B01-2%EF%BC%9ARNN%E5%92%8CLSTM/" class="post-title-link" itemprop="url">NLP笔记1-2：RNN和LSTM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-11-14 22:48:00 / 修改时间：22:53:22" itemprop="dateCreated datePublished" datetime="2023-11-14T22:48:00+08:00">2023-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>469</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>正式进入NLP学习！</p>
+<h4 id="rnn">RNN</h4>
+<p>RNN，循环神经网络，用于解决输入是序列数据的情况。所谓序列数据，就是指数据前后具有相关性。（这就是高中老师说的“结合上下文”吧！）</p>
+<p>相比CNN的经典卷积核，循环卷积核有一个变化。</p>
+<p>循环卷积核不仅接入了当前时间下的输入，还接入了上一个时刻卷积核的输出。</p>
+<p>这样处理，可以说考虑了前文的所有内容。</p>
+<p>看<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30844905">这篇文章</a>，写的特别清楚。</p>
+<p>但是问题在于，存在梯度的问题。如果要顾及很长文章的情况，循环卷积核旁边的权重就会被乘很多次。在反向传播时，由于梯度过小，学习会直接停止；或者由于梯度过大，会直接梯度爆炸。</p>
+<h4 id="lstm">LSTM</h4>
+<p>在RNN网络结构基础上，把单纯的循环卷积核改成了三个门，遗忘门，输入门，输出门。核心信息储存在随时间变化的cell
+state里。</p>
+<p>遗忘门用于确定是否需要遗忘之前的某些元素。</p>
+<p>输入门用于确定加入cell
+state的信息。注意输入门和遗忘门两个sigmoid层作用不一样，前者确定是否需要遗忘cell中的信息，后者确定是否需要向cell中加入信息。</p>
+<p>输出门用于确定输出。这个sigmoid层用来确定是否向下传递，tanh层用来加非线性。</p>
+<p>非常精彩的改动，爱来自中国。</p>
+<p>参考<a
+target="_blank" rel="noopener" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding
+LSTM Network</a>，这篇文章绝绝子哈哈</p>
+<h5 id="lstm变种">LSTM变种</h5>
+<p>peephole：在sigmoid函数那里连接了cell，好像考虑全面了一些。</p>
+<p>coupled forget and input gate：只向cell中input刚刚忘记的。</p>
+<p>Gate Recurrent
+Unit（GRU）：cell都被整合了？没看懂，但据说很好用，先就这样吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/14/NLP%E7%AC%94%E8%AE%B01-1%EF%BC%9A%E4%BB%8ECNN%E5%BC%80%E5%A7%8B/" class="post-title-link" itemprop="url">NLP笔记1-1：从CNN开始</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-14 22:42:19" itemprop="dateCreated datePublished" datetime="2023-11-14T22:42:19+08:00">2023-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-15 22:40:07" itemprop="dateModified" datetime="2023-11-15T22:40:07+08:00">2023-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/NLP/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>525</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>CNN，卷积神经网络，近年来AI大火的根源，也是最近一切AI的基础，在人工智能界地位十分重要。</p>
+<p>神经网络，说白了，黑箱模型。输入一个张量，输出一个张量，中间参数全靠猜。可以看出，整体就是一个拟合输入<span
+class="math inline">\(x\)</span>和输出<span
+class="math inline">\(y\)</span>的关系的工具。于是张量能表示的一切，就都可以用人工智能解决。</p>
+<p>不同的猜法对应不同的优化方法，不同的隐藏层对应不同的网络模型。今天从CNN开始。</p>
+<h4 id="cnn特征提取分类预测">CNN特征提取&amp;分类预测</h4>
+<p>三步走：卷积，激活，池化。</p>
+<p>卷积很像在算互相关函数，也就是在提取特征。输入和卷积核作卷积就是计算相似程度的感觉。具体的卷积核是通过训练得到的。</p>
+<p>激活函数可以加入一些非线性在网络中（毕竟拟合如果只是线性的那可太没意思了），而ReLU又是很简单的非线性，于是就用这个了。</p>
+<p>池化就是减少冗杂信息量加快计算速度。最大池化保留了最好的匹配结果。</p>
+<p>三步之后，看似只是输出匹配结果，但其实对应特征已经被提取出来了。这些特征未必在人眼看来是显性的，但这就是特征。</p>
+<p>加深网络层数，CNN的特征提取部分就结束了。</p>
+<p>特征提取后，还要将提取的特征转化为分类结果，这个时候加全连接层，就像加权投票一样，算出结果。</p>
+<h4 id="反向传播">反向传播</h4>
+<p>如何进行优化？这是一种有监督学习。必须给神经网络喂标注好的数据。</p>
+<p>如果给一个随机的初值，它会产生一个误差值。根据这个误差值，可以计算每一步的梯度。再根据学习率，对网络参数进行调整，直至最后收敛。</p>
+<p>大体内容都在这了，详细可以看<a
+target="_blank" rel="noopener" href="https://e2eml.school/how_convolutional_neural_networks_work.html">这篇文章</a>，真正的大神</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -436,7 +671,7 @@ Pages</a>，就是在Github上的托管站点。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">28k</span>
   </span>
 </div>
 <div class="busuanzi-count">
