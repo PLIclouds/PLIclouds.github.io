@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16.png">
+  <link rel="mask-icon" href="/images/svg.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"pliclouds.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="其实我一开始还有点犹豫要不要写这一章，因为我发现JavaGuide上对这个东西讲得实在太明白了，大白话版的，面试必过版的，我不知道写这个有什么用。但我转念一想，这个博客就应该是我以自己的思路把整个理论复现一遍，我应该关注的是我自己的思路，而不是别人写的思路。否则就算我写再多，又有什么意义呢？这些技术已经被人说透说烂了，但他们都不属于我。只有我亲自的记录，用我的方式传递这个知识，才能真正意义上算是学">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Java梦的起点7：JVM基础理论">
+<meta property="og:url" content="https://pliclouds.github.io/2024/02/09/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B97%EF%BC%9AJVM%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/index.html">
+<meta property="og:site_name" content="Parallel Space">
+<meta property="og:description" content="其实我一开始还有点犹豫要不要写这一章，因为我发现JavaGuide上对这个东西讲得实在太明白了，大白话版的，面试必过版的，我不知道写这个有什么用。但我转念一想，这个博客就应该是我以自己的思路把整个理论复现一遍，我应该关注的是我自己的思路，而不是别人写的思路。否则就算我写再多，又有什么意义呢？这些技术已经被人说透说烂了，但他们都不属于我。只有我亲自的记录，用我的方式传递这个知识，才能真正意义上算是学">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-9.png">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-10.png">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-11.png">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-8.png">
+<meta property="og:image" content="https://pliclouds.github.io/image/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6%20(2).png">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-12.png">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-13.png">
+<meta property="og:image" content="https://pliclouds.github.io/image/image-14.png">
+<meta property="article:published_time" content="2024-02-09T13:00:35.000Z">
+<meta property="article:modified_time" content="2024-02-10T08:08:01.358Z">
+<meta property="article:author" content="黄浩诚">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pliclouds.github.io/image/image-9.png">
+
+
+<link rel="canonical" href="https://pliclouds.github.io/2024/02/09/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B97%EF%BC%9AJVM%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://pliclouds.github.io/2024/02/09/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B97%EF%BC%9AJVM%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/","path":"2024/02/09/Java梦的起点7：JVM基础理论/","title":"Java梦的起点7：JVM基础理论"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java梦的起点7：JVM基础理论 | Parallel Space</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Parallel Space</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">平凡即伟大</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jvm%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">JVM基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jvm%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">JVM是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jvm%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAjava%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">JVM如何运行一个Java程序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E9%87%8D%E7%82%B9"><span class="nav-number">1.3.1.</span> <span class="nav-text">双亲委派机制（重点）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jvm%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E9%87%8D%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">JVM内存分配（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">2.1.</span> <span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">字符串常量池</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">2.2.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="nav-number">2.2.1.</span> <span class="nav-text">虚拟机栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="nav-number">2.2.2.</span> <span class="nav-text">本地方法栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%A9%BA%E9%97%B4"><span class="nav-number">2.4.</span> <span class="nav-text">元空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">2.4.1.</span> <span class="nav-text">运行时常量池</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-number">2.5.</span> <span class="nav-text">直接内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">黄浩诚</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/pliclouds" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;pliclouds" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/huang.hch@gmail.com" title="E-Mail → huang.hch@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://pliclouds.github.io/2024/02/09/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B97%EF%BC%9AJVM%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="黄浩诚">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java梦的起点7：JVM基础理论 | Parallel Space">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java梦的起点7：JVM基础理论
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-09 21:00:35" itemprop="dateCreated datePublished" datetime="2024-02-09T21:00:35+08:00">2024-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-10 16:08:01" itemprop="dateModified" datetime="2024-02-10T16:08:01+08:00">2024-02-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%8E%E7%AB%AF/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.3k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>其实我一开始还有点犹豫要不要写这一章，因为我发现<a
+target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/">JavaGuide</a>上对这个东西讲得实在太明白了，大白话版的，面试必过版的，我不知道写这个有什么用。但我转念一想，这个博客就应该是我以自己的思路把整个理论复现一遍，我应该关注的是我自己的思路，而不是别人写的思路。否则就算我写再多，又有什么意义呢？这些技术已经被人说透说烂了，但他们都不属于我。只有我亲自的记录，用我的方式传递这个知识，才能真正意义上算是学明白了这个点。</p>
+<h2 id="jvm基础">JVM基础</h2>
+<h3 id="jvm是什么">JVM是什么？</h3>
+<p>回顾一下JVM。JVM全称Java Virtual
+Machine，说明这是一个虚拟机，用来运行Java程序的。Java如今为什么可以横行霸道，就是因为JVM的存在屏蔽了操作系统之间的差异。我们知道，操作系统屏蔽了硬件之间的差别，使得开发者不再需要针对硬件去进行编程。而JVM屏蔽了操作系统之间的差别，使得开发者不再需要针对操作系统去进行编程。</p>
+<p>很多人都会提这样的屏蔽，但我必须声明，它还是有和底层交互的空间的。屏蔽只是让大部分事情看起来更加方便了，但真正要操作底层的时候，JVM仍然可以通过操作系统去操作。这种屏蔽和抽象在我的心中就是一种艺术，它让事情变得简单，在必要时又能找到一条回到根本的路径。</p>
+<p><img src="/image/image-9.png" alt="alt text" /></p>
+<blockquote>
+<p>没有什么是加一个中间件不能解决的。如果有，那就再加一个。</p>
+</blockquote>
+<h3 id="jvm如何运行一个java程序">JVM如何运行一个Java程序？</h3>
+<p><img src="/image/image-10.png" alt="alt text" /></p>
+<p>其实大体就两步：</p>
+<ol type="1">
+<li>Java首先要被编译为一个.class字节码文件（一个二进制文件）</li>
+<li>然后JVM将.class字节码文件用类加载器加载到内存中</li>
+</ol>
+<h3 id="类加载器">类加载器</h3>
+<p>上文提及的类加载器是什么？简单理解，就是加载类的一种工具，它本身也是一个类。不同的类会用到不同的类加载器，Java里内置了四种类加载器：</p>
+<ul>
+<li>BootStrap
+ClassLoader：<strong>启动类加载器</strong>，主要加载核心类库（包括Java基础类库<code>rt.jar</code>）</li>
+<li>Extension
+ClassLoader：<strong>扩展类加载器</strong>，主要加载<code>%JRE_HOME%/lib/ext</code>下的jar包</li>
+<li>AppClassLoader：<strong>应用类加载器</strong>，主要加载用户创建的类</li>
+<li>CustomClassLoader：<strong>自定义类加载器</strong>，加载自定义路径下的类。</li>
+</ul>
+<p>这几个类加载器还有继承的关系：</p>
+<p><img src="/image/image-11.png" alt="alt text" /></p>
+<h4 id="双亲委派机制重点">双亲委派机制（重点）</h4>
+<p>双亲委派机制说的是类加载器加载类的工作原理。如果仔细看了上面那张图就会发现两边虚线的箭头，其实这就是双亲委派机制的过程。总结起来就两句话：<br />
+* 类加载器实例接到加载请求后，会优先将任务委派给其父类加载器<br />
+* 父类加载器无法加载类时，才会让子类加载器进行加载</p>
+<p>这个机制起到了保护作用，防止因为用户随意定义类名而导致的命名冲突问题。</p>
+<p>类加载器在发现需要它来加载类时，会先判断这个类是否被加载，如果已经加载，就不再重复加载，若没有加载，才会把这个类加载到自己的加载器上。</p>
+<p>具体到确定需要加载后的每一步的话，理论上还是比较复杂的，<a
+target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/class-loading-process.html">类加载过程详解</a>这篇文章讲得比较仔细（不是重点，不看不影响后续阅读）。</p>
+<h2 id="jvm内存分配重点">JVM内存分配（重点）</h2>
+<p>类被加载的大致流程我们弄明白了，那么类相关的信息被加载到哪里了呢？这个问题我们暂时回答不了，我们还要从JVM内存开始讲起。从JDK1.8起，JVM内存空间被划分为如下区域：<br />
+<a name="dis"><br />
+<img src="/image/image-8.png" alt="alt text" /><br />
+</a><br />
+网上太多这样的图了。问题是，我们该如何看这张图呢？我们先把上面的图转换一下，然后一个个说：<br />
+<img src="/image/未命名文件%20(2).png" alt="alt text" /></p>
+<ul>
+<li><strong>堆</strong>：唯一作用就是存放各种对象。
+<ul>
+<li><strong>字符串常量池</strong>：位于堆内存中（和堆共用内存，但是单独管理），存放字符串常量。</li>
+</ul></li>
+<li><strong>栈</strong>：储存一些控制程序运行时的量。</li>
+<li><strong>程序计数器</strong>：控制当前线程执行的字节码行号。</li>
+<li><strong>元空间</strong>：储存类型信息、常量、静态变量、编译后的字节码文件。
+<ul>
+<li><strong>运行时常量池</strong>：储存字面量和符号引用。</li>
+</ul></li>
+<li><strong>直接内存</strong>：用于加速IO。</li>
+</ul>
+<p>相信聪明的你一定不会上来就仔细查这么多专有名词吧？下面我们逐一讲解。</p>
+<h3 id="堆">堆</h3>
+<p>堆的唯一作用就是存放对象，而几乎所有对象也都储存在这里。虽然说堆只是存放各种对象，但它实际上是最复杂的。因为堆所占用的内存是虚拟机内存的最大的一块（默认大约是三分之二），里面的对象的生命周期都需要虚拟机管理（不像c++创建了就得手动销毁）。</p>
+<p>正因为需要管理内存，堆有了复杂的结构，同时也有了复杂的<strong>垃圾回收机制（GC）</strong>，这个面试真的是重点中的重点，看<a
+target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/jvm-garbage-collection.htm">这篇文章</a>吧。</p>
+<p>堆内部结构如下图所示：<br />
+<img src="/image/image-12.png" alt="alt text" /></p>
+<p>咦？MetaSpace怎么跑到堆里来了？其实不是的，在JDK1.7时候，这个元空间其实被叫做永久代（方法区），它确实就是放在堆下，只不过1.8它换了个名字放在本地内存里了。二者的区别也就在这里。更加详细的解释可以参考<a
+target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/memory-area.html#%E6%96%B9%E6%B3%95%E5%8C%BA">这里</a>。</p>
+<blockquote>
+<p>大部分情况，对象都会首先在 Eden
+区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 S0 或者
+S1，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为
+1)，当它的年龄增加到一定程度，就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数
+-XX:MaxTenuringThreshold 来设置。</p>
+</blockquote>
+<p>大概意思就是说，GC会回收一些对象，每回收一次，存活的对象就年龄+1，然后决定要不要进入老年代。</p>
+<p>堆大小有很多设置参数，因为区的大小涉及GC性能，可用于JVM调优。比较常用的有：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xms10m -Xmx10m</span><br></pre></td></tr></table></figure><br />
+分别设置的是初始堆内存和最大堆内存。</p>
+<h4 id="字符串常量池">字符串常量池</h4>
+<p>顾名思义，字符串常量池就是储存字符串常量的地方。编译阶段，JVM会让出现的字符串常量进到常量池中。运行阶段也会让出现的字符串常量进到常量池中。</p>
+<p>编译过程中有时会对一些表达式做出一些优化，例如常量相加时：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;b&quot;</span> + <span class="string">&quot;b&quot;</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这个表达式会被优化成<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;bb&quot;</span>;</span><br></pre></td></tr></table></figure><br />
+所以在常量池里只会出现“bb”这个字符串。</p>
+<p><a
+href="tip:字符串对象也可以相加，但此时不会被优化，加出来的对象也会被直接放入堆中，常量池中不会出现相加后的字符串"
+class="uri">tip:字符串对象也可以相加，但此时不会被优化，加出来的对象也会被直接放入堆中，常量池中不会出现相加后的字符串</a>。</p>
+<p>这里通常会出现一些用<code>==</code>判断字符串是否相等的题目。<code>==</code>对于引用类型判断的是引用地址是否相等，而因为字符串本身就是对象，这就引起一系列奇奇怪怪的问题。</p>
+<p>时间紧张，没有太多时间在这里纠结，这里挖个坑，回来慢慢填。</p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34115899/article/details/86583262">这里</a>有一篇博客写得挺好，值得一看。</p>
+<h3 id="栈">栈</h3>
+<p>栈储存程序运行时的一些变量。这句话显然不够具体。看最开始的<a href = "#dis">那张图</a>，事实上栈这个概念是在线程之内的，每个线程都有他们私有的虚拟机栈和本地方法栈。</p>
+<p>栈的大小是可以动态扩展的。若无法申请到更多内存，就会抛出OOM错误，即OutOfMemoryError；若已经申请到最大内存，但还是内存不够时，就会抛出StackOverflowError。</p>
+<p>接下来我们分开介绍两种不同的栈。</p>
+<h4 id="虚拟机栈">虚拟机栈</h4>
+<p>一个线程的运行过程中可能调用很多不同的函数，如何保证他们按照正确的顺序执行？栈的存在使得函数间的切换变得有迹可循，也才有了递归和dfs等算法的写法。栈的特性就是FIFO，每一个方法对应一个<strong>栈帧</strong>，也就是栈里的一个元素。而一个栈帧又分为了四个部分：<br />
+* 局部变量表：用于存放基础数据类型和运行时的引用类型<br />
+* 操作数栈：用于存放运算中间数<br />
+*
+动态链接：用于符号引用（例如<code>Math.PI</code>或者<code>Java.lang</code>）转换成直接引用<br />
+* 方法返回地址：用于找到方法的上下文（从谁调用？调用了谁？）</p>
+<p>具体结构如下图：<br />
+<img src="/image/image-13.png" alt="alt text" /></p>
+<h4 id="本地方法栈">本地方法栈</h4>
+<p>在HotSpot虚拟机中，这个栈和虚拟机栈已经合二为一了。这个栈和虚拟机栈的作用基本一模一样，唯一的不同就是它专门管理<strong>本地方法</strong>，这种方法在Java中用<code>native</code>关键字定义，具体的实现一般用c而不是Java，而且通常这些代码都是较为底层的代码。</p>
+<blockquote>
+<p>当我们有一些旧的库，已经使用C语言编写好了，如果要移植到Java上来，非常浪费时间，而JNI(Java
+Native
+interface)可以支持Java程序与C语言编写的库进行交互，这样就不必要进行移植了。或者是与硬件、操作系统进行交互、提高程序的性能等，都可以使用JNI。需要注意的一点是需要保证本地代码能工作在任何Java虚拟机环境。</p>
+</blockquote>
+<blockquote>
+<p>一旦使用JNI，Java程序将丢失了Java平台的两个优点：<br />
+1、程序不再跨平台，要想跨平台，必须在不同的系统环境下程序编译配置本地语言部分。<br />
+2、程序不再是绝对安全的，本地代码的使用不当可能会导致整个程序崩溃。一个通用规则是，调用本地方法应该集中在少数的几个类当中，这样就降低了Java和其他语言之间的耦合。</p>
+</blockquote>
+<h3 id="程序计数器">程序计数器</h3>
+<p>这个很简单，每个线程都有一个独立的程序计数器，用于依次读取二进制码中的指令，任何时候都不可能出现OOM错误（就一个数怎么OOM）。</p>
+<h3 id="元空间">元空间</h3>
+<blockquote>
+<p>广义上来说，元的意思便是“超越什么的什么”、“关于什么的什么”。</p>
+</blockquote>
+<p>这让我突然想到《道德经》里的那句话：</p>
+<blockquote>
+<p>玄之又玄，众妙之门。</p>
+</blockquote>
+<p>当然，这里的元空间并没有那么玄乎，在我看来，不妨将其看作一个类似管理员的存在，管理着各种各样程序运行中十分重要的，而且大多是不应该被修改的东西：</p>
+<ul>
+<li>类信息：包括类的属性，字段（属性），方法，接口</li>
+<li>常量和静态变量</li>
+<li>（JIT, Just-in-time）代码缓存：用于提高程序执行速度</li>
+</ul>
+<p>从永久代换到本地内存变成元空间后，它就没有了虚拟机内存上限的限制，这也就意味着可以用更多的内存加载类信息、静态变量和常量。当然，为了防止元空间过度占用本地内存，我们可以添加限制参数：<br />
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MetaspaceSize=N <span class="comment">//设置 Metaspace 的初始（和最小大小）</span></span><br><span class="line">-XX:MaxMetaspaceSize=N <span class="comment">//设置 Metaspace 的最大大小</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="运行时常量池">运行时常量池</h4>
+<p>元空间不能存储所有的类信息，除了上述类信息还有编译期生成的字面量，符号引用和常量池表。常量池表是在编译期生成的。这一部分没太弄明白，留个坑以后来填。</p>
+<h3 id="直接内存">直接内存</h3>
+<p>暂时看不懂，姑且理解为加速IO的一块缓存吧。</p>
+<h2 id="总结">总结</h2>
+<p><img src="/image/image-14.png" alt="alt text" /></p>
+<p>事实上学到这里我们也不能完全准确回答开头提出的问题，因为“类信息”这个概念我们并没有真正理解过。如果真的要详细了解开头的问题，<a
+target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/class-file-structure.htm">这里有一篇文章</a>或许能解答这个问题。</p>
+<p>但这篇文章的理论能够更好地帮助我们理解JVM的内存分配，能让我们更加清晰地看到程序运行时内存的具体情况，这也是十分重要的。</p>
+<p>真正理解虚拟机其实是一个漫长的过程。有一本著名的关于Java虚拟机的书籍名为《深入理解Java虚拟机》，如果需要深入学习，可以参考这本书籍。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>黄浩诚
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://pliclouds.github.io/2024/02/09/Java%E6%A2%A6%E7%9A%84%E8%B5%B7%E7%82%B97%EF%BC%9AJVM%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA/" title="Java梦的起点7：JVM基础理论">https://pliclouds.github.io/2024/02/09/Java梦的起点7：JVM基础理论/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/06/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A81-3%EF%BC%9AJava%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E5%B8%B8%E7%94%A8%E7%B1%BB/" rel="prev" title="算法入门1-3：Java字符串和常用类">
+                  <i class="fa fa-angle-left"></i> 算法入门1-3：Java字符串和常用类
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">黄浩诚</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">42k</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"PLIclouds/BlogComments","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
